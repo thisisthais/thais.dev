@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useSpring, a } from 'react-spring/three';
 
-export default ({ initialPosition, scaledState, floatState }) => {
+const floatBox = setFloatState => {
+  setFloatState(true);
+  setTimeout(() => setFloatState(false), 1000);
+};
+
+export default ({ initialPosition, scaledState }) => {
+  const [floatState, setFloatState] = useState(false);
   const boxData = useSpring({
     scale: scaledState ? [1.5, 1.5, 1.5] : [1, 1, 1],
     position: floatState
@@ -10,7 +16,11 @@ export default ({ initialPosition, scaledState, floatState }) => {
   });
 
   return (
-    <a.mesh position={boxData.position} scale={boxData.scale}>
+    <a.mesh
+      onPointerOver={() => floatBox(setFloatState)}
+      position={boxData.position}
+      scale={boxData.scale}
+    >
       <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
       <a.meshPhysicalMaterial attach="material" color={'pink'} />
     </a.mesh>
