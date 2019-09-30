@@ -3,7 +3,7 @@ import { useSpring, a } from 'react-spring/three';
 
 const floatBox = setFloatState => {
   setFloatState(true);
-  setTimeout(() => setFloatState(false), 1000);
+  setTimeout(() => setFloatState(false), 500);
 };
 
 export default ({ initialPosition, scaledState }) => {
