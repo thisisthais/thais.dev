@@ -11,26 +11,32 @@ const App = () => {
   for (var x = spacing; x <= 9 * spacing; x += spacing) {
     for (var z = spacing; z <= 5 * spacing; z += spacing) {
       if (Math.random() >= 0.7) {
-        boxes.push(<Box key={`box${x}${z}`} initialPosition={[x, 0, z]} />);
-        boxes.push(<Box key={`box${-x}${z}`} initialPosition={[-x, 0, z]} />);
-        boxes.push(<Box key={`box${x}${-z}`} initialPosition={[x, 0, -z]} />);
-        boxes.push(<Box key={`box${-x}${-z}`} initialPosition={[-x, 0, -z]} />);
+        boxes.push(<Box key={`box${x},0,${z}`} initialPosition={[x, 0, z]} />);
+        boxes.push(
+          <Box key={`box${-x},0,${z}`} initialPosition={[-x, 0, z]} />
+        );
+        boxes.push(
+          <Box key={`box${x},0,${-z}`} initialPosition={[x, 0, -z]} />
+        );
+        boxes.push(
+          <Box key={`box${-x},${-z}`} initialPosition={[-x, 0, -z]} />
+        );
       }
 
       if (Math.random() >= 0.9) {
-        boxes.push(<Box key={`box0${z}`} initialPosition={[0, 0, z]} />);
+        boxes.push(<Box key={`box0,0,${z}`} initialPosition={[0, 0, z]} />);
       }
 
       if (Math.random() >= 0.9) {
-        boxes.push(<Box key={`box0${-z}`} initialPosition={[0, 0, -z]} />);
+        boxes.push(<Box key={`box0,0,${-z}`} initialPosition={[0, 0, -z]} />);
       }
 
       if (Math.random() >= 0.9) {
-        boxes.push(<Box key={`box${x}0`} initialPosition={[x, 0, 0]} />);
+        boxes.push(<Box key={`box${x},0,0`} initialPosition={[x, 0, 0]} />);
       }
 
       if (Math.random() >= 0.9) {
-        boxes.push(<Box key={`box${-x}0`} initialPosition={[-x, 0, 0]} />);
+        boxes.push(<Box key={`box${-x},0,0`} initialPosition={[-x, 0, 0]} />);
       }
     }
   }
