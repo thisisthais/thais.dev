@@ -28,83 +28,18 @@ const xBasedColor = x =>
 
 const App = () => {
   let keyCount = 0;
-  const boxes = [
-    <Box
-      key={`box#${keyCount++}`}
-      initialPosition={[0, 0, 0]}
-      color={xBasedColor(0)}
-    />
-  ];
+  const boxes = [];
 
-  for (var x = spacing; x <= 15 * spacing; x += spacing) {
-    for (var z = spacing; z <= 20 * spacing; z += spacing) {
-      if (Math.random() >= 0.7) {
+  for (var x = -12; x <= 12; x++) {
+    for (var z = -20; z <= 6; z++) {
+      if (Math.random() >= 0.5) {
+        const randHeight = Math.random() * (2.4 - 1.0) + 1.0;
         boxes.push(
           <Box
             key={`box#${keyCount++}`}
             initialPosition={[x, 0, z]}
-            color={xBasedColor(x)}
-          />
-        );
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[-x, 0, z]}
-            color={xBasedColor(x)}
-          />
-        );
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[x, 0, -z]}
-            color={xBasedColor(x)}
-          />
-        );
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[-x, 0, -z]}
-            color={xBasedColor(x)}
-          />
-        );
-      }
-
-      if (Math.random() >= 0.9) {
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[0, 0, z]}
-            color={xBasedColor(0)}
-          />
-        );
-      }
-
-      if (Math.random() >= 0.9) {
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[0, 0, -z]}
-            color={xBasedColor(0)}
-          />
-        );
-      }
-
-      if (Math.random() >= 0.9) {
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[x, 0, 0]}
-            color={xBasedColor(x)}
-          />
-        );
-      }
-
-      if (Math.random() >= 0.9) {
-        boxes.push(
-          <Box
-            key={`box#${keyCount++}`}
-            initialPosition={[-x, 0, 0]}
-            color={xBasedColor(x)}
+            color={xBasedColor(Math.abs(x))}
+            randHeight={randHeight}
           />
         );
       }
