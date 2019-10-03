@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App.css';
-import House from './House';
+import Bismuth from './Bismuth';
 
 extend({ OrbitControls });
 
@@ -29,7 +29,7 @@ const App = () => {
         <Controls />
         <ambientLight />
         <spotLight position={[0, 10, 4]} />
-        <House />
+        <Bismuth />
       </Canvas>
     </div>
   );
