@@ -79,24 +79,23 @@ const defaultBlocks = {
 const BoxRing = ({ position, stretch = 0, blocks = defaultBlocks }) => {
   const { A, B, C, D } = blocks;
   const vertices = [
-    // top ring
-    [-2, 0.5, 2], //0
-    [-2, 0.5, -2], //1
-    [2, 0.5, -2], //2,
-    [2, 0.5, 2], //3,
-    [-1, 0.5, 1], //4
-    [-1, 0.5, -1], //5
-    [1, 0.5, -1], //6
-    [1, 0.5, 1], //7
-    // bottom ring
-    [-2, -0.5, 2], //8
-    [-2, -0.5, -2], //9
-    [2, -0.5, -2], //10,
-    [2, -0.5, 2], //11,
-    [-1, -0.5, 1], //12
-    [-1, -0.5, -1], //13
-    [1, -0.5, -1], //14
-    [1, -0.5, 1] //15
+    // top ring
+    [-1, 0.25, 1], //0
+    [-1, 0.25, -1], //1
+    [1, 0.25, -1], //2,
+    [1, 0.25, 1], //3,
+    [-0.5, 0.25, 0.5], //4
+    [-0.5, 0.25, -0.5], //5
+    [0.5, 0.25, -0.5], //6
+    [0.5, 0.25, 0.5], //7 // bottom ring
+    [-1, -0.25, 1], //8
+    [-1, -0.25, -1], //9
+    [1, -0.25, -1], //10,
+    [1, -0.25, 1], //11,
+    [-0.5, -0.25, 0.5], //12
+    [-0.5, -0.25, -0.5], //13
+    [0.5, -0.25, -0.5], //14
+    [0.5, -0.25, 0.5] //15
   ].map(v => stretchVertex(v, stretch));
 
   var faces = [
@@ -132,17 +131,88 @@ const BoxRing = ({ position, stretch = 0, blocks = defaultBlocks }) => {
 
 export default () => {
   // MUST be capital! or else a conflicts with <a />
-  const blocks = {
+  const firstTowerBaseBlocks = {
     A: { closed: true },
     B: { closed: false },
     C: { closed: true }
   };
+  const firtTowerTopBlocks = {
+    A: { closed: true },
+    B: { closed: true }
+  };
+  const firstTowerFirstLoopBlock = {
+    C: { closed: true },
+    D: { closed: true }
+  };
+  const firstTowerSecondLoopBlock = {
+    A: { closed: true }
+  };
+  const firstTower = (
+    <>
+      <BoxRing
+        position={[-1.75, 2.75, -1.75]}
+        blocks={firstTowerSecondLoopBlock}
+        key="paloita"
+      />
+      <BoxRing
+        stretch={0.25}
+        position={[-2, 2.75, -2]}
+        blocks={firstTowerFirstLoopBlock}
+        key="donimer"
+      />
+      <BoxRing
+        stretch={0.75}
+        position={[-1.5, 2.75, -1.5]}
+        blocks={firtTowerTopBlocks}
+        key="roleum"
+      />
+      <BoxRing
+        stretch={0.5}
+        position={[-1.5, 2.5, -1.5]}
+        blocks={firstTowerBaseBlocks}
+        key="devilFace"
+      />
+      <BoxRing
+        stretch={0.25}
+        position={[-1.5, 2.25, -1.5]}
+        blocks={firstTowerBaseBlocks}
+        key="devilFace"
+      />
+      <BoxRing
+        position={[-1.5, 2, -1.5]}
+        blocks={firstTowerBaseBlocks}
+        key="beese"
+      />
+    </>
+  );
+  const secondTowerBaseBlocks = {
+    A: { closed: true },
+    D: { closed: true }
+  };
+  const allClosedBase = [
+    <BoxRing stretch={1.5} position={[0, 1.5, 0]} key="vibro" />,
+    <BoxRing stretch={1.25} position={[0, 1.25, 0]} key="maniaBaby" />,
+    <BoxRing stretch={1} position={[0, 1, 0]} key="chiqueta" />,
+    <BoxRing stretch={0.75} position={[0, 0.75, 0]} key="fantimer" />,
+    <BoxRing stretch={0.5} position={[0, 0.5, 0]} key="tillium" />,
+    <BoxRing stretch={0.25} position={[0, 0.25, 0]} key="angelShape" />,
+    <BoxRing key="baws" />
+  ];
   return (
     <>
-      {/* <BoxRing scale={[2.5, 1, 2.5]} position={[0, 4, 0]} /> */}
-      <BoxRing stretch={2} position={[0, 2, 0]} />
-      <BoxRing stretch={1} position={[0, 1, 0]} />
-      <BoxRing />
+      <BoxRing
+        stretch={0.5}
+        position={[1.5, 2.25, 1.5]}
+        blocks={secondTowerBaseBlocks}
+        key="tojaLad"
+      />
+      <BoxRing
+        position={[1.5, 2, 1.5]}
+        blocks={secondTowerBaseBlocks}
+        key="boobi"
+      />
+      {firstTower}
+      {allClosedBase}
     </>
   );
 };
