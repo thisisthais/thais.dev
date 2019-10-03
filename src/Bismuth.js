@@ -2,7 +2,7 @@ import React from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
 
-export default () => {
+const BoxRing = ({ scale, position }) => {
   const vertices = [
     // top ring
     [-2, 0.5, 2], //0
@@ -71,8 +71,8 @@ export default () => {
     ];
   });
 
-  const test = (
-    <a.mesh scale={[2, 2, 2]}>
+  return (
+    <a.mesh scale={scale || [1, 1, 1]} position={position || [0, 0, 0]}>
       <geometry
         attach="geometry"
         vertices={vertices.map(v => new THREE.Vector3(...v))}
@@ -84,6 +84,15 @@ export default () => {
       />
     </a.mesh>
   );
+};
 
-  return test;
+export default () => {
+  return (
+    <>
+      <BoxRing scale={[2.5, 1, 2.5]} position={[0, 3, 0]} />
+      <BoxRing scale={[2, 1, 2]} position={[0, 2, 0]} />
+      <BoxRing scale={[1.5, 1, 1.5]} position={[0, 1, 0]} />
+      <BoxRing />
+    </>
+  );
 };
