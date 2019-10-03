@@ -58,12 +58,25 @@ const dBlockFaces = ({ closed } = {}) => [
 ];
 const dBlockVertexIndexes = [2, 3, 6, 7, 10, 11, 14, 15];
 
+// stretch the vertices length and depth to make wider ring
+const stretchVertex = (v, stretch) => [
+  v[0] > 0 ? v[0] + stretch : v[0] - stretch,
+  v[1],
+  v[2] > 0 ? v[2] + stretch : v[2] - stretch
+];
+
 /**
- * blocks is an object that may contain a, b, c, and d keys.
+ * blocks is an object that may contain A, B, C, and D keys.
  * if a key exists, that block will be added to the box ring.
- * the value at that key determines if it's a closed or open block
+ * the closed at that key determines if it's a closed or open block
  */
-const BoxRing = ({ scale, position, blocks }) => {
+const defaultBlocks = {
+  A: { closed: false },
+  B: { closed: false },
+  C: { closed: false },
+  D: { closed: false }
+};
+const BoxRing = ({ position, stretch = 0, blocks = defaultBlocks }) => {
   const { A, B, C, D } = blocks;
   const vertices = [
     // top ring
@@ -84,7 +97,8 @@ const BoxRing = ({ scale, position, blocks }) => {
     [-1, -0.5, -1], //13
     [1, -0.5, -1], //14
     [1, -0.5, 1] //15
-  ];
+  ].map(v => stretchVertex(v, stretch));
+
   var faces = [
     ...(A ? aBlockFaces({ closed: A.closed }) : []),
     ...(B ? bBlockFaces({ closed: B.closed }) : []),
@@ -102,7 +116,7 @@ const BoxRing = ({ scale, position, blocks }) => {
   });
 
   return (
-    <a.mesh scale={scale || [1, 1, 1]} position={position || [0, 0, 0]}>
+    <a.mesh position={position || [0, 0, 0]}>
       <geometry
         attach="geometry"
         vertices={vertices.map(v => new THREE.Vector3(...v))}
@@ -125,10 +139,10 @@ export default () => {
   };
   return (
     <>
-      {/* <BoxRing scale={[2.5, 1, 2.5]} position={[0, 3, 0]} />
-      <BoxRing scale={[2, 1, 2]} position={[0, 2, 0]} />
-      <BoxRing scale={[1.5, 1, 1.5]} position={[0, 1, 0]} /> */}
-      <BoxRing blocks={blocks} />
+      {/* <BoxRing scale={[2.5, 1, 2.5]} position={[0, 4, 0]} /> */}
+      <BoxRing stretch={2} position={[0, 2, 0]} />
+      <BoxRing stretch={1} position={[0, 1, 0]} />
+      <BoxRing />
     </>
   );
 };
