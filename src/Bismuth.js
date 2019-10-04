@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { useRender } from 'react-three-fiber';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
+import { hsluvToHex } from 'hsluv';
 
 const OUTER_LENGTH = 0.4;
 const INNER_LENGTH = 0.3;
@@ -109,17 +110,26 @@ const dBlockFaces = [
   [25, 27, 31]
 ];
 
-const Base = () => {
-  const boxGeo = new THREE.BoxGeometry(OUTER_LENGTH, HEIGHT, OUTER_LENGTH);
-  boxGeo.faces.forEach((face, ndx) => {
+const interpolateHue = idx => (360 * (idx + (1 % 12))) / 12;
+
+const Base = ({ position = [0, 0, 0] }) => {
+  const boxGeo = new THREE.BoxGeometry(
+    2 * OUTER_LENGTH,
+    HEIGHT,
+    2 * OUTER_LENGTH
+  );
+  boxGeo.faces.forEach((face, idx) => {
     face.vertexColors = [
-      new THREE.Color().setHSL(ndx / 12, 1, 0.5),
-      new THREE.Color().setHSL(ndx / 12 + 0.1, 1, 0.5),
-      new THREE.Color().setHSL(ndx / 12 + 0.2, 1, 0.5)
+      // new THREE.Color(hsluvToHex([interpolateHue(idx + 4), 100, 60])),
+      // new THREE.Color(hsluvToHex([interpolateHue(idx + 7), 100, 70])),
+      // new THREE.Color(hsluvToHex([interpolateHue(idx), 100, 50]))
+      new THREE.Color().setHSL(idx / 12, 0.5, 0.5),
+      new THREE.Color().setHSL(idx / 12 + 0.1, 0.5, 0.5),
+      new THREE.Color().setHSL(idx / 12 + 0.2, 0.5, 0.5)
     ];
   });
   return (
-    <a.mesh geometry={boxGeo}>
+    <a.mesh geometry={boxGeo} position={position}>
       <a.meshBasicMaterial
         attach="material"
         vertexColors={THREE.VertexColors}
@@ -128,31 +138,45 @@ const Base = () => {
   );
 };
 
-const BoxRing = ({ stretch = 0.1, position = [0, 0, 0] }) => {
+const defaultBlocks = {
+  A: {},
+  B: {},
+  C: {},
+  D: {}
+};
+const BoxRing = ({
+  includeBlocks = defaultBlocks,
+  stretch = 0,
+  position = [0, 0, 0]
+}) => {
+  const { A, B, C, D } = includeBlocks;
   const vertices = [
-    ...aBlockVertices(stretch),
-    ...bBlockVertices(stretch),
-    ...cBlockVertices(stretch),
-    ...dBlockVertices(stretch)
+    ...(A ? aBlockVertices(stretch) : []),
+    ...(B ? bBlockVertices(stretch) : []),
+    ...(C ? cBlockVertices(stretch) : []),
+    ...(D ? dBlockVertices(stretch) : [])
   ];
 
   var faces = [...aBlockFaces, ...bBlockFaces, ...cBlockFaces, ...dBlockFaces];
   faces = faces.map(f => new THREE.Face3(...f));
 
-  faces.forEach((face, ndx) => {
+  faces.forEach((face, idx) => {
     face.vertexColors = [
-      new THREE.Color().setHSL(ndx / 12, 1, 0.5),
-      new THREE.Color().setHSL(ndx / 12 + 0.1, 1, 0.5),
-      new THREE.Color().setHSL(ndx / 12 + 0.2, 1, 0.5)
+      // new THREE.Color(hsluvToHex([interpolateHue(idx + 4), 100, 60])),
+      // new THREE.Color(hsluvToHex([interpolateHue(idx + 7), 100, 70])),
+      // new THREE.Color(hsluvToHex([interpolateHue(idx), 100, 50]))
+      new THREE.Color().setHSL(idx / 12, 0.5, 0.5),
+      new THREE.Color().setHSL(idx / 12 + position[1] + 0.2, 0.5, 0.5),
+      new THREE.Color().setHSL(idx / 12 + position[1] + 0.4, 0.5, 0.5)
     ];
   });
 
   const ringRef = useRef();
-  let theta = 0;
-  useRender(() => {
-    const rotation = (10 / stretch) * THREE.Math.degToRad((theta += 0.3));
-    ringRef.current.rotation.set(rotation, 0, 0);
-  });
+  // let theta = 0;
+  // useRender(() => {
+  //   const rotation = (10 / (stretch + 0.1)) * THREE.Math.degToRad((theta += 0.3));
+  //   ringRef.current.rotation.set(rotation, 0, 0);
+  // });
 
   return (
     <a.mesh ref={ringRef} position={position}>
@@ -170,15 +194,216 @@ const BoxRing = ({ stretch = 0.1, position = [0, 0, 0] }) => {
 };
 
 export default () => {
+  const ABTowerBase = (
+    <>
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.6}
+        position={[-0.15, 0.55, -0.15]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.5}
+        position={[-0.15, 0.5, -0.15]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.6}
+        position={[-0.1, 0.45, -0.1]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.5}
+        position={[-0.1, 0.4, -0.1]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {}, C: {}, D: {} }}
+        stretch={0.4}
+        position={[-0.1, 0.35, -0.1]}
+      />
+    </>
+  );
+
+  const ABTowerHook = (
+    <>
+      <BoxRing
+        includeBlocks={{ A: {} }}
+        stretch={-0.1}
+        position={[0.4, 0.55, -0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0.1}
+        position={[0.6, 0.55, -0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {} }}
+        stretch={-0.1}
+        position={[0.5, 0.5, -0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0.1}
+        position={[0.6, 0.5, -0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {} }}
+        stretch={-0.2}
+        position={[0.4, 0.45, -0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0}
+        position={[0.6, 0.45, -0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {} }}
+        stretch={-0.2}
+        position={[0.5, 0.4, -0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={-0.1}
+        position={[0.6, 0.4, -0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={-0.2}
+        position={[0.6, 0.35, -0.7]}
+      />
+    </>
+  );
+
+  const BCTowerBase = (
+    <>
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0.6}
+        position={[0.15, 0.55, 0.15]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0.5}
+        position={[0.15, 0.5, 0.15]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0.6}
+        position={[0.1, 0.45, 0.1]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0.5}
+        position={[0.1, 0.4, 0.1]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {}, C: {}, D: {} }}
+        stretch={0.3}
+        position={[0.1, 0.4, 0.1]}
+      />
+    </>
+  );
+
+  const BCTowerHook = (
+    <>
+      <BoxRing
+        includeBlocks={{ C: {} }}
+        stretch={-0.1}
+        position={[-0.4, 0.55, 0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.1}
+        position={[-0.6, 0.55, 0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {} }}
+        stretch={-0.1}
+        position={[-0.5, 0.5, 0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.1}
+        position={[-0.6, 0.5, 0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {} }}
+        stretch={-0.2}
+        position={[-0.4, 0.45, 0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0}
+        position={[-0.6, 0.45, 0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {} }}
+        stretch={-0.2}
+        position={[-0.5, 0.4, 0.6]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={-0.1}
+        position={[-0.6, 0.4, 0.7]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={-0.2}
+        position={[-0.6, 0.35, 0.7]}
+      />
+    </>
+  );
+
   return (
     <>
-      <BoxRing stretch={1.5} />
-      <BoxRing stretch={1.25} />
-      <BoxRing stretch={1} />
-      <BoxRing stretch={0.75} />
-      <BoxRing stretch={0.5} />
-      <BoxRing stretch={0.25} />
-      <BoxRing />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={0}
+        position={[-0.4, 0.9, -1.1]}
+      />
+      <BoxRing
+        includeBlocks={{ C: {}, D: {} }}
+        stretch={-0.05}
+        position={[-0.45, 0.85, -1.1]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.3}
+        position={[-0.8, 0.85, -0.8]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {} }}
+        stretch={0.25}
+        position={[-0.8, 0.8, -0.8]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {}, C: {}, D: {} }}
+        stretch={0.2}
+        position={[-0.8, 0.75, -0.8]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {}, C: {}, D: {} }}
+        stretch={0.15}
+        position={[-0.8, 0.7, -0.8]}
+      />
+      <BoxRing
+        includeBlocks={{ A: {}, B: {}, C: {}, D: {} }}
+        stretch={0.1}
+        position={[-0.8, 0.65, -0.8]}
+      />
+      <Base position={[-0.8, 0.6, -0.8]} />
+      {BCTowerHook}
+      {BCTowerBase}
+      {ABTowerHook}
+      {ABTowerBase}
+      <BoxRing stretch={0.6} position={[0, 0.3, 0]} />
+      <BoxRing stretch={0.5} position={[0, 0.25, 0]} />
+      <BoxRing stretch={0.4} position={[0, 0.2, 0]} />
+      <BoxRing stretch={0.3} position={[0, 0.15, 0]} />
+      <BoxRing stretch={0.2} position={[0, 0.1, 0]} />
+      <BoxRing stretch={0.1} position={[0, 0.05, 0]} />
+      <BoxRing stretch={0} />
+      <Base />
     </>
   );
 };
