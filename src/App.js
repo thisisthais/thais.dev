@@ -14,9 +14,7 @@ const Controls = () => {
     orbitRef.current.update();
   });
 
-  return (
-    <orbitControls args={[camera, gl.domElement]} autoRotate ref={orbitRef} />
-  );
+  return <orbitControls args={[camera, gl.domElement]} ref={orbitRef} />;
 };
 
 const App = () => {
@@ -24,7 +22,7 @@ const App = () => {
     <div className="App">
       <Canvas
         style={{ touchAction: 'none' }}
-        camera={{ position: [0, 10, 16], rotation: [-Math.PI / 8, 0, 0] }}
+        camera={{ position: [0, 3, 3], rotation: [-Math.PI / 8, 0, 0] }}
       >
         <Controls />
         <ambientLight />
