@@ -2,49 +2,53 @@ import React from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
 
+const OUTER_LENGTH = 1;
+const INNER_LENGTH = 0.9;
+const HEIGHT = 0.05;
+
 const aBlockVertices = [
-  [-1, 0.1, 1], //0
-  [-0.8, 0.1, 1], //1
-  [-1, -0.1, 1], //2
-  [-0.8, -0.1, 1], //3
+  [-OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //0
+  [-INNER_LENGTH, HEIGHT, OUTER_LENGTH], //1
+  [-OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //2
+  [-INNER_LENGTH, -HEIGHT, OUTER_LENGTH], //3
   //
-  [-1, 0.1, -1], //4
-  [-0.8, 0.1, -1], //5
-  [-1, -0.1, -1], //6
-  [-0.8, -0.1, -1] //7
+  [-OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //4
+  [-INNER_LENGTH, HEIGHT, -OUTER_LENGTH], //5
+  [-OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH], //6
+  [-INNER_LENGTH, -HEIGHT, -OUTER_LENGTH] //7
 ];
 const bBlockVertices = [
-  [-1, 0.1, -0.8], //8
-  [1, 0.1, -0.8], //9
-  [-1, -0.1, -0.8], //10
-  [1, -0.1, -0.8], //11
+  [-OUTER_LENGTH, HEIGHT, -INNER_LENGTH], //8
+  [OUTER_LENGTH, HEIGHT, -INNER_LENGTH], //9
+  [-OUTER_LENGTH, -HEIGHT, -INNER_LENGTH], //10
+  [OUTER_LENGTH, -HEIGHT, -INNER_LENGTH], //11
   //
-  [-1, 0.1, -1], //12
-  [1, 0.1, -1], //13
-  [-1, -0.1, -1], //14
-  [1, -0.1, -1] //15
+  [-OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //12
+  [OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //13
+  [-OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH], //14
+  [OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH] //15
 ];
 const cBlockVertices = [
-  [0.8, 0.1, 1], //16
-  [1, 0.1, 1], //17
-  [0.8, -0.1, 1], //18
-  [1, -0.1, 1], //19
+  [INNER_LENGTH, HEIGHT, OUTER_LENGTH], //16
+  [OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //17
+  [INNER_LENGTH, -HEIGHT, OUTER_LENGTH], //18
+  [OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //19
   //
-  [0.8, 0.1, -1], //20
-  [1, 0.1, -1], //21
-  [0.8, -0.1, -1], //22
-  [1, -0.1, -1] //23
+  [INNER_LENGTH, HEIGHT, -OUTER_LENGTH], //20
+  [OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //21
+  [INNER_LENGTH, -HEIGHT, -OUTER_LENGTH], //22
+  [OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH] //23
 ];
 const dBlockVertices = [
-  [-1, 0.1, 1], //24
-  [1, 0.1, 1], //25
-  [-1, -0.1, 1], //26
-  [1, -0.1, 1], //27
+  [-OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //24
+  [OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //25
+  [-OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //26
+  [OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //27
   //
-  [-1, 0.1, 0.8], //28
-  [1, 0.1, 0.8], //29
-  [-1, -0.1, 0.8], //30
-  [1, -0.1, 0.8] //31
+  [-OUTER_LENGTH, HEIGHT, INNER_LENGTH], //28
+  [OUTER_LENGTH, HEIGHT, INNER_LENGTH], //29
+  [-OUTER_LENGTH, -HEIGHT, INNER_LENGTH], //30
+  [OUTER_LENGTH, -HEIGHT, INNER_LENGTH] //31
 ];
 
 const aBlockFaces = [
