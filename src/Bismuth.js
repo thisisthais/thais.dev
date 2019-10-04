@@ -6,49 +6,49 @@ const OUTER_LENGTH = 1;
 const INNER_LENGTH = 0.9;
 const HEIGHT = 0.05;
 
-const aBlockVertices = [
-  [-OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //0
-  [-INNER_LENGTH, HEIGHT, OUTER_LENGTH], //1
-  [-OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //2
-  [-INNER_LENGTH, -HEIGHT, OUTER_LENGTH], //3
+const aBlockVertices = (stretch = 0) => [
+  [-OUTER_LENGTH, HEIGHT, OUTER_LENGTH + stretch], //0
+  [-INNER_LENGTH, HEIGHT, OUTER_LENGTH + stretch], //1
+  [-OUTER_LENGTH, -HEIGHT, OUTER_LENGTH + stretch], //2
+  [-INNER_LENGTH, -HEIGHT, OUTER_LENGTH + stretch], //3
   //
-  [-OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //4
-  [-INNER_LENGTH, HEIGHT, -OUTER_LENGTH], //5
-  [-OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH], //6
-  [-INNER_LENGTH, -HEIGHT, -OUTER_LENGTH] //7
+  [-OUTER_LENGTH, HEIGHT, -OUTER_LENGTH - stretch], //4
+  [-INNER_LENGTH, HEIGHT, -OUTER_LENGTH - stretch], //5
+  [-OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH - stretch], //6
+  [-INNER_LENGTH, -HEIGHT, -OUTER_LENGTH - stretch] //7
 ];
-const bBlockVertices = [
-  [-OUTER_LENGTH, HEIGHT, -INNER_LENGTH], //8
-  [OUTER_LENGTH, HEIGHT, -INNER_LENGTH], //9
-  [-OUTER_LENGTH, -HEIGHT, -INNER_LENGTH], //10
-  [OUTER_LENGTH, -HEIGHT, -INNER_LENGTH], //11
+const bBlockVertices = (stretch = 0) => [
+  [-OUTER_LENGTH - stretch, HEIGHT, -INNER_LENGTH], //8
+  [OUTER_LENGTH + stretch, HEIGHT, -INNER_LENGTH], //9
+  [-OUTER_LENGTH - stretch, -HEIGHT, -INNER_LENGTH], //10
+  [OUTER_LENGTH + stretch, -HEIGHT, -INNER_LENGTH], //11
   //
-  [-OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //12
-  [OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //13
-  [-OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH], //14
-  [OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH] //15
+  [-OUTER_LENGTH - stretch, HEIGHT, -OUTER_LENGTH], //12
+  [OUTER_LENGTH + stretch, HEIGHT, -OUTER_LENGTH], //13
+  [-OUTER_LENGTH - stretch, -HEIGHT, -OUTER_LENGTH], //14
+  [OUTER_LENGTH + stretch, -HEIGHT, -OUTER_LENGTH] //15
 ];
-const cBlockVertices = [
-  [INNER_LENGTH, HEIGHT, OUTER_LENGTH], //16
-  [OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //17
-  [INNER_LENGTH, -HEIGHT, OUTER_LENGTH], //18
-  [OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //19
+const cBlockVertices = (stretch = 0) => [
+  [INNER_LENGTH, HEIGHT, OUTER_LENGTH + stretch], //16
+  [OUTER_LENGTH, HEIGHT, OUTER_LENGTH + stretch], //17
+  [INNER_LENGTH, -HEIGHT, OUTER_LENGTH + stretch], //18
+  [OUTER_LENGTH, -HEIGHT, OUTER_LENGTH + stretch], //19
   //
-  [INNER_LENGTH, HEIGHT, -OUTER_LENGTH], //20
-  [OUTER_LENGTH, HEIGHT, -OUTER_LENGTH], //21
-  [INNER_LENGTH, -HEIGHT, -OUTER_LENGTH], //22
-  [OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH] //23
+  [INNER_LENGTH, HEIGHT, -OUTER_LENGTH - stretch], //20
+  [OUTER_LENGTH, HEIGHT, -OUTER_LENGTH - stretch], //21
+  [INNER_LENGTH, -HEIGHT, -OUTER_LENGTH - stretch], //22
+  [OUTER_LENGTH, -HEIGHT, -OUTER_LENGTH - stretch] //23
 ];
-const dBlockVertices = [
-  [-OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //24
-  [OUTER_LENGTH, HEIGHT, OUTER_LENGTH], //25
-  [-OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //26
-  [OUTER_LENGTH, -HEIGHT, OUTER_LENGTH], //27
+const dBlockVertices = (stretch = 0) => [
+  [-OUTER_LENGTH - stretch, HEIGHT, OUTER_LENGTH], //24
+  [OUTER_LENGTH + stretch, HEIGHT, OUTER_LENGTH], //25
+  [-OUTER_LENGTH - stretch, -HEIGHT, OUTER_LENGTH], //26
+  [OUTER_LENGTH + stretch, -HEIGHT, OUTER_LENGTH], //27
   //
-  [-OUTER_LENGTH, HEIGHT, INNER_LENGTH], //28
-  [OUTER_LENGTH, HEIGHT, INNER_LENGTH], //29
-  [-OUTER_LENGTH, -HEIGHT, INNER_LENGTH], //30
-  [OUTER_LENGTH, -HEIGHT, INNER_LENGTH] //31
+  [-OUTER_LENGTH - stretch, HEIGHT, INNER_LENGTH], //28
+  [OUTER_LENGTH + stretch, HEIGHT, INNER_LENGTH], //29
+  [-OUTER_LENGTH - stretch, -HEIGHT, INNER_LENGTH], //30
+  [OUTER_LENGTH + stretch, -HEIGHT, INNER_LENGTH] //31
 ];
 
 const aBlockFaces = [
@@ -109,14 +109,9 @@ const dBlockFaces = [
 ];
 
 const BoxRing = () => {
-  const vertices = [
-    ...aBlockVertices,
-    ...bBlockVertices,
-    ...cBlockVertices,
-    ...dBlockVertices
-  ];
+  const vertices = [...dBlockVertices(-0.5)];
 
-  var faces = [...aBlockFaces, ...bBlockFaces, ...cBlockFaces, ...dBlockFaces];
+  var faces = [...aBlockFaces];
   faces = faces.map(f => new THREE.Face3(...f));
 
   faces.forEach((face, ndx) => {
