@@ -4,9 +4,10 @@ import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { hsluvToHex } from 'hsluv';
 
-const OUTER_LENGTH = 0.4;
-const INNER_LENGTH = 0.3;
-const HEIGHT = 0.05;
+const OUTER_LENGTH = 1;
+const INNER_LENGTH = 1;
+const HEIGHT = 1;
+const WIDTH = 1;
 
 const aBlockVertices = (stretch = 0) => [
   [-OUTER_LENGTH - stretch, HEIGHT, OUTER_LENGTH + stretch], //0
@@ -110,6 +111,55 @@ const dBlockFaces = [
   [25, 27, 31]
 ];
 
+// initial point is top right when facing camera
+const calcClockwiseFace = ([startX, startY, startZ]) => [
+  [startX, startY, startZ],
+  [startX, startY - HEIGHT, startZ],
+  [startX - WIDTH, startY - HEIGHT, startZ],
+  [startX - WIDTH, startY, startZ]
+];
+
+const pushBack = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x, v1y, v1z - OUTER_LENGTH],
+  [v2x, v2y, v2z - OUTER_LENGTH],
+  [v3x, v3y, v3z - OUTER_LENGTH],
+  [v4x, v4y, v4z - OUTER_LENGTH]
+];
+
+const triangulateRectPrism = ([v0, v1, v2, v3, v4, v5, v6, v7]) => [
+  // front
+  [0, 2, 1],
+  [0, 3, 2],
+  // back
+  [7, 5, 6],
+  [7, 4, 5],
+  // right
+  [1, 4, 0],
+  [1, 5, 4],
+  // left
+  [3, 7, 6],
+  [3, 6, 2],
+  // top
+  [4, 7, 3],
+  [4, 3, 0],
+  // bottom
+  [6, 1, 2],
+  [6, 5, 1]
+];
+
+const calcVertices = (listOfLengths, startingPoint = [1, 1, 1]) => {
+  // calc starting face
+  const vertices = calcClockwiseFace(startingPoint);
+  const backVertices = pushBack(vertices.slice(0, 4));
+
+  return [...vertices, ...backVertices];
+};
+
 const interpolateHue = idx => (360 * (idx + (1 % 12))) / 12;
 
 const Base = ({ position = [0, 0, 0] }) => {
@@ -144,15 +194,9 @@ const Layer = ({
   rotation = [0, 0, 0],
   curl = 0
 }) => {
-  const vertices = [
-    ...aBlockVertices(stretch),
-    ...bBlockVertices(stretch),
-    ...cBlockVertices(stretch)
-    // ...dBlockVertices(stretch)
-  ];
-
-  var faces = [...aBlockFaces, ...bBlockFaces, ...cBlockFaces, ...dBlockFaces];
-  faces = faces.map(f => new THREE.Face3(...f));
+  const vertices = [...calcVertices([1])];
+  console.log(vertices);
+  const faces = triangulateRectPrism(vertices).map(f => new THREE.Face3(...f));
 
   faces.forEach((face, idx) => {
     face.vertexColors = [
