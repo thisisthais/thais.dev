@@ -9,108 +9,6 @@ const INNER_LENGTH = 1;
 const HEIGHT = 1;
 const WIDTH = 1;
 
-const aBlockVertices = (stretch = 0) => [
-  [-OUTER_LENGTH - stretch, HEIGHT, OUTER_LENGTH + stretch], //0
-  [-INNER_LENGTH - stretch, HEIGHT, OUTER_LENGTH + stretch], //1
-  [-OUTER_LENGTH - stretch, -HEIGHT, OUTER_LENGTH + stretch], //2
-  [-INNER_LENGTH - stretch, -HEIGHT, OUTER_LENGTH + stretch], //3
-  //
-  [-OUTER_LENGTH - stretch, HEIGHT, -OUTER_LENGTH - stretch], //4
-  [-INNER_LENGTH - stretch, HEIGHT, -OUTER_LENGTH - stretch], //5
-  [-OUTER_LENGTH - stretch, -HEIGHT, -OUTER_LENGTH - stretch], //6
-  [-INNER_LENGTH - stretch, -HEIGHT, -OUTER_LENGTH - stretch] //7
-];
-const bBlockVertices = (stretch = 0) => [
-  [-OUTER_LENGTH - stretch, HEIGHT, -INNER_LENGTH - stretch], //8
-  [OUTER_LENGTH + stretch, HEIGHT, -INNER_LENGTH - stretch], //9
-  [-OUTER_LENGTH - stretch, -HEIGHT, -INNER_LENGTH - stretch], //10
-  [OUTER_LENGTH + stretch, -HEIGHT, -INNER_LENGTH - stretch], //11
-  //
-  [-OUTER_LENGTH - stretch, HEIGHT, -OUTER_LENGTH - stretch], //12
-  [OUTER_LENGTH + stretch, HEIGHT, -OUTER_LENGTH - stretch], //13
-  [-OUTER_LENGTH - stretch, -HEIGHT, -OUTER_LENGTH - stretch], //14
-  [OUTER_LENGTH + stretch, -HEIGHT, -OUTER_LENGTH - stretch] //15
-];
-const cBlockVertices = (stretch = 0) => [
-  [INNER_LENGTH + stretch, HEIGHT, OUTER_LENGTH + stretch], //16
-  [OUTER_LENGTH + stretch, HEIGHT, OUTER_LENGTH + stretch], //17
-  [INNER_LENGTH + stretch, -HEIGHT, OUTER_LENGTH + stretch], //18
-  [OUTER_LENGTH + stretch, -HEIGHT, OUTER_LENGTH + stretch], //19
-  //
-  [INNER_LENGTH + stretch, HEIGHT, -OUTER_LENGTH - stretch], //20
-  [OUTER_LENGTH + stretch, HEIGHT, -OUTER_LENGTH - stretch], //21
-  [INNER_LENGTH + stretch, -HEIGHT, -OUTER_LENGTH - stretch], //22
-  [OUTER_LENGTH + stretch, -HEIGHT, -OUTER_LENGTH - stretch] //23
-];
-const dBlockVertices = (stretch = 0) => [
-  [-OUTER_LENGTH - stretch, HEIGHT, OUTER_LENGTH + stretch], //24
-  [OUTER_LENGTH + stretch, HEIGHT, OUTER_LENGTH + stretch], //25
-  [-OUTER_LENGTH - stretch, -HEIGHT, OUTER_LENGTH + stretch], //26
-  [OUTER_LENGTH + stretch, -HEIGHT, OUTER_LENGTH + stretch], //27
-  //
-  [-OUTER_LENGTH - stretch, HEIGHT, INNER_LENGTH + stretch], //28
-  [OUTER_LENGTH + stretch, HEIGHT, INNER_LENGTH + stretch], //29
-  [-OUTER_LENGTH - stretch, -HEIGHT, INNER_LENGTH + stretch], //30
-  [OUTER_LENGTH + stretch, -HEIGHT, INNER_LENGTH + stretch] //31
-];
-
-const aBlockFaces = [
-  [0, 2, 3],
-  [0, 3, 1],
-  [0, 5, 4],
-  [0, 1, 5],
-  [7, 1, 3],
-  [7, 5, 1],
-  [4, 5, 7],
-  [4, 7, 6],
-  [2, 7, 3],
-  [2, 6, 7],
-  [6, 2, 0],
-  [6, 0, 4]
-];
-const bBlockFaces = [
-  [10, 9, 8],
-  [10, 11, 9],
-  [8, 9, 13],
-  [8, 13, 12],
-  [11, 15, 13],
-  [11, 13, 9],
-  [14, 12, 13],
-  [14, 13, 15],
-  [10, 15, 11],
-  [10, 14, 15],
-  [10, 8, 12],
-  [10, 12, 14]
-];
-const cBlockFaces = [
-  [17, 16, 18],
-  [17, 18, 19],
-  [17, 20, 16],
-  [17, 21, 20],
-  [19, 21, 17],
-  [19, 23, 21],
-  [21, 22, 20],
-  [21, 23, 22],
-  [20, 18, 16],
-  [20, 22, 18],
-  [22, 23, 19],
-  [22, 19, 18]
-];
-const dBlockFaces = [
-  [26, 25, 24],
-  [26, 27, 25],
-  [25, 28, 24],
-  [25, 29, 28],
-  [28, 26, 24],
-  [28, 30, 26],
-  [28, 29, 31],
-  [28, 31, 30],
-  [30, 27, 26],
-  [30, 31, 27],
-  [25, 31, 29],
-  [25, 27, 31]
-];
-
 // initial point is top right when facing camera
 const calcInitialVertices = ([startX, startY, startZ]) => [
   [startX, startY, startZ],
@@ -131,7 +29,7 @@ const pushBack = ([
   [v4x, v4y, v4z - OUTER_LENGTH]
 ];
 
-const turn90Q2 = ([
+const turn90Q1 = ([
   [v1x, v1y, v1z],
   [v2x, v2y, v2z],
   [v3x, v3y, v3z],
@@ -153,6 +51,54 @@ const pushRight = ([
   [v2x + OUTER_LENGTH, v2y, v2z],
   [v3x + OUTER_LENGTH, v3y, v3z],
   [v4x + OUTER_LENGTH, v4y, v4z]
+];
+
+const turn90Q2 = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x - WIDTH, v1y, v1z + WIDTH],
+  [v2x - WIDTH, v2y, v2z + WIDTH],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+];
+
+const pushFoward = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x, v1y, v1z + OUTER_LENGTH],
+  [v2x, v2y, v2z + OUTER_LENGTH],
+  [v3x, v3y, v3z + OUTER_LENGTH],
+  [v4x, v4y, v4z + OUTER_LENGTH]
+];
+
+const turn90Q3 = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x - WIDTH, v3y, v3z - WIDTH],
+  [v4x - WIDTH, v4y, v4z - WIDTH]
+];
+
+const pushLeft = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x - OUTER_LENGTH, v1y, v1z],
+  [v2x - OUTER_LENGTH, v2y, v2z],
+  [v3x - OUTER_LENGTH, v3y, v3z],
+  [v4x - OUTER_LENGTH, v4y, v4z]
 ];
 
 const triangulateQ0toQ1 = () => [
@@ -198,16 +144,66 @@ const triangulateQ1toQ2 = () =>
     [6, 1, 5]
   ].map(([v1, v2, v3]) => [v1 + 8, v2 + 8, v3 + 8]);
 
-const calcVertices = (listOfLengths, startingPoint = [1, 1, 1]) => {
+const triangulateQ2toQ3 = () =>
+  [
+    // front
+    [0, 2, 1],
+    [0, 3, 2],
+    // back
+    [7, 5, 6],
+    [7, 4, 5],
+    // right
+    [1, 4, 0],
+    [1, 5, 4],
+    // left
+    [3, 7, 6],
+    [3, 6, 2],
+    // top
+    [4, 7, 3],
+    [4, 3, 0],
+    // bottom
+    [6, 1, 2],
+    [6, 5, 1]
+  ].map(([v1, v2, v3]) => [v1 + 16, v2 + 16, v3 + 16]);
+
+const triangulateQ3toQ4 = () =>
+  [
+    // front
+    [0, 1, 2],
+    [0, 2, 3],
+    // back
+    [7, 6, 5],
+    [7, 5, 4],
+    // right
+    [1, 0, 4],
+    [1, 4, 5],
+    // left
+    [3, 6, 7],
+    [3, 2, 6],
+    // top
+    [4, 3, 7],
+    [4, 0, 3],
+    // bottom
+    [6, 2, 1],
+    [6, 1, 5]
+  ].map(([v1, v2, v3]) => [v1 + 24, v2 + 24, v3 + 24]);
+
+const calcVertices = (listOfLengths, startingPoint = [0, 0, 0]) => {
   // calc starting face
   const Q0FrontVertices = calcInitialVertices(startingPoint);
   const Q1FrontVertices = pushBack(Q0FrontVertices.slice(0, 4));
-  const Q1SideVertices = turn90Q2(Q1FrontVertices);
+  const Q1SideVertices = turn90Q1(Q1FrontVertices);
   const Q2SideVertices = pushRight(Q1SideVertices);
+  const Q2FrontVertices = turn90Q2(Q2SideVertices);
+  const Q3FrontVertices = pushFoward(Q2FrontVertices);
+  const Q3SideVertices = turn90Q3(Q3FrontVertices);
+  const Q0SideVertuces = pushLeft(Q3SideVertices);
 
   return [
     [...Q0FrontVertices, ...Q1FrontVertices],
-    [...Q1SideVertices, ...Q2SideVertices]
+    [...Q1SideVertices, ...Q2SideVertices],
+    [...Q2FrontVertices, ...Q3FrontVertices],
+    [...Q3SideVertices, ...Q0SideVertuces]
   ];
 };
 
@@ -245,12 +241,19 @@ const Layer = ({
   rotation = [0, 0, 0],
   curl = 0
 }) => {
-  const [Q0toQ1, Q1toQ2] = calcVertices([1]);
-  console.log(Q0toQ1, Q1toQ2);
-  const Q0toQ1faces = triangulateQ0toQ1(Q0toQ1).map(f => new THREE.Face3(...f));
-  const Q1toQ2faces = triangulateQ1toQ2(Q1toQ2).map(f => new THREE.Face3(...f));
+  const [Q0toQ1, Q1toQ2, Q2toQ3, Q3toQ0] = calcVertices([1]);
+  const Q0toQ1faces = triangulateQ0toQ1(Q0toQ1);
+  const Q1toQ2faces = triangulateQ1toQ2(Q1toQ2);
+  const Q2toQ3faces = triangulateQ2toQ3(Q2toQ3);
+  const Q3toQ0faces = triangulateQ3toQ4(Q3toQ0);
+  console.log(Q3toQ0);
 
-  const faces = [...Q0toQ1faces, ...Q1toQ2faces];
+  const faces = [
+    ...Q0toQ1faces,
+    ...Q1toQ2faces,
+    ...Q2toQ3faces,
+    ...Q3toQ0faces
+  ].map(f => new THREE.Face3(...f));
 
   faces.forEach((face, idx) => {
     face.vertexColors = [
@@ -263,7 +266,8 @@ const Layer = ({
     ];
   });
 
-  const vertices = [...Q0toQ1, ...Q1toQ2];
+  const vertices = [...Q0toQ1, ...Q1toQ2, ...Q2toQ3, ...Q3toQ0];
+  console.log(vertices, faces);
   return (
     <a.mesh position={position} rotation={rotation}>
       <geometry
