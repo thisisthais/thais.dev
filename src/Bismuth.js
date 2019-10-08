@@ -4,7 +4,7 @@ import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { hsluvToHex } from 'hsluv';
 
-const OUTER_LENGTH = 1;
+const OUTER_LENGTH = 2;
 const INNER_LENGTH = 1;
 const HEIGHT = 1;
 const WIDTH = 1;
@@ -112,7 +112,7 @@ const dBlockFaces = [
 ];
 
 // initial point is top right when facing camera
-const calcClockwiseFace = ([startX, startY, startZ]) => [
+const calcInitialVertices = ([startX, startY, startZ]) => [
   [startX, startY, startZ],
   [startX, startY - HEIGHT, startZ],
   [startX - WIDTH, startY - HEIGHT, startZ],
@@ -131,7 +131,31 @@ const pushBack = ([
   [v4x, v4y, v4z - OUTER_LENGTH]
 ];
 
-const triangulateRectPrism = ([v0, v1, v2, v3, v4, v5, v6, v7]) => [
+const turn90Q2 = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x + WIDTH, v3y, v3z + WIDTH],
+  [v4x + WIDTH, v4y, v4z + WIDTH]
+];
+
+const pushRight = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x + OUTER_LENGTH, v1y, v1z],
+  [v2x + OUTER_LENGTH, v2y, v2z],
+  [v3x + OUTER_LENGTH, v3y, v3z],
+  [v4x + OUTER_LENGTH, v4y, v4z]
+];
+
+const triangulateQ0toQ1 = () => [
   // front
   [0, 2, 1],
   [0, 3, 2],
@@ -152,12 +176,39 @@ const triangulateRectPrism = ([v0, v1, v2, v3, v4, v5, v6, v7]) => [
   [6, 5, 1]
 ];
 
+const triangulateQ1toQ2 = () =>
+  [
+    // front
+    [0, 1, 2],
+    [0, 2, 3],
+    // back
+    [7, 6, 5],
+    [7, 5, 4],
+    // right
+    [1, 0, 4],
+    [1, 4, 5],
+    // left
+    [3, 6, 7],
+    [3, 2, 6],
+    // top
+    [4, 3, 7],
+    [4, 0, 3],
+    // bottom
+    [6, 2, 1],
+    [6, 1, 5]
+  ].map(([v1, v2, v3]) => [v1 + 8, v2 + 8, v3 + 8]);
+
 const calcVertices = (listOfLengths, startingPoint = [1, 1, 1]) => {
   // calc starting face
-  const vertices = calcClockwiseFace(startingPoint);
-  const backVertices = pushBack(vertices.slice(0, 4));
+  const Q0FrontVertices = calcInitialVertices(startingPoint);
+  const Q1FrontVertices = pushBack(Q0FrontVertices.slice(0, 4));
+  const Q1SideVertices = turn90Q2(Q1FrontVertices);
+  const Q2SideVertices = pushRight(Q1SideVertices);
 
-  return [...vertices, ...backVertices];
+  return [
+    [...Q0FrontVertices, ...Q1FrontVertices],
+    [...Q1SideVertices, ...Q2SideVertices]
+  ];
 };
 
 const interpolateHue = idx => (360 * (idx + (1 % 12))) / 12;
@@ -194,9 +245,12 @@ const Layer = ({
   rotation = [0, 0, 0],
   curl = 0
 }) => {
-  const vertices = [...calcVertices([1])];
-  console.log(vertices);
-  const faces = triangulateRectPrism(vertices).map(f => new THREE.Face3(...f));
+  const [Q0toQ1, Q1toQ2] = calcVertices([1]);
+  console.log(Q0toQ1, Q1toQ2);
+  const Q0toQ1faces = triangulateQ0toQ1(Q0toQ1).map(f => new THREE.Face3(...f));
+  const Q1toQ2faces = triangulateQ1toQ2(Q1toQ2).map(f => new THREE.Face3(...f));
+
+  const faces = [...Q0toQ1faces, ...Q1toQ2faces];
 
   faces.forEach((face, idx) => {
     face.vertexColors = [
@@ -209,6 +263,7 @@ const Layer = ({
     ];
   });
 
+  const vertices = [...Q0toQ1, ...Q1toQ2];
   return (
     <a.mesh position={position} rotation={rotation}>
       <geometry
