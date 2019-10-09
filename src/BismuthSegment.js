@@ -3,8 +3,8 @@ import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { hsluvToHex } from 'hsluv';
 
-const HEIGHT = 0.25;
-const WIDTH = 0.25;
+const HEIGHT = 0.2;
+const WIDTH = 0.2;
 
 // initial point is top right when facing camera
 const calcInitialVertices = ([startX, startY, startZ]) => [
@@ -230,12 +230,11 @@ const calcVerticesAndFaces = (listOfLengths, startingPoint = [0, 0, 0]) => {
 };
 
 export default ({
-  stretch = 0,
+  lengths = [1, 1, 1, 1],
   position = [0, 0, 0],
-  rotation = [0, 0, 0],
-  curl = 0
+  rotation = [0, 0, 0]
 }) => {
-  const [vertices, faces] = calcVerticesAndFaces([3, 2, 1]);
+  const [vertices, faces] = calcVerticesAndFaces(lengths);
 
   faces.forEach((face, idx) => {
     face.vertexColors = [

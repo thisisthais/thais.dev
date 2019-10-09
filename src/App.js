@@ -22,7 +22,10 @@ const App = () => {
     <div className="App">
       <Canvas
         style={{ touchAction: 'none' }}
-        camera={{ position: [0, 3, 3], rotation: [-Math.PI / 8, 0, 0] }}
+        camera={{
+          position: [0, 9, 0],
+          rotation: [0, 0, 0]
+        }}
       >
         <Controls />
         <ambientLight />
