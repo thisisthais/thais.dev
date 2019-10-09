@@ -35,8 +35,16 @@ const Base = ({ position = [0, 0, 0] }) => {
   );
 };
 
+// don't ask me where these numbers came from but it depends on
+// the y axis rotation, aka rotation[1]
+const rotationOffsetMapping = {
+  0: { xOff: -0.05, zOff: 0.05 },
+  [Math.PI / 2]: { xOff: 0.05, zOff: 0.05 },
+  [Math.PI]: { xOff: 0.05, zOff: -0.05 }
+};
+
 const generateTower = (
-  { lengths, position, rotation, height },
+  { lengths, position, height, rotation = [0, 0, 0] },
   towerList = []
 ) => {
   if (height <= 1) {
@@ -50,9 +58,10 @@ const generateTower = (
     <Segment position={position} lengths={lengths} rotation={rotation} />
   );
   const [x, y, z] = position;
+  const { xOff, zOff } = rotationOffsetMapping[rotation[1]];
   return generateTower(
     {
-      position: [x - 0.05, y + HEIGHT / 2, z + 0.05],
+      position: [x + xOff, y + HEIGHT / 2, z + zOff],
       rotation,
       lengths: lengths.map(l => l + 0.1),
       height: height - 1
@@ -62,6 +71,7 @@ const generateTower = (
 };
 
 export default () => {
+  console.log(rotationOffsetMapping);
   const tower0 = generateTower({
     lengths: [1, 1, 1, 1],
     position: [-2, 0, -2],
@@ -94,19 +104,19 @@ export default () => {
   });
   const tower6 = generateTower({
     lengths: [0.5, 1, 1, 0.4],
-    position: [-2, 0, 1.1],
+    position: [-1.7, 0, 1.6],
     rotation: [0, Math.PI / 2, 0],
     height: 4
   });
   const tower7 = generateTower({
     lengths: [0.5, 0.5, 1, 1, 0.4],
-    position: [0.5, 0, 1.1],
+    position: [0.3, 0, 1.3],
     rotation: [0, Math.PI, 0],
     height: 4
   });
   const tower8 = generateTower({
     lengths: [0.4, 0.3, 0.6, 1, 1, 0.4, 0.3],
-    position: [3, 0, 1],
+    position: [2.1, 0, 1],
     rotation: [0, Math.PI, 0],
     height: 4
   });
@@ -122,11 +132,6 @@ export default () => {
       {tower6}
       {tower7}
       {tower8}
-      {/* <Segment
-        position={[2, 0, 1]}
-        lengths={[0.4, 0.3, 0.6, 1, 1, 0.4, 0.3]}
-        rotation={[0, Math.PI, 0]}
-      /> */}
     </>
   );
 };
