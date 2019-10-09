@@ -101,6 +101,18 @@ const pushLeft = ([
   [v4x - OUTER_LENGTH, v4y, v4z]
 ];
 
+const turn90Q0 = ([
+  [v1x, v1y, v1z],
+  [v2x, v2y, v2z],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+]) => [
+  [v1x + WIDTH, v1y, v1z - WIDTH],
+  [v2x + WIDTH, v2y, v2z - WIDTH],
+  [v3x, v3y, v3z],
+  [v4x, v4y, v4z]
+];
+
 const triangulateQ0toQ1 = () => [
   // front
   [0, 2, 1],
@@ -188,23 +200,28 @@ const triangulateQ3toQ4 = () =>
     [6, 1, 5]
   ].map(([v1, v2, v3]) => [v1 + 24, v2 + 24, v3 + 24]);
 
+const orderedGrowFunctions = [
+  [turn90Q0, pushBack],
+  [turn90Q1, pushRight],
+  [turn90Q2, pushFoward],
+  [turn90Q3, pushLeft]
+];
 const calcVertices = (listOfLengths, startingPoint = [0, 0, 0]) => {
-  // calc starting face
-  const Q0FrontVertices = calcInitialVertices(startingPoint);
-  const Q1FrontVertices = pushBack(Q0FrontVertices.slice(0, 4));
-  const Q1SideVertices = turn90Q1(Q1FrontVertices);
-  const Q2SideVertices = pushRight(Q1SideVertices);
-  const Q2FrontVertices = turn90Q2(Q2SideVertices);
-  const Q3FrontVertices = pushFoward(Q2FrontVertices);
-  const Q3SideVertices = turn90Q3(Q3FrontVertices);
-  const Q0SideVertuces = pushLeft(Q3SideVertices);
-
-  return [
-    [...Q0FrontVertices, ...Q1FrontVertices],
-    [...Q1SideVertices, ...Q2SideVertices],
-    [...Q2FrontVertices, ...Q3FrontVertices],
-    [...Q3SideVertices, ...Q0SideVertuces]
-  ];
+  const vertices = [];
+  for (let i = 0; i < listOfLengths.length; i++) {
+    if (i === 0) {
+      const initialFace = calcInitialVertices(startingPoint);
+      vertices.push(...initialFace, ...pushBack(initialFace));
+    } else {
+      const functionsIndex = i % 4;
+      const [turnFunction, pushFunction] = orderedGrowFunctions[functionsIndex];
+      const lastFaceVertices = vertices.slice(-4, vertices.length);
+      const turnFaceVertices = turnFunction(lastFaceVertices);
+      const pushFaceVertices = pushFunction(turnFaceVertices);
+      vertices.push(...turnFaceVertices, ...pushFaceVertices);
+    }
+  }
+  return vertices;
 };
 
 const interpolateHue = idx => (360 * (idx + (1 % 12))) / 12;
@@ -241,12 +258,11 @@ const Layer = ({
   rotation = [0, 0, 0],
   curl = 0
 }) => {
-  const [Q0toQ1, Q1toQ2, Q2toQ3, Q3toQ0] = calcVertices([1]);
-  const Q0toQ1faces = triangulateQ0toQ1(Q0toQ1);
-  const Q1toQ2faces = triangulateQ1toQ2(Q1toQ2);
-  const Q2toQ3faces = triangulateQ2toQ3(Q2toQ3);
-  const Q3toQ0faces = triangulateQ3toQ4(Q3toQ0);
-  console.log(Q3toQ0);
+  const vertices = calcVertices([1, 1, 1, 1]);
+  const Q0toQ1faces = triangulateQ0toQ1();
+  const Q1toQ2faces = triangulateQ1toQ2();
+  const Q2toQ3faces = triangulateQ2toQ3();
+  const Q3toQ0faces = triangulateQ3toQ4();
 
   const faces = [
     ...Q0toQ1faces,
@@ -266,7 +282,6 @@ const Layer = ({
     ];
   });
 
-  const vertices = [...Q0toQ1, ...Q1toQ2, ...Q2toQ3, ...Q3toQ0];
   console.log(vertices, faces);
   return (
     <a.mesh position={position} rotation={rotation}>
