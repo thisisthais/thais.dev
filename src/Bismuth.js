@@ -11,11 +11,14 @@ const HEIGHT = 0.1;
 const LENGTH_DELTA = 0.2;
 const MIN_BASE_HEIGHT = 2;
 const MAX_BASE_HEIGHT = 7;
+const DEFAULT_LENGTHS = [1, 1, 1, 1];
+const ROTATIONS = [0, Math.PI / 2, (3 / 2) * Math.PI, Math.PI];
 
 const randIntInRange = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+  Math.floor(Math.random() * (max - min + 1) + min);
 const randFloatInRange = (min, max) => Math.random() * (max - min) + min;
 const randomlyNegative = num => (Math.random() > 0.5 ? num : -num);
+const randRotation = () => ROTATIONS[randIntInRange(0, 3)];
 
 const Base = ({ size = 1, position = [0, 0, 0] }) => {
   const boxGeo = new THREE.BoxGeometry(size, HEIGHT, size);
@@ -48,14 +51,13 @@ const rotationOffsetMapping = {
 const generateTower = (
   {
     height,
-    lengths = [1, 1, 1, 1],
+    lengths = DEFAULT_LENGTHS,
     position = [0, 0, 0, 0],
     rotation = [0, 0, 0]
   },
   towerList = []
 ) => {
   if (height <= 1) {
-    console.log('lastTowerHeight', position[1]);
     return [
       ...towerList,
       <Segment
@@ -141,19 +143,16 @@ export default () => {
     MIN_BASE_HEIGHT,
     MAX_BASE_HEIGHT
   );
-  console.log('randBaseHeight', randomBaseTowerHeight);
 
   const baseTower = generateTower({
     height: randomBaseTowerHeight,
-    position: [-0.4, 2 * HEIGHT, 0.4]
+    position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
   });
   const offsetFromOrigin = LENGTH_DELTA * randomBaseTowerHeight;
 
   // 2*HEIGHT makes some overlap, 3*HEIGHT makes it exactly on top
-  var currentHeight = 2 * HEIGHT + randomBaseTowerHeight * HEIGHT;
-  console.log('calculated height', currentHeight);
+  var currentHeight = randomBaseTowerHeight * HEIGHT - HEIGHT / 2;
 
-  // again, where does the 1.5 come from?? no clue
   const randomTowerStartPos = {
     x1: randomlyNegative(
       randFloatInRange(offsetFromOrigin / 2, offsetFromOrigin)
@@ -167,12 +166,13 @@ export default () => {
   const nextTower = generateTower({
     lengths: [0.5, 0.5, 0.5],
     position: [x1, y1, z1],
+    rotation: [0, randRotation(), 0],
     height: 4
   });
 
   return (
     <>
-      <a.mesh position={[-4, 0, -6]}>
+      <a.mesh position={[-2, 0, -4]}>
         {/* {tower0}
         {tower1}
         {tower2}

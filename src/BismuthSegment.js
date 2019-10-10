@@ -3,15 +3,15 @@ import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { hsluvToHex } from 'hsluv';
 
-const HEIGHT = 0.2;
-const WIDTH = 0.2;
+const HEIGHT = 0.1;
+const WIDTH = 0.1;
 
 // initial point is top right when facing camera
 const calcInitialVertices = ([startX, startY, startZ]) => [
-  [startX, startY, startZ],
-  [startX, startY - HEIGHT, startZ],
-  [startX - WIDTH, startY - HEIGHT, startZ],
-  [startX - WIDTH, startY, startZ]
+  [startX + WIDTH / 2, startY + HEIGHT / 2, startZ],
+  [startX + WIDTH / 2, startY - HEIGHT / 2, startZ],
+  [startX - WIDTH / 2, startY - HEIGHT / 2, startZ],
+  [startX - WIDTH / 2, startY + HEIGHT / 2, startZ]
 ];
 
 const pushBack = (
