@@ -3,9 +3,6 @@ import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { default as Segment } from './BismuthSegment';
 
-// to delete
-const OUTER_LENGTH = 2;
-
 // to keep
 const HEIGHT = 0.1;
 const LENGTH_DELTA = 0.2;
@@ -13,6 +10,7 @@ const MIN_BASE_HEIGHT = 2;
 const MAX_BASE_HEIGHT = 7;
 const DEFAULT_LENGTHS = [1, 1, 1, 1];
 const ROTATIONS = [0, Math.PI / 2, (3 / 2) * Math.PI, Math.PI];
+const QUAD_MULTIPLIERS = [[1, 1], [-1, 1], [1, -1], [-1, -1]];
 
 const randIntInRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
@@ -148,11 +146,12 @@ export default () => {
     height: randomBaseTowerHeight,
     position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
   });
-  const offsetFromOrigin = LENGTH_DELTA * randomBaseTowerHeight;
-
-  // 2*HEIGHT makes some overlap, 3*HEIGHT makes it exactly on top
+  const offsetFromOrigin = 1.1 * LENGTH_DELTA * randomBaseTowerHeight;
   var currentHeight = randomBaseTowerHeight * HEIGHT - HEIGHT / 2;
 
+  // generate towers for layers
+  const numTowersInLayer = randIntInRange(1, 3);
+  const towersInLayer = [];
   const randomTowerStartPos = {
     x1: randomlyNegative(
       randFloatInRange(offsetFromOrigin / 2, offsetFromOrigin)
@@ -162,13 +161,23 @@ export default () => {
       randFloatInRange(offsetFromOrigin / 2, offsetFromOrigin)
     )
   };
-  const { x1, y1, z1 } = randomTowerStartPos;
-  const nextTower = generateTower({
-    lengths: [0.5, 0.5, 0.5],
-    position: [x1, y1, z1],
-    rotation: [0, randRotation(), 0],
-    height: 4
-  });
+
+  const availableLayerQuadrants = QUAD_MULTIPLIERS;
+  for (let i = 0; i < numTowersInLayer; i++) {
+    const [[xMult, zMult]] = availableLayerQuadrants.splice(
+      randIntInRange(0, availableLayerQuadrants.length - 1),
+      1
+    );
+    const { x1, y1, z1 } = randomTowerStartPos;
+    console.log(xMult, zMult);
+    const nextTower = generateTower({
+      lengths: [0.5, 0.5, 0.5],
+      position: [x1 * xMult, y1, z1 * zMult],
+      rotation: [0, randRotation(), 0],
+      height: 4
+    });
+    towersInLayer.push(nextTower);
+  }
 
   return (
     <>
@@ -183,7 +192,7 @@ export default () => {
         {tower7}
         {tower8} */}
       </a.mesh>
-      {nextTower}
+      {[...towersInLayer]}
       {baseTower}
       <Base />
     </>
