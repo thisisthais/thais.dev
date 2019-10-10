@@ -23,13 +23,13 @@ const App = () => {
       <Canvas
         style={{ touchAction: 'none' }}
         camera={{
-          position: [0, 9, 0],
-          rotation: [0, 0, 0]
+          position: [5, 9, 5]
         }}
       >
         <Controls />
         <ambientLight />
         <spotLight position={[0, 10, 4]} />
+        <axesHelper args={[5]} />
         <Bismuth />
       </Canvas>
     </div>

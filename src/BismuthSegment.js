@@ -247,7 +247,6 @@ export default ({
     ];
   });
 
-  console.log(vertices, faces);
   return (
     <a.mesh position={position} rotation={rotation}>
       <geometry
