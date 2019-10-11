@@ -21,20 +21,11 @@ const randRotation = () => ROTATIONS[randIntInRange(0, 3)];
 const genRandLengths = (lastLengths, height) => {
   const maxLastLength = Math.max(...lastLengths);
 
-  var numTurns;
-  if (height < 10) {
-    numTurns = randIntInRange(3, 5);
-  } else if (height < 15) {
-    numTurns = randIntInRange(3, 6);
-  } else if (height < 20) {
-    numTurns = randIntInRange(4, 6);
-  } else {
-    numTurns = 2;
-  }
-
+  const numTurns = randIntInRange(2, 7);
   const newLengths = [];
   for (let i = 0; i < numTurns; i++) {
     const randOffset = randFloatInRange(-0.1, 0.1);
+    // make this strictly smaller lengths after 4?
     newLengths.push(maxLastLength / 4 + randOffset);
   }
 
@@ -82,15 +73,7 @@ const generateTower = (
   if (height <= 1) {
     currentHeight = position[1];
     currentLengths = lengths;
-    return [
-      ...towerList,
-      <Segment
-        position={position}
-        lengths={lengths}
-        rotation={rotation}
-        key={`segment${towerList.length + 1}`}
-      />
-    ];
+    return towerList;
   }
 
   towerList.push(
@@ -98,7 +81,7 @@ const generateTower = (
       position={position}
       lengths={lengths}
       rotation={rotation}
-      key={`segment${towerList.length + 1}`}
+      key={`segment${towerList.length + Math.random()}`}
     />
   );
   const [x, y, z] = position;
@@ -114,131 +97,91 @@ const generateTower = (
   );
 };
 
-export default () => {
-  // const tower0 = generateTower({
-  //   lengths: [1, 1, 1, 1],
-  //   position: [-2, 0, -2.2],
-  //   height: 4
-  // });
-  // const tower1 = generateTower({
-  //   lengths: [1.2, 1, 1],
-  //   position: [0, 0, -2],
-  //   height: 4
-  // });
-  // const tower2 = generateTower({
-  //   lengths: [1.2, 1, 0.5],
-  //   position: [2, 0, -2],
-  //   height: 4
-  // });
-  // const tower3 = generateTower({
-  //   lengths: [1.2, 1, 1, 0.4],
-  //   position: [-2, 0, 0],
-  //   height: 4
-  // });
-  // const tower4 = generateTower({
-  //   lengths: [1.2, 1, 0.5, 0.4],
-  //   position: [0, 0, 0],
-  //   height: 4
-  // });
-  // const tower5 = generateTower({
-  //   lengths: [1.2, 1, 0.7, 0.5, 0.25],
-  //   position: [2, 0, 0],
-  //   height: 4
-  // });
-  // const tower6 = generateTower({
-  //   lengths: [0.5, 1, 1, 0.4],
-  //   position: [-1.7, 0, 1.8],
-  //   rotation: [0, Math.PI / 2, 0],
-  //   height: 4
-  // });
-  // const tower7 = generateTower({
-  //   lengths: [0.5, 0.5, 1, 1, 0.4],
-  //   position: [0.3, 0, 1.5],
-  //   rotation: [0, Math.PI, 0],
-  //   height: 4
-  // });
-  // const tower8 = generateTower({
-  //   lengths: [0.4, 0.3, 0.6, 1, 1, 0.4, 0.3],
-  //   position: [2.1, 0, 1.2],
-  //   rotation: [0, Math.PI, 0],
-  //   height: 4
-  // });
-  var currentLayersHeight = 0;
-  const randomBaseTowerHeight = randIntInRange(
-    MIN_BASE_HEIGHT,
-    MAX_BASE_HEIGHT
-  );
-  currentLayersHeight = randomBaseTowerHeight;
-
-  const baseTower = generateTower({
-    height: randomBaseTowerHeight,
-    position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
-  });
-  const numTowerLayers = randIntInRange(4, 8);
-  const allLayerSegments = [];
-
-  for (var i = 0; i < numTowerLayers; i++) {
-    console.log(currentLayersHeight);
-    const offsetFromOrigin =
-      1.1 * LENGTH_DELTA * Math.min(currentLayersHeight, 5);
-
-    // generate towers for layers
-    const numTowersInLayer = randIntInRange(2, 4);
-    const towersInLayer = [];
-    const randomTowerStartPos = {
-      x1: randomlyNegative(
-        randFloatInRange(offsetFromOrigin / 3, offsetFromOrigin / 1.5)
-      ),
-      y1: currentHeight,
-      z1: randomlyNegative(
-        randFloatInRange(offsetFromOrigin / 3, offsetFromOrigin / 1.5)
-      )
-    };
-
-    // keept track of where each tower is placed and don't reuse quadrants
-    var availableLayerQuadrants = [...QUAD_MULTIPLIERS];
-
-    const lastLayerLengths = currentLengths;
-    var shortestTowerHeight = 10;
-    for (let i = 0; i < numTowersInLayer; i++) {
-      const [[xMult, zMult]] = availableLayerQuadrants.splice(
-        randIntInRange(0, availableLayerQuadrants.length - 1),
-        1
-      );
-      const { x1, y1, z1 } = randomTowerStartPos;
-
-      const randLengths = genRandLengths(lastLayerLengths, currentLayersHeight);
-      const randPosOffset = randFloatInRange(-0.1, 0.1);
-      const randTowerHeight = randIntInRange(3, 7);
-      shortestTowerHeight = Math.min(shortestTowerHeight, randTowerHeight);
-
-      const nextTower = generateTower({
-        lengths: randLengths,
-        position: [x1 * xMult + randPosOffset, y1, z1 * zMult + randPosOffset],
-        rotation: [0, randRotation(), 0],
-        height: randTowerHeight
-      });
-      towersInLayer.push(nextTower);
-    }
-    availableLayerQuadrants = [...QUAD_MULTIPLIERS];
-    currentLayersHeight += shortestTowerHeight;
-    allLayerSegments.push(...towersInLayer);
+const generateLayers = (
+  { numLayers = 1, currentHeight = 0 },
+  allSegments = []
+) => {
+  if (numLayers < 1) {
+    return allSegments;
   }
+
+  let randomBaseTowerHeight;
+  if (allSegments.length === 0) {
+    randomBaseTowerHeight = randIntInRange(5, 15);
+    const baseTower = generateTower({
+      height: randomBaseTowerHeight,
+      position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
+    });
+    allSegments.push(...baseTower);
+    currentHeight += randomBaseTowerHeight;
+  }
+
+  const numTowers = randIntInRange(1, 4);
+  const startingLayerHeight = ((randomBaseTowerHeight * 9) / 10) * HEIGHT;
+  const initialBaseLength = 1 + randomBaseTowerHeight * LENGTH_DELTA;
+
+  // keept track of where each tower is placed and don't reuse quadrants
+  var availableLayerQuadrants = [...QUAD_MULTIPLIERS];
+
+  const towersInLayer = [];
+  let lastLayerLengths = [];
+  let shortestTowerHeight = 100;
+  for (let i = 0; i < numTowers; i++) {
+    // figuring out a random position that makes sense
+    const offsetFromOrigin =
+      1.1 * LENGTH_DELTA * Math.min(startingLayerHeight, 5);
+    const [[xMult, zMult]] = availableLayerQuadrants.splice(
+      randIntInRange(0, availableLayerQuadrants.length - 1),
+      1
+    );
+    const randPosOffset = randFloatInRange(-0.1, 0.1);
+    const randomTowerStartPos = {
+      x:
+        xMult * randFloatInRange(offsetFromOrigin / 3, offsetFromOrigin) +
+        randPosOffset,
+      y: (currentHeight * HEIGHT) / 1.3,
+      z:
+        zMult * randFloatInRange(offsetFromOrigin / 3, offsetFromOrigin) +
+        randPosOffset
+    };
+    const { x, y, z } = randomTowerStartPos;
+
+    // figure out lengths
+    if (lastLayerLengths.length === 0) {
+      lastLayerLengths = [
+        initialBaseLength,
+        initialBaseLength,
+        initialBaseLength,
+        initialBaseLength
+      ];
+    }
+    const randLengths = genRandLengths(lastLayerLengths, currentHeight);
+
+    const randTowerHeight = randIntInRange(7, 30 / numLayers);
+    shortestTowerHeight = Math.min(shortestTowerHeight, randTowerHeight);
+
+    const nextTower = generateTower({
+      lengths: randLengths,
+      position: [x, y, z],
+      rotation: [0, randRotation(), 0],
+      height: randTowerHeight
+    });
+    towersInLayer.push(...nextTower);
+  }
+
+  const nextLayerHeight = currentHeight + shortestTowerHeight;
+  availableLayerQuadrants = [...QUAD_MULTIPLIERS];
+  return generateLayers(
+    { numLayers: numLayers - 1, currentHeight: nextLayerHeight },
+    [...allSegments, ...towersInLayer]
+  );
+};
+
+export default () => {
+  const baseTower = generateLayers({ numLayers: 30 });
 
   return (
     <>
-      <a.mesh position={[-2, 0, -4]}>
-        {/* {tower0}
-        {tower1}
-        {tower2}
-        {tower3}
-        {tower4}
-        {tower5}
-        {tower6}
-        {tower7}
-        {tower8} */}
-      </a.mesh>
-      {[...allLayerSegments]}
       {baseTower}
       <Base />
     </>
