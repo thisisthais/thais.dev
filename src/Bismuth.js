@@ -10,7 +10,12 @@ const MIN_BASE_HEIGHT = 2;
 const MAX_BASE_HEIGHT = 7;
 const DEFAULT_LENGTHS = [1, 1, 1, 1];
 const ROTATIONS = [0, Math.PI / 2, (3 / 2) * Math.PI, Math.PI];
-const QUAD_MULTIPLIERS = [[1, 1], [-1, 1], [1, -1], [-1, -1]];
+const QUAD_MULTIPLIERS = [
+  [1, 1],
+  [-1, 1],
+  [1, -1],
+  [-1, -1]
+];
 
 const randIntInRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
