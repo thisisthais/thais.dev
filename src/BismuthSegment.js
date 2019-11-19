@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
-import { hsluvToHex } from 'hsluv';
 
 const HEIGHT = 0.1;
 const WIDTH = 0.1;
@@ -226,7 +225,10 @@ const calcVerticesAndFaces = (listOfLengths, startingPoint = [0, 0, 0]) => {
     // i*8 because each new block on the segment adds 8 vertices, so we need to offset
     faces.push(...triangulateFunction(i * 8));
   }
-  return [vertices, faces.map(f => new THREE.Face3(...f))];
+  return [
+    vertices.map(v => new THREE.Vector3(...v)),
+    faces.map(f => new THREE.Face3(...f))
+  ];
 };
 
 export default ({
@@ -234,18 +236,7 @@ export default ({
   position = [0, 0, 0],
   rotation = [0, 0, 0]
 }) => {
-  const [vertices, faces] = calcVerticesAndFaces(lengths);
-
-  faces.forEach((face, idx) => {
-    face.vertexColors = [
-      // new THREE.Color(hsluvToHex([interpolateHue(idx + 4), 100, 60])),
-      // new THREE.Color(hsluvToHex([interpolateHue(idx + 7), 100, 70])),
-      // new THREE.Color(hsluvToHex([interpolateHue(idx), 100, 50]))
-      new THREE.Color().setHSL(idx / 12, 0.5, 0.5),
-      new THREE.Color().setHSL(idx / 12 + position[1] + 0.2, 0.5, 0.5),
-      new THREE.Color().setHSL(idx / 12 + position[1] + 0.4, 0.5, 0.5)
-    ];
-  });
+  const [vertices, faces] = useMemo(() => calcVerticesAndFaces(lengths), []);
 
   const fragmentShader = `
     varying vec3 Normal;
@@ -285,38 +276,32 @@ export default ({
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
     }
   `;
-  const uniforms = {
-    // phong material uniforms
-    Ka: { value: new THREE.Vector3(1, 1, 1) },
-    Kd: { value: new THREE.Vector3(1, 1, 1) },
-    Ks: { value: new THREE.Vector3(1, 1, 1) },
-    LightIntensity: { value: new THREE.Vector4(0.5, 0.5, 0.5, 1.0) },
-    LightPosition: { value: new THREE.Vector4(0.0, 2000.0, 0.0, 1.0) },
-    Shininess: { value: 200.0 }
-    // classic uniforms
-  };
+
+  const shaderData = useMemo(
+    () => ({
+      uniforms: {
+        Ka: { value: new THREE.Vector3(1, 1, 1) },
+        Kd: { value: new THREE.Vector3(1, 1, 1) },
+        Ks: { value: new THREE.Vector3(1, 1, 1) },
+        LightIntensity: { value: new THREE.Vector4(0.5, 0.5, 0.5, 1.0) },
+        LightPosition: { value: new THREE.Vector4(0.0, 10.0, 4.0, 1.0) },
+        Shininess: { value: 200.0 }
+      },
+      fragmentShader,
+      vertexShader
+    }),
+    []
+  );
 
   return (
     <a.mesh position={position} rotation={rotation}>
       <geometry
         attach="geometry"
-        vertices={vertices.map(v => new THREE.Vector3(...v))}
+        vertices={vertices}
         faces={faces}
+        onUpdate={self => self.computeFaceNormals()}
       />
-      {/* <boxBufferGeometry attach="geometry" args={[1, 1, 1]} /> */}
-      {/* <a.meshBasicMaterial
-        attach="material"
-        fragmentShader={bismuthShader}
-        vertexShader
-        uniforms
-        vertexColors={THREE.VertexColors}
-      /> */}
-      <a.shaderMaterial
-        attach="material"
-        uniforms={uniforms}
-        fragmentShader={fragmentShader}
-        vertexShader={vertexShader}
-      />
+      <a.shaderMaterial attach="material" {...shaderData} />
     </a.mesh>
   );
 };

@@ -3,6 +3,7 @@ import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App.css';
 import Bismuth from './Bismuth';
+import BismuthSegment from './BismuthSegment';
 
 extend({ OrbitControls });
 
