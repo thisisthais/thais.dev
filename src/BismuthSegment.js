@@ -323,12 +323,12 @@ void main() {
   vec3 initialColor = spectral_zucconi6(Position.x + Position.y + Position.z)/3.;
   
   vec3 color = vec3(0.);
-  float gapDistance = 0.25;
+  float gapDistance =1.25;
   for (int n = 1; n <= 8; n++) {
     float wavelength = abs(sin(lightDirection) - sin(viewDirection))*gapDistance / float(n);
     color += spectral_zucconi6(wavelength);
   }
-  color *= 2.0;
+  color.x *= 1.5;
   initialColor += color;
 
   gl_FragColor = vec4(initialColor, 1.0);
