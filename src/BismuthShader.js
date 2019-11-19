@@ -37,54 +37,26 @@ const BismuthShader = {
     uniform float iTime;
     uniform vec3 iResolution;
 
-    vec3 phong() {
-      vec3 n = normalize(Normal);
-      vec3 s = normalize(vec3(LightPosition) - Position);
-      vec3 v = normalize(vec3(-Position));
-      vec3 r = reflect(-s, n);
-
-      vec3 ambient = Ka;
-      vec3 diffuse = Kd * max(dot(s, n), 0.0);
-      vec3 specular = Ks * pow(max(dot(r, v), 0.0), Shininess);
-
-      return LightIntensity * (ambient + diffuse + specular);
-    }
-
-    vec3 hsb2rgb( in vec3 c ){
-      vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
-                                6.0)-3.0)-1.0,
-                        0.0,
-                        1.0 );
-      rgb = rgb*rgb*(3.0-2.0*rgb);
-      return c.z * mix( vec3(1.0), rgb, c.y);
-    }
-
-    vec3 pretty() {
-      vec4 fragColor = gl_FragColor;
-      vec2 fragCoord = gl_FragCoord.xy;
-
-      vec2 uv = fragCoord.xy / iResolution.xy;
-      vec2 p=(2.0*fragCoord.xy-iResolution.xy)/max(iResolution.x,iResolution.y);
-
-      for(int i=1;i<45;i++) {
-        vec2 newp=p;
-        newp.x+=(0.5/float(i))*cos(float(i)*p.y+iTime*11.0/37.0+0.03*float(i))+1.3;		
-        newp.y-=(0.5/float(i))*cos(float(i)*p.x+iTime*17.0/41.0+0.03*float(i+10))+1.9;
-        p=newp;
-      }
-
-      
-      vec3 col=vec3(max(0.5, 0.5*sin(3.0*p.x)+0.5),min(0.75, 0.5*cos(3.0*p.y)+0.5),max(0.75, sin(1.3*p.x+1.7*p.y)));
-      return col;
-    }
-
-    vec3 bump3y(in vec3 x, in vec3 yoffset) {
-      vec3 y = vec3(1.0) - x * x;
-      y = clamp(y - yoffset, 0.0, 1.9);
+    // --- Spectral Zucconi --------------------------------------------
+    // By Alan Zucconi
+    // Based on GPU Gems: https://developer.nvidia.com/sites/all/modules/custom/gpugems/books/GPUGems/gpugems_ch08.html
+    // But with values optimised to match as close as possible the visible spectrum
+    // Fits this: https://commons.wikimedia.org/wiki/File:Linear_visible_spectrum.svg
+    // With weighter MSE (RGB weights: 0.3, 0.59, 0.11)
+    vec3 bump3y (vec3 x, vec3 yoffset) {
+      vec3 y = vec3(1.,1.,1.) - x * x;
+      y = saturate(y-yoffset);
       return y;
     }
 
-    vec3 spectral_zucconi6(in float x) {
+    // --- Spectral Zucconi 6 -----------------------------------------
+    // Based on GPU Gems
+    // Optimised by Alan Zucconi
+    vec3 spectral_zucconi6 (float w) {
+      // w: [400, 700]
+      // x: [0,   1]
+      float x = saturate((w - 400.0)/ 300.0);
+
       const vec3 c1 = vec3(3.54585104, 2.93225262, 2.41593945);
       const vec3 x1 = vec3(0.69549072, 0.49228336, 0.27699880);
       const vec3 y1 = vec3(0.02312639, 0.15225084, 0.52607955);
@@ -95,7 +67,7 @@ const BismuthShader = {
 
       return
         bump3y(c1 * (x - x1), y1) +
-        bump3y(c2 * (x - x2), y2);
+        bump3y(c2 * (x - x2), y2) ;
     }
 
     void main() {
@@ -105,18 +77,10 @@ const BismuthShader = {
       vec3 lightVector = normalize(LightPosition.xyz - Position);
       float lightDirection = acos(dot(lightVector, Normal)/length(viewVector)*length(Normal));
 
-      vec3 initialColor = spectral_zucconi6(Position.x + Position.y + Position.z)/3.;
+      float w = abs(viewVector.x)*300. + 400.;
+      vec3 zucColor = spectral_zucconi6(w);
 
-      vec3 color = vec3(0.);
-      float gapDistance =1.25;
-      for (int n = 1; n <= 8; n++) {
-        float wavelength = abs(sin(lightDirection) - sin(viewDirection))*gapDistance / float(n);
-        color += spectral_zucconi6(wavelength);
-      }
-      color.x *= 1.5;
-      initialColor += color + pretty()/5.0;
-
-      gl_FragColor = vec4(initialColor, 1.0);
+      gl_FragColor = vec4(zucColor, 1.0);
     }
   `
 };
