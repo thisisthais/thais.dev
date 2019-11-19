@@ -55,7 +55,7 @@ const BismuthShader = {
     vec3 spectral_zucconi6 (float w) {
       // w: [400, 700]
       // x: [0,   1]
-      float x = saturate((w - 400.0)/ 300.0);
+      float x = saturate((w - 350.0)/ 300.0);
 
       const vec3 c1 = vec3(3.54585104, 2.93225262, 2.41593945);
       const vec3 x1 = vec3(0.69549072, 0.49228336, 0.27699880);
@@ -78,9 +78,9 @@ const BismuthShader = {
       float lightDirection = acos(dot(lightVector, Normal)/length(viewVector)*length(Normal));
 
       float w = abs(viewVector.x)*300. + 400.;
-      vec3 zucColor = spectral_zucconi6(w);
+      vec3 color = spectral_zucconi6(w);
 
-      gl_FragColor = vec4(zucColor, 1.0);
+      gl_FragColor = vec4(color, 1.0);
     }
   `
 };
