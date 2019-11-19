@@ -31,7 +31,8 @@ const App = () => {
         <ambientLight />
         <spotLight position={[0, 10, 4]} />
         <axesHelper args={[5]} />
-        <Bismuth />
+        {/* <Bismuth /> */}
+        <BismuthSegment />
       </Canvas>
     </div>
   );

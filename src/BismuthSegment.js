@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { a } from 'react-spring/three';
+import { useFrame } from 'react-three-fiber';
 import * as THREE from 'three';
 
 const HEIGHT = 0.1;
@@ -248,6 +249,7 @@ export default ({
     uniform vec4 LightPosition;
     uniform vec3 LightIntensity;
     uniform float Shininess;
+    uniform float iTime;
 
     vec3 phong() {
       vec3 n = normalize(Normal);
@@ -262,10 +264,23 @@ export default ({
       return LightIntensity * (ambient + diffuse + specular);
     }
 
+    vec3 hsb2rgb( in vec3 c ){
+      vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
+                               6.0)-3.0)-1.0,
+                       0.0,
+                       1.0 );
+      rgb = rgb*rgb*(3.0-2.0*rgb);
+      return c.z * mix( vec3(1.0), rgb, c.y);
+  }
+
     void main() {
-      vec3 blue = vec3(0.0, 0.0, 1.0);
-      gl_FragColor = vec4(blue*phong(), 1.0);
+      vec3 viewVector = normalize(cameraPosition - Position);
+      float vertexView = dot(viewVector, Normal);
+      vec3 brightPosition = hsb2rgb(Position+2.0)*vertexView;
+
+      gl_FragColor = vec4(brightPosition, 1.0);
   }`;
+
   const vertexShader = `
     varying vec3 Normal;
     varying vec3 Position;
@@ -280,12 +295,16 @@ export default ({
   const shaderData = useMemo(
     () => ({
       uniforms: {
+        // phong uniforms
         Ka: { value: new THREE.Vector3(1, 1, 1) },
         Kd: { value: new THREE.Vector3(1, 1, 1) },
         Ks: { value: new THREE.Vector3(1, 1, 1) },
         LightIntensity: { value: new THREE.Vector4(0.5, 0.5, 0.5, 1.0) },
         LightPosition: { value: new THREE.Vector4(0.0, 10.0, 4.0, 1.0) },
-        Shininess: { value: 200.0 }
+        Shininess: { value: 200.0 },
+        // time uniform
+        iTime: { value: 0.0 }
+        // iridescence uniform
       },
       fragmentShader,
       vertexShader
@@ -293,15 +312,23 @@ export default ({
     []
   );
 
+  const shaderRef = useRef();
+
+  useFrame(state => {
+    shaderRef.current.uniforms.iTime.value =
+      shaderRef.current.uniforms.iTime.value + 0.0;
+  });
+
   return (
     <a.mesh position={position} rotation={rotation}>
-      <geometry
+      {/* <geometry
         attach="geometry"
         vertices={vertices}
         faces={faces}
         onUpdate={self => self.computeFaceNormals()}
-      />
-      <a.shaderMaterial attach="material" {...shaderData} />
+      /> */}
+      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
+      <a.shaderMaterial attach="material" ref={shaderRef} {...shaderData} />
     </a.mesh>
   );
 };
