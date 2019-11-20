@@ -3,8 +3,8 @@ import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App.css';
 import Bismuth from './Bismuth';
-import { Slider, Typography } from '@material-ui/core';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { Button, Slider } from '@material-ui/core';
+import { withStyles, rgba } from '@material-ui/core/styles';
 
 extend({ OrbitControls });
 
@@ -25,13 +25,30 @@ const MySlider = withStyles({
   }
 })(Slider);
 
+const MyButton = withStyles({
+  root: {
+    color: '#ba6ca7',
+    borderColor: '#ba6ca7',
+    '&:hover': {
+      backgroundColor: 'rgba(138, 84, 171, 0.2)'
+    }
+  }
+})(Button);
+
 const App = () => {
+  const [regenBismuth, setRegenBismuth] = useState(false);
   const [numLayers, setNumLayers] = useState(5);
   const [baseTowerHeightRange, setBaseTowerHeightRange] = useState([10, 20]);
 
   return (
     <div className="App">
       <div className="sliders">
+        <MyButton
+          variant="outlined"
+          onClick={() => setRegenBismuth(!regenBismuth)}
+        >
+          Gen new bismuth
+        </MyButton>
         <h4>Number of Layers</h4>
         <MySlider
           defaultValue={numLayers}
@@ -62,6 +79,7 @@ const App = () => {
         <axesHelper args={[5]} />
         <Bismuth
           baseTowerHeightRange={baseTowerHeightRange}
+          forceUpdate={regenBismuth} // bool prop just to trigger re-render using new random values
           numLayers={numLayers}
         />
       </Canvas>
