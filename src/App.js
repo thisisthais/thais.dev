@@ -37,14 +37,14 @@ const MyButton = withStyles({
 
 const MyPaper = withStyles({
   root: {
-    alignItems: 'baseline',
+    alignItems: 'stretch',
     boxShadow:
       '2px 3px 1px -1px rgba(134, 88, 184, 0.2), 2px 2px 2px 0px rgba(134, 88, 184, 0.2), 2px 2px 4px 0px rgba(134, 88, 184, 0.2)',
     display: 'flex',
-    flexDirection: 'row',
-    padding: '0.5em 2em 0.5em 2em',
-    margin: '1em',
-    maxHeight: '40%'
+    flexFlow: 'column wrap',
+    justifyContent: 'space-between',
+    maxWidth: '30%',
+    margin: '1em'
   }
 })(Paper);
 
