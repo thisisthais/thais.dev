@@ -10,5 +10,15 @@ canvas {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+}
+
+.sliders {
+  padding: 3em;
+}
+
+h4 {
+  font-family: fantasy;
 }

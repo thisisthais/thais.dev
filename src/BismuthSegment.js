@@ -251,11 +251,13 @@ export default ({
   useFrame(state => {
     shaderRef.current.uniforms.iTime.value =
       shaderRef.current.uniforms.iTime.value + 0.0001;
-    shaderRef.current.uniforms.iResolution.value = new THREE.Vector3(
-      canvasElement.width,
-      canvasElement.height,
-      1
-    );
+    if (canvasElement) {
+      shaderRef.current.uniforms.iResolution.value = new THREE.Vector3(
+        canvasElement.width,
+        canvasElement.height,
+        1
+      );
+    }
   });
 
   return (
@@ -266,7 +268,6 @@ export default ({
         faces={faces}
         onUpdate={self => self.computeFaceNormals()}
       />
-      {/* <boxBufferGeometry attach="geometry" args={[1, 1, 1]} /> */}
       <a.shaderMaterial attach="material" ref={shaderRef} {...shaderData} />
     </a.mesh>
   );

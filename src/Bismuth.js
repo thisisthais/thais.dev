@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef, useMemo } from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { default as Segment } from './BismuthSegment';
+
+import { BismuthShader } from './BismuthShader';
 
 // to keep
 const HEIGHT = 0.1;
@@ -39,6 +41,8 @@ const genRandLengths = (lastLengths, height) => {
 
 const Base = ({ size = 1, position = [0, 0, 0] }) => {
   const boxGeo = new THREE.BoxGeometry(size, HEIGHT, size);
+  const shaderData = useMemo(() => ({ ...BismuthShader }), []);
+  const shaderRef = useRef();
   boxGeo.faces.forEach((face, idx) => {
     face.vertexColors = [
       new THREE.Color().setHSL(idx / 12, 0.5, 0.5),
@@ -48,10 +52,7 @@ const Base = ({ size = 1, position = [0, 0, 0] }) => {
   });
   return (
     <a.mesh geometry={boxGeo} position={position}>
-      <a.meshBasicMaterial
-        attach="material"
-        vertexColors={THREE.VertexColors}
-      />
+      <a.shaderMaterial attach="material" ref={shaderRef} {...shaderData} />
     </a.mesh>
   );
 };
@@ -184,8 +185,8 @@ const generateLayers = (
   );
 };
 
-export default () => {
-  const baseTower = generateLayers({ numLayers: 5 });
+export default ({ numLayers }) => {
+  const baseTower = generateLayers({ numLayers });
 
   return (
     <>
