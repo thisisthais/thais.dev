@@ -3,8 +3,8 @@ import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App.css';
 import Bismuth from './Bismuth';
-import { Button, Slider } from '@material-ui/core';
-import { withStyles, rgba } from '@material-ui/core/styles';
+import { Button, Paper, Slider } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 extend({ OrbitControls });
 
@@ -35,29 +35,31 @@ const MyButton = withStyles({
   }
 })(Button);
 
+const MyPaper = withStyles({
+  root: {
+    boxShadow:
+      '2px 3px 1px -1px rgba(134, 88, 184, 0.2), 2px 2px 2px 0px rgba(134, 88, 184, 0.2), 2px 2px 4px 0px rgba(134, 88, 184, 0.2)',
+    padding: '0.5em 2em 2em 2em',
+    margin: '1em',
+    maxHeight: '40%'
+  }
+})(Paper);
+
 const App = () => {
   const [regenBismuth, setRegenBismuth] = useState(false);
   const [numLayers, setNumLayers] = useState(5);
   const [baseTowerHeightRange, setBaseTowerHeightRange] = useState([10, 20]);
+  const [towerHeightRange, setTowerHeightRange] = useState([7, 30]);
 
   return (
     <div className="App">
-      <div className="sliders">
-        <MyButton
-          variant="outlined"
-          onClick={() => setRegenBismuth(!regenBismuth)}
-        >
-          Gen new bismuth
-        </MyButton>
-        <h4>Number of Layers</h4>
-        <MySlider
-          defaultValue={numLayers}
-          marks={true}
-          min={3}
-          max={10}
-          onChange={(_, value) => setNumLayers(value)}
-          valueLabelDisplay="auto"
-        />
+      <MyPaper>
+        <h3>Play around with some input values :)</h3>
+        <h5>
+          A new bismuth will automatically generate on any change.You can also
+          generate new bismuths while keeping the same inputs by using the 'Gen
+          New Bismuth' button.
+        </h5>
         <h4>Base Tower Height Range</h4>
         <MySlider
           defaultValue={baseTowerHeightRange}
@@ -67,7 +69,32 @@ const App = () => {
           onChange={(_, value) => setBaseTowerHeightRange(value)}
           valueLabelDisplay="auto"
         />
-      </div>
+        <h4>Number of Layers</h4>
+        <MySlider
+          defaultValue={numLayers}
+          marks={true}
+          min={3}
+          max={10}
+          onChange={(_, value) => setNumLayers(value)}
+          valueLabelDisplay="auto"
+        />
+        <h4>Tower Height Range</h4>
+        <MySlider
+          defaultValue={towerHeightRange}
+          marks={true}
+          min={5}
+          max={40}
+          onChange={(_, value) => setTowerHeightRange(value)}
+          valueLabelDisplay="auto"
+        />
+        <MyButton
+          variant="outlined"
+          size="small"
+          onClick={() => setRegenBismuth(!regenBismuth)}
+        >
+          Gen new bismuth
+        </MyButton>
+      </MyPaper>
       <Canvas
         id="myCanvas"
         style={{ touchAction: 'none' }}
@@ -81,6 +108,7 @@ const App = () => {
           baseTowerHeightRange={baseTowerHeightRange}
           forceUpdate={regenBismuth} // bool prop just to trigger re-render using new random values
           numLayers={numLayers}
+          towerHeightRange={towerHeightRange}
         />
       </Canvas>
     </div>

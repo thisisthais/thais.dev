@@ -15,10 +15,15 @@ canvas {
   text-align: center;
 }
 
-.sliders {
-  padding: 3em;
+h4 {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 0.8em;
+  color: #ba6ca7;
+  margin-bottom: 0;
 }
 
-h4 {
-  font-family: fantasy;
+h3,
+h5 {
+  color: #8658b8;
+  margin: 0.2em;
 }
