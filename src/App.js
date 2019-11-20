@@ -27,6 +27,7 @@ const MySlider = withStyles({
 
 const App = () => {
   const [numLayers, setNumLayers] = useState(5);
+  const [baseTowerHeightRange, setBaseTowerHeightRange] = useState([10, 20]);
 
   return (
     <div className="App">
@@ -40,6 +41,15 @@ const App = () => {
           onChange={(_, value) => setNumLayers(value)}
           valueLabelDisplay="auto"
         />
+        <h4>Base Tower Height Range</h4>
+        <MySlider
+          defaultValue={baseTowerHeightRange}
+          marks={true}
+          min={1}
+          max={30}
+          onChange={(_, value) => setBaseTowerHeightRange(value)}
+          valueLabelDisplay="auto"
+        />
       </div>
       <Canvas
         id="myCanvas"
@@ -50,7 +60,10 @@ const App = () => {
       >
         <Controls />
         <axesHelper args={[5]} />
-        <Bismuth numLayers={numLayers} />
+        <Bismuth
+          baseTowerHeightRange={baseTowerHeightRange}
+          numLayers={numLayers}
+        />
       </Canvas>
     </div>
   );

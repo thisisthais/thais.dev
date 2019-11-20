@@ -100,7 +100,12 @@ const generateTower = (
 };
 
 const generateLayers = (
-  { numLayers = 1, currentHeight = 0, lastLayerLengths = [] },
+  {
+    baseTowerHeightRange,
+    numLayers = 1,
+    currentHeight = 0,
+    lastLayerLengths = []
+  },
   allSegments = []
 ) => {
   if (numLayers < 1) {
@@ -109,7 +114,7 @@ const generateLayers = (
 
   let randomBaseTowerHeight;
   if (allSegments.length === 0) {
-    randomBaseTowerHeight = randIntInRange(10, 20);
+    randomBaseTowerHeight = randIntInRange(...baseTowerHeightRange);
     const baseTower = generateTower({
       height: randomBaseTowerHeight,
       position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
@@ -185,9 +190,9 @@ const generateLayers = (
   );
 };
 
-export default ({ numLayers }) => {
-  const baseTower = generateLayers({ numLayers });
-
+export default ({ baseTowerHeightRange, numLayers }) => {
+  const baseTower = generateLayers({ baseTowerHeightRange, numLayers });
+  console.log(baseTowerHeightRange);
   return (
     <>
       {baseTower}

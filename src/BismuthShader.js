@@ -64,7 +64,7 @@ const BismuthShader = {
       vec3 lightVector = normalize(LightPosition.xyz - Position);
       float lightDirection = acos(dot(lightVector, Normal)/length(viewVector)*length(Normal));
 
-      float w = abs(viewVector.x)*300. + 400.;
+      float w = abs(viewVector.z)*300. + 400.;
       //vec3 initialColor = spectral_zucconi6(w);
       vec3 initialColor = spectral_zucconi6((viewVector.x + viewVector.y + viewVector.z)/2.);
 
