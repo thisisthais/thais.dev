@@ -2,8 +2,8 @@ import * as THREE from 'three';
 
 const BismuthShader = {
   uniforms: {
-    LightPosition: { value: new THREE.Vector4(3.0, 3.0, 2.0, 1.0) },
-    GapDistance: { value: 1.25 }
+    LightPosition: { value: new THREE.Vector4(0.0, 5.0, -2.0, 1.0) },
+    GapDistance: { value: 0.0 }
   },
   vertexShader: `
     varying vec3 Normal;
