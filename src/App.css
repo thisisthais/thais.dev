@@ -13,18 +13,27 @@ canvas {
   margin-top: 1em;
 }
 
-/* .App {
+.App {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-align: center;
-} */
+}
 
 .textContainer {
   margin: 0.8em;
+  max-width: 40%;
 }
 
 .slidersContainer {
   margin: 0.5em;
+  min-width: 60%;
+}
+
+.sideBar {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  max-height: 40%;
 }
 
 h4 {
@@ -32,6 +41,7 @@ h4 {
   font-size: 0.8em;
   color: #ba6ca7;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 h5 {
@@ -41,8 +51,17 @@ h5 {
 
 @media screen and (min-width: 640px) {
   .App {
-    display: flex;
     flex-direction: row;
-    text-align: center;
+  }
+
+  .sideBar {
+    max-width: 350px;
+    flex-direction: column;
+    max-height: 100%;
+  }
+
+  .textContainer {
+    margin: 0.8em;
+    max-width: 100%;
   }
 }

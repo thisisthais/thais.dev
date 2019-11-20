@@ -37,13 +37,10 @@ const MyButton = withStyles({
 
 const MyPaper = withStyles({
   root: {
-    alignItems: 'stretch',
     boxShadow:
       '2px 3px 1px -1px rgba(134, 88, 184, 0.2), 2px 2px 2px 0px rgba(134, 88, 184, 0.2), 2px 2px 4px 0px rgba(134, 88, 184, 0.2)',
     display: 'flex',
-    flexFlow: 'column wrap',
-    justifyContent: 'space-between',
-    maxWidth: '30%',
+    justifyContent: 'space-around',
     margin: '1em'
   }
 })(Paper);
@@ -58,7 +55,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <MyPaper>
+      <MyPaper className="sideBar">
         <div className="textContainer">
           <h5>Play around with some input values :)</h5>
           <h5>A new bismuth will automatically generate on any change.</h5>

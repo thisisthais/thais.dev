@@ -244,7 +244,7 @@ export default ({
   const shaderRef = useRef();
 
   useEffect(
-    state => {
+    _ => {
       shaderRef.current.uniforms.GapDistance.value = gapDistance;
     },
     [gapDistance]
