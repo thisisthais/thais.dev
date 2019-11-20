@@ -69,6 +69,7 @@ const generateTower = (
     position = [0, 0, 0, 0],
     rotation = [0, 0, 0]
   },
+  gapDistance,
   towerList = []
 ) => {
   if (height <= 1) {
@@ -80,6 +81,7 @@ const generateTower = (
       position={position}
       lengths={lengths}
       rotation={rotation}
+      gapDistance={gapDistance}
       key={`segment${towerList.length + Math.random()}`}
     />
   );
@@ -92,6 +94,7 @@ const generateTower = (
       lengths: lengths.map(l => l + LENGTH_DELTA),
       height: height - 1
     },
+    gapDistance,
     towerList
   );
 };
@@ -100,6 +103,7 @@ const generateLayers = (
   {
     baseTowerHeightRange,
     towerHeightRange,
+    gapDistance,
     numLayers = 1,
     currentHeight = 0,
     lastLayerLengths = []
@@ -113,10 +117,13 @@ const generateLayers = (
   let randomBaseTowerHeight;
   if (allSegments.length === 0) {
     randomBaseTowerHeight = randIntInRange(...baseTowerHeightRange);
-    const baseTower = generateTower({
-      height: randomBaseTowerHeight,
-      position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
-    });
+    const baseTower = generateTower(
+      {
+        height: randomBaseTowerHeight,
+        position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2]
+      },
+      gapDistance
+    );
     allSegments.push(...baseTower);
     currentHeight += randomBaseTowerHeight;
   }
@@ -169,12 +176,15 @@ const generateLayers = (
       lastLayerLengths = randLengths;
     }
 
-    const nextTower = generateTower({
-      lengths: randLengths,
-      position: [x, Math.min(y, 3), z],
-      rotation: [0, randRotation(), 0],
-      height: randTowerHeight
-    });
+    const nextTower = generateTower(
+      {
+        lengths: randLengths,
+        position: [x, Math.min(y, 3), z],
+        rotation: [0, randRotation(), 0],
+        height: randTowerHeight
+      },
+      gapDistance
+    );
     towersInLayer.push(...nextTower);
   }
 
@@ -185,17 +195,24 @@ const generateLayers = (
       numLayers: numLayers - 1,
       currentHeight: nextLayerHeight,
       lastLayerLengths,
-      towerHeightRange
+      towerHeightRange,
+      gapDistance
     },
     [...allSegments, ...towersInLayer]
   );
 };
 
-export default ({ baseTowerHeightRange, numLayers, towerHeightRange }) => {
+export default ({
+  baseTowerHeightRange,
+  numLayers,
+  towerHeightRange,
+  gapDistance
+}) => {
   const baseTower = generateLayers({
     baseTowerHeightRange,
     numLayers,
-    towerHeightRange
+    towerHeightRange,
+    gapDistance
   });
 
   return (

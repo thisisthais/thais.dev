@@ -2,7 +2,8 @@ import * as THREE from 'three';
 
 const BismuthShader = {
   uniforms: {
-    LightPosition: { value: new THREE.Vector4(3.0, 3.0, 2.0, 1.0) }
+    LightPosition: { value: new THREE.Vector4(3.0, 3.0, 2.0, 1.0) },
+    GapDistance: { value: 1.25 }
   },
   vertexShader: `
     varying vec3 Normal;
@@ -19,6 +20,7 @@ const BismuthShader = {
     varying vec3 Position;
 
     uniform vec4 LightPosition;
+    uniform float GapDistance;
 
     vec3 bump3y(in vec3 x, in vec3 yoffset) {
       vec3 y = vec3(1.0) - x * x;
@@ -52,7 +54,7 @@ const BismuthShader = {
       vec3 initialColor = spectral_zucconi6((viewVector.x + viewVector.y + viewVector.z)/2.);
 
       vec3 color = vec3(0.);
-      float gapDistance = 1.25;
+      float gapDistance = GapDistance;
       for (int n = 1; n <= 8; n++) {
         float wavelength = abs(sin(lightDirection) - sin(viewDirection))*gapDistance / float(n);
         color += spectral_zucconi6(wavelength);

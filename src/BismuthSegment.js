@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
 
@@ -236,11 +236,19 @@ const calcVerticesAndFaces = (listOfLengths, startingPoint = [0, 0, 0]) => {
 export default ({
   lengths = [1, 1, 1, 1],
   position = [0, 0, 0],
-  rotation = [0, 0, 0]
+  rotation = [0, 0, 0],
+  gapDistance = 1.25
 }) => {
   const [vertices, faces] = useMemo(() => calcVerticesAndFaces(lengths), []);
   const shaderData = useMemo(() => ({ ...BismuthShader }), []);
   const shaderRef = useRef();
+
+  useEffect(
+    state => {
+      shaderRef.current.uniforms.GapDistance.value = gapDistance;
+    },
+    [gapDistance]
+  );
 
   return (
     <a.mesh position={position} rotation={rotation}>

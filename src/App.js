@@ -54,6 +54,7 @@ const App = () => {
   const [numLayers, setNumLayers] = useState(5);
   const [baseTowerHeightRange, setBaseTowerHeightRange] = useState([10, 20]);
   const [towerHeightRange, setTowerHeightRange] = useState([7, 30]);
+  const [gapDistance, setGapDistance] = useState(1.25);
 
   return (
     <div className="App">
@@ -69,6 +70,7 @@ const App = () => {
         <div className="slidersContainer">
           <h4>Base Tower Height Range</h4>
           <MySlider
+            getAriaLabel={() => 'Base Tower Height Range'}
             defaultValue={baseTowerHeightRange}
             marks={true}
             min={1}
@@ -78,6 +80,7 @@ const App = () => {
           />
           <h4>Number of Layers</h4>
           <MySlider
+            aria-label="Number of Layers"
             defaultValue={numLayers}
             marks={true}
             min={3}
@@ -87,11 +90,22 @@ const App = () => {
           />
           <h4>Tower Height Range</h4>
           <MySlider
+            getAriaLabel={() => 'Tower Height Range'}
             defaultValue={towerHeightRange}
             marks={true}
             min={5}
             max={40}
             onChange={(_, value) => setTowerHeightRange(value)}
+            valueLabelDisplay="auto"
+          />
+          <h4>Iridescence Gap Distance</h4>
+          <MySlider
+            aria-label="Iridescence Gap Distance"
+            defaultValue={gapDistance}
+            min={0.01}
+            max={5.0}
+            step={0.01}
+            onChange={(_, value) => setGapDistance(value)}
             valueLabelDisplay="auto"
           />
           <MyButton
@@ -116,6 +130,7 @@ const App = () => {
           forceUpdate={regenBismuth} // bool prop just to trigger re-render using new random values
           numLayers={numLayers}
           towerHeightRange={towerHeightRange}
+          gapDistance={gapDistance}
         />
       </Canvas>
     </div>
