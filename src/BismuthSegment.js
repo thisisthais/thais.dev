@@ -1,6 +1,5 @@
-import React, { useMemo, useRef, useEffect } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { a } from 'react-spring/three';
-import { useFrame } from 'react-three-fiber';
 import * as THREE from 'three';
 
 import { BismuthShader } from './BismuthShader';
@@ -242,23 +241,6 @@ export default ({
   const [vertices, faces] = useMemo(() => calcVerticesAndFaces(lengths), []);
   const shaderData = useMemo(() => ({ ...BismuthShader }), []);
   const shaderRef = useRef();
-
-  let canvasElement;
-  useEffect(() => {
-    canvasElement = document.getElementsByTagName('canvas')[0];
-  }, []);
-
-  useFrame(state => {
-    shaderRef.current.uniforms.iTime.value =
-      shaderRef.current.uniforms.iTime.value + 0.0001;
-    if (canvasElement) {
-      shaderRef.current.uniforms.iResolution.value = new THREE.Vector3(
-        canvasElement.width,
-        canvasElement.height,
-        1
-      );
-    }
-  });
 
   return (
     <a.mesh position={position} rotation={rotation}>

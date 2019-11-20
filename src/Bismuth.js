@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { default as Segment } from './BismuthSegment';
@@ -8,8 +8,6 @@ import { BismuthShader } from './BismuthShader';
 // to keep
 const HEIGHT = 0.1;
 const LENGTH_DELTA = 0.2;
-const MIN_BASE_HEIGHT = 2;
-const MAX_BASE_HEIGHT = 7;
 const DEFAULT_LENGTHS = [1, 1, 1, 1];
 const ROTATIONS = [0, Math.PI / 2, (3 / 2) * Math.PI, Math.PI];
 const QUAD_MULTIPLIERS = [
@@ -22,7 +20,6 @@ const QUAD_MULTIPLIERS = [
 const randIntInRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 const randFloatInRange = (min, max) => Math.random() * (max - min) + min;
-const randomlyNegative = num => (Math.random() > 0.5 ? num : -num);
 const randRotation = () => ROTATIONS[randIntInRange(0, 3)];
 
 const genRandLengths = (lastLengths, height) => {
@@ -42,7 +39,7 @@ const genRandLengths = (lastLengths, height) => {
 const Base = ({ size = 1, position = [0, 0, 0] }) => {
   const boxGeo = new THREE.BoxGeometry(size, HEIGHT, size);
   const shaderData = useMemo(() => ({ ...BismuthShader }), []);
-  const shaderRef = useRef();
+
   boxGeo.faces.forEach((face, idx) => {
     face.vertexColors = [
       new THREE.Color().setHSL(idx / 12, 0.5, 0.5),
@@ -52,7 +49,7 @@ const Base = ({ size = 1, position = [0, 0, 0] }) => {
   });
   return (
     <a.mesh geometry={boxGeo} position={position}>
-      <a.shaderMaterial attach="material" ref={shaderRef} {...shaderData} />
+      <a.shaderMaterial attach="material" {...shaderData} />
     </a.mesh>
   );
 };

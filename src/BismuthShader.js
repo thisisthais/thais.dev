@@ -2,17 +2,7 @@ import * as THREE from 'three';
 
 const BismuthShader = {
   uniforms: {
-    // phong uniforms
-    Ka: { value: new THREE.Vector3(1, 1, 1) },
-    Kd: { value: new THREE.Vector3(1, 1, 1) },
-    Ks: { value: new THREE.Vector3(1, 1, 1) },
-    LightIntensity: { value: new THREE.Vector4(0.5, 0.5, 0.5, 1.0) },
-    LightPosition: { value: new THREE.Vector4(3.0, 3.0, 2.0, 1.0) },
-    Shininess: { value: 200.0 },
-    // basic uniforms
-    iTime: { value: 0.0 },
-    iResolution: { value: new THREE.Vector3() }
-    // iridescence uniform
+    LightPosition: { value: new THREE.Vector4(3.0, 3.0, 2.0, 1.0) }
   },
   vertexShader: `
     varying vec3 Normal;
@@ -28,14 +18,7 @@ const BismuthShader = {
     varying vec3 Normal;
     varying vec3 Position;
 
-    uniform vec3 Ka;
-    uniform vec3 Kd;
-    uniform vec3 Ks;
     uniform vec4 LightPosition;
-    uniform vec3 LightIntensity;
-    uniform float Shininess;
-    uniform float iTime;
-    uniform vec3 iResolution;
 
     vec3 bump3y(in vec3 x, in vec3 yoffset) {
       vec3 y = vec3(1.0) - x * x;
@@ -69,7 +52,7 @@ const BismuthShader = {
       vec3 initialColor = spectral_zucconi6((viewVector.x + viewVector.y + viewVector.z)/2.);
 
       vec3 color = vec3(0.);
-      float gapDistance =1.25;
+      float gapDistance = 1.25;
       for (int n = 1; n <= 8; n++) {
         float wavelength = abs(sin(lightDirection) - sin(viewDirection))*gapDistance / float(n);
         color += spectral_zucconi6(wavelength);

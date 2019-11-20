@@ -37,15 +37,19 @@ const MyButton = withStyles({
 
 const MyPaper = withStyles({
   root: {
+    alignItems: 'baseline',
     boxShadow:
       '2px 3px 1px -1px rgba(134, 88, 184, 0.2), 2px 2px 2px 0px rgba(134, 88, 184, 0.2), 2px 2px 4px 0px rgba(134, 88, 184, 0.2)',
-    padding: '0.5em 2em 2em 2em',
+    display: 'flex',
+    flexDirection: 'row',
+    padding: '0.5em 2em 0.5em 2em',
     margin: '1em',
     maxHeight: '40%'
   }
 })(Paper);
 
 const App = () => {
+  // cleam this up later
   const [regenBismuth, setRegenBismuth] = useState(false);
   const [numLayers, setNumLayers] = useState(5);
   const [baseTowerHeightRange, setBaseTowerHeightRange] = useState([10, 20]);
@@ -54,46 +58,50 @@ const App = () => {
   return (
     <div className="App">
       <MyPaper>
-        <h3>Play around with some input values :)</h3>
-        <h5>
-          A new bismuth will automatically generate on any change.You can also
-          generate new bismuths while keeping the same inputs by using the 'Gen
-          New Bismuth' button.
-        </h5>
-        <h4>Base Tower Height Range</h4>
-        <MySlider
-          defaultValue={baseTowerHeightRange}
-          marks={true}
-          min={1}
-          max={30}
-          onChange={(_, value) => setBaseTowerHeightRange(value)}
-          valueLabelDisplay="auto"
-        />
-        <h4>Number of Layers</h4>
-        <MySlider
-          defaultValue={numLayers}
-          marks={true}
-          min={3}
-          max={10}
-          onChange={(_, value) => setNumLayers(value)}
-          valueLabelDisplay="auto"
-        />
-        <h4>Tower Height Range</h4>
-        <MySlider
-          defaultValue={towerHeightRange}
-          marks={true}
-          min={5}
-          max={40}
-          onChange={(_, value) => setTowerHeightRange(value)}
-          valueLabelDisplay="auto"
-        />
-        <MyButton
-          variant="outlined"
-          size="small"
-          onClick={() => setRegenBismuth(!regenBismuth)}
-        >
-          Gen new bismuth
-        </MyButton>
+        <div className="textContainer">
+          <h5>Play around with some input values :)</h5>
+          <h5>A new bismuth will automatically generate on any change.</h5>
+          <h5>
+            You can also generate new bismuths while keeping the same inputs by
+            using the button.
+          </h5>
+        </div>
+        <div className="slidersContainer">
+          <h4>Base Tower Height Range</h4>
+          <MySlider
+            defaultValue={baseTowerHeightRange}
+            marks={true}
+            min={1}
+            max={30}
+            onChange={(_, value) => setBaseTowerHeightRange(value)}
+            valueLabelDisplay="auto"
+          />
+          <h4>Number of Layers</h4>
+          <MySlider
+            defaultValue={numLayers}
+            marks={true}
+            min={3}
+            max={10}
+            onChange={(_, value) => setNumLayers(value)}
+            valueLabelDisplay="auto"
+          />
+          <h4>Tower Height Range</h4>
+          <MySlider
+            defaultValue={towerHeightRange}
+            marks={true}
+            min={5}
+            max={40}
+            onChange={(_, value) => setTowerHeightRange(value)}
+            valueLabelDisplay="auto"
+          />
+          <MyButton
+            variant="outlined"
+            size="small"
+            onClick={() => setRegenBismuth(!regenBismuth)}
+          >
+            Gen new bismuth
+          </MyButton>
+        </div>
       </MyPaper>
       <Canvas
         id="myCanvas"
@@ -103,7 +111,6 @@ const App = () => {
         }}
       >
         <Controls />
-        <axesHelper args={[5]} />
         <Bismuth
           baseTowerHeightRange={baseTowerHeightRange}
           forceUpdate={regenBismuth} // bool prop just to trigger re-render using new random values
