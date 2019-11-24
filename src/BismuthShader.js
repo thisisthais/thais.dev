@@ -55,7 +55,7 @@ const BismuthShader = {
 
       vec3 color = vec3(0.);
       float gapDistance = GapDistance;
-      for (int n = 1; n <= 8; n++) {
+      for (int n = 1; n <= 16; n++) {
         float wavelength = abs(sin(lightDirection) - sin(viewDirection))*gapDistance / float(n);
         color += spectral_zucconi6(wavelength);
       }

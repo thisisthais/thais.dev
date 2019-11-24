@@ -5,6 +5,7 @@ import './App.css';
 import Bismuth from './Bismuth';
 import { Button, Paper, Slider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import polyfill from '@juggle/resize-observer';
 
 extend({ OrbitControls });
 
@@ -115,6 +116,7 @@ const App = () => {
         </div>
       </MyPaper>
       <Canvas
+        resize={{ polyfill }}
         id="myCanvas"
         style={{ touchAction: 'none' }}
         camera={{
