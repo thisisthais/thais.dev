@@ -3,7 +3,7 @@ import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import './App.css';
 import Bismuth from './Bismuth';
-import { Button, Paper, Slider } from '@material-ui/core';
+import { Button, Grid, Paper, Slider, Tooltip } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import polyfill from '@juggle/resize-observer';
 
@@ -28,8 +28,10 @@ const MySlider = withStyles({
 
 const MyButton = withStyles({
   root: {
-    color: '#ba6ca7',
-    borderColor: '#ba6ca7',
+    color: '#a46fd9',
+    borderColor: '#a46fd9',
+    marginTop: '-0.5em',
+    marginBottom: '0.5em',
     '&:hover': {
       backgroundColor: 'rgba(138, 84, 171, 0.2)'
     }
@@ -42,9 +44,19 @@ const MyPaper = withStyles({
       '2px 3px 1px -1px rgba(134, 88, 184, 0.2), 2px 2px 2px 0px rgba(134, 88, 184, 0.2), 2px 2px 4px 0px rgba(134, 88, 184, 0.2)',
     display: 'flex',
     justifyContent: 'space-around',
-    margin: '1em'
+    margin: '0.8em'
   }
 })(Paper);
+
+const MyTooltip = withStyles({
+  tooltip: {
+    backgroundColor: '#ffffff',
+    color: '#a46fd9',
+    border: '1px solid #a46fd9',
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    fontSize: '0.8em'
+  }
+})(Tooltip);
 
 const App = () => {
   // cleam this up later
@@ -54,66 +66,101 @@ const App = () => {
   const [towerHeightRange, setTowerHeightRange] = useState([7, 30]);
   const [gapDistance, setGapDistance] = useState(1.25);
 
+  const tooltipText = `
+  Enjoy growing bismuth crystals from the comfort of your device!
+  No two bismuths are exactly the same.
+  Below you will find some properties that affect the generated geometry or iridescence of your bismuth.
+  `;
+
   return (
     <div className="App">
       <MyPaper className="sideBar">
-        <div className="textContainer">
-          <h5>Play around with some input values :)</h5>
-          <h5>A new bismuth will automatically generate on any change.</h5>
-          <h5>
-            You can also generate new bismuths while keeping the same inputs by
-            using the button.
-          </h5>
-        </div>
-        <div className="slidersContainer">
-          <h4>Base Tower Height Range</h4>
-          <MySlider
-            getAriaLabel={() => 'Base Tower Height Range'}
-            defaultValue={baseTowerHeightRange}
-            marks={true}
-            min={1}
-            max={30}
-            onChange={(_, value) => setBaseTowerHeightRange(value)}
-            valueLabelDisplay="auto"
-          />
-          <h4>Number of Layers</h4>
-          <MySlider
-            aria-label="Number of Layers"
-            defaultValue={numLayers}
-            marks={true}
-            min={3}
-            max={10}
-            onChange={(_, value) => setNumLayers(value)}
-            valueLabelDisplay="auto"
-          />
-          <h4>Tower Height Range</h4>
-          <MySlider
-            getAriaLabel={() => 'Tower Height Range'}
-            defaultValue={towerHeightRange}
-            marks={true}
-            min={5}
-            max={40}
-            onChange={(_, value) => setTowerHeightRange(value)}
-            valueLabelDisplay="auto"
-          />
-          <h4>Iridescence Gap Distance</h4>
-          <MySlider
-            aria-label="Iridescence Gap Distance"
-            defaultValue={gapDistance}
-            min={0.01}
-            max={5.0}
-            step={0.01}
-            onChange={(_, value) => setGapDistance(value)}
-            valueLabelDisplay="auto"
-          />
-          <MyButton
-            variant="outlined"
-            size="small"
-            onClick={() => setRegenBismuth(!regenBismuth)}
-          >
-            Gen new bismuth
-          </MyButton>
-        </div>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          className="sidebarContent"
+        >
+          <Grid container item justify="center" sm>
+            <MyTooltip title={tooltipText} placement="bottom">
+              <Grid
+                container
+                direction="row"
+                justify="space-around"
+                alignItems="center"
+              >
+                <span role="img" aria-label="sparkle emoji">
+                  ✨✨✨
+                </span>
+                <h2>Bismuth Generator</h2>
+                <h7>ⓘ</h7>
+                <span role="img" aria-label="sparkle emoji">
+                  ✨✨✨
+                </span>
+              </Grid>
+            </MyTooltip>
+          </Grid>
+          <Grid container item direction="column" justify="center">
+            <Grid item xs>
+              <h4>Base Tower Height Range</h4>
+              <MySlider
+                getAriaLabel={() => 'Base Tower Height Range'}
+                defaultValue={baseTowerHeightRange}
+                marks={true}
+                min={1}
+                max={30}
+                onChange={(_, value) => setBaseTowerHeightRange(value)}
+                valueLabelDisplay="auto"
+              />
+            </Grid>
+            <Grid item xs>
+              <h4>Number of Layers</h4>
+              <MySlider
+                aria-label="Number of Layers"
+                defaultValue={numLayers}
+                marks={true}
+                min={3}
+                max={10}
+                onChange={(_, value) => setNumLayers(value)}
+                valueLabelDisplay="auto"
+              />
+            </Grid>
+            <Grid item xs>
+              <h4>Tower Height Range</h4>
+              <MySlider
+                getAriaLabel={() => 'Tower Height Range'}
+                defaultValue={towerHeightRange}
+                marks={true}
+                min={5}
+                max={40}
+                onChange={(_, value) => setTowerHeightRange(value)}
+                valueLabelDisplay="auto"
+              />
+            </Grid>
+            <Grid item xs>
+              <h4>Iridescence Gap Distance</h4>
+              <MySlider
+                aria-label="Iridescence Gap Distance"
+                defaultValue={gapDistance}
+                min={0.01}
+                max={5.0}
+                step={0.01}
+                onChange={(_, value) => setGapDistance(value)}
+                valueLabelDisplay="auto"
+              />
+            </Grid>
+            <Grid item xs>
+              <MyButton
+                variant="outlined"
+                size="small"
+                onClick={() => setRegenBismuth(!regenBismuth)}
+              >
+                Regenerate
+              </MyButton>
+            </Grid>
+          </Grid>
+        </Grid>
       </MyPaper>
       <Canvas
         resize={{ polyfill }}
