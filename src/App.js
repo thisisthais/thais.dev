@@ -75,7 +75,6 @@ const App = () => {
               ✨✨✨
             </span>
             <h2>Bismuth Generator</h2>
-            <p>ⓘ</p>
             <span role="img" aria-label="sparkle emoji">
               ✨✨✨
             </span>
