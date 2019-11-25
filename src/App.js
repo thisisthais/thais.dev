@@ -59,6 +59,33 @@ const MyTooltip = withStyles({
 })(Tooltip);
 
 const App = () => {
+  return (
+    <div className="App">
+      <MyPaper className="sidebar">
+        <div className="sidebarContent">
+          <div className="sidebarTitle">
+            <span role="img" aria-label="sparkle emoji">
+              ✨✨✨
+            </span>
+            <h2>Bismuth Generator</h2>
+            <p>ⓘ</p>
+            <span role="img" aria-label="sparkle emoji">
+              ✨✨✨
+            </span>
+          </div>
+          <div className="slider1">slider 1</div>
+          <div className="slider2">slider 2</div>
+          <div className="slider3">slider 3</div>
+          <div className="slider4">slider 4</div>
+          <div className="button">buuutton</div>
+        </div>
+      </MyPaper>
+      <div className="canvas"></div>
+    </div>
+  );
+};
+
+const App2 = () => {
   // cleam this up later
   const [regenBismuth, setRegenBismuth] = useState(false);
   const [numLayers, setNumLayers] = useState(5);
