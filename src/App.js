@@ -59,9 +59,16 @@ const MyTooltip = withStyles({
 })(Tooltip);
 
 const App = () => {
+  // cleam this up later
+  const [regenBismuth, setRegenBismuth] = useState(false);
+  const [numLayers, setNumLayers] = useState(5);
+  const [baseTowerHeightRange, setBaseTowerHeightRange] = useState([10, 20]);
+  const [towerHeightRange, setTowerHeightRange] = useState([7, 30]);
+  const [gapDistance, setGapDistance] = useState(1.25);
+
   return (
     <div className="App">
-      <MyPaper className="sidebar">
+      <div className="sidebar">
         <div className="sidebarContent">
           <div className="sidebarTitle">
             <span role="img" aria-label="sparkle emoji">
@@ -73,14 +80,90 @@ const App = () => {
               ✨✨✨
             </span>
           </div>
-          <div className="slider1">slider 1</div>
-          <div className="slider2">slider 2</div>
-          <div className="slider3">slider 3</div>
-          <div className="slider4">slider 4</div>
-          <div className="button">buuutton</div>
+          <div className="slider1">
+            <h4>Base Tower Height Range</h4>
+            <MySlider
+              getAriaLabel={() => 'Base Tower Height Range'}
+              defaultValue={baseTowerHeightRange}
+              marks={true}
+              min={1}
+              max={30}
+              onChange={(_, value) => setBaseTowerHeightRange(value)}
+              valueLabelDisplay="auto"
+            />
+          </div>
+          <div className="slider2">
+            <h4>Number of Layers</h4>
+            <MySlider
+              aria-label="Number of Layers"
+              defaultValue={numLayers}
+              marks={true}
+              min={3}
+              max={10}
+              onChange={(_, value) => setNumLayers(value)}
+              valueLabelDisplay="auto"
+            />
+          </div>
+          <div className="slider3">
+            <h4>Tower Height Range</h4>
+            <MySlider
+              getAriaLabel={() => 'Tower Height Range'}
+              defaultValue={towerHeightRange}
+              marks={true}
+              min={5}
+              max={40}
+              onChange={(_, value) => setTowerHeightRange(value)}
+              valueLabelDisplay="auto"
+            />
+          </div>
+          <div className="slider4">
+            <h4>Iridescence Gap Distance</h4>
+            <MySlider
+              aria-label="Iridescence Gap Distance"
+              defaultValue={gapDistance}
+              min={0.01}
+              max={5.0}
+              step={0.01}
+              onChange={(_, value) => setGapDistance(value)}
+              valueLabelDisplay="auto"
+            />
+          </div>
+          <MyButton
+            className="button"
+            variant="outlined"
+            size="small"
+            onClick={() => setRegenBismuth(!regenBismuth)}
+          >
+            Regenerate
+          </MyButton>
+          {/* <div className="button">
+            <MyButton
+              variant="outlined"
+              size="small"
+              onClick={() => setRegenBismuth(!regenBismuth)}
+            >
+              Regenerate
+            </MyButton>
+          </div> */}
         </div>
-      </MyPaper>
-      <div className="canvas"></div>
+      </div>
+      <Canvas
+        resize={{ polyfill }}
+        id="myCanvas"
+        style={{ touchAction: 'none' }}
+        camera={{
+          position: [-3, 5, -3]
+        }}
+      >
+        <Controls />
+        <Bismuth
+          baseTowerHeightRange={baseTowerHeightRange}
+          forceUpdate={regenBismuth} // bool prop just to trigger re-render using new random values
+          numLayers={numLayers}
+          towerHeightRange={towerHeightRange}
+          gapDistance={gapDistance}
+        />
+      </Canvas>
     </div>
   );
 };
