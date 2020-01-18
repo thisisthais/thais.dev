@@ -1,214 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body,
-.root,
-.App {
-  /* canvas { */
-  height: 100%;
+#root {
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #272727;
+  overflow: hidden;
 }
 
-.App {
-  /* background-color: pink; */
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: minmax(100px, 0.3fr) auto;
+#root {
+  overflow: auto;
 }
 
-.sidebar {
-  margin: 10px;
-  padding: 5px;
+body {
+  position: fixed;
+  overflow: hidden;
+  overscroll-behavior-y: none;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  color: black;
+  -webkit-font-smoothing: antialiased;
 }
 
-.sidebarContent {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 20% repeat(2, 35%) 15%;
-  grid-column-gap: 10px;
-  grid-row-gap: 2px;
-}
-
-.sidebarTitle {
-  justify-self: center;
-  /* background-color: darkorange; */
-  grid-area: 1 / 1 / 2 / 3;
-  /* text */
-  display: flex;
-  flex-direction: row;
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  margin: -8px;
-}
-
-h2 {
-  color: #ba6ca7;
-  background: -webkit-linear-gradient(#ba6ca7, #7507eb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 1em;
-}
-
-h4 {
-  color: #ba6ca7;
-  font-size: 0.5em;
-  margin: 0;
-}
-
-.slider1 {
-  /* background-color: deepskyblue; */
-  grid-area: 2 / 1 / 3 / 2;
-  min-width: 40%;
-}
-.slider2 {
-  /* background-color: hotpink; */
-  grid-area: 2 / 2 / 3 / 3;
-}
-.slider3 {
-  /* background-color: lightskyblue; */
-  grid-area: 3 / 1 / 4 / 2;
-}
-.slider4 {
-  /* background-color: magenta; */
-  grid-area: 3 / 2 / 4 / 3;
-}
-.button {
-  justify-self: center;
-  background-color: mediumpurple;
-  grid-area: 4 / 1 / 5 / 3;
-}
-
-#myCanvas {
-  bottom: -20%;
-  max-height: 80%;
-}
-
-@media screen and (min-width: 1025px) {
-  .App {
-    display: grid;
-    grid-template-columns: minmax(200px, 0.3fr) auto;
-    grid-template-rows: 1fr;
-    align-items: center;
-  }
-
-  #myCanvas {
-    bottom: 0;
-    max-height: 100%;
-  }
-
-  .sidebar {
-    padding: 0;
-    align-items: center;
-    height: 100%;
-  }
-
-  .sidebarContent {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 20% repeat(4, 15%) 10%;
-    grid-row-gap: 2px;
-    height: 100%;
-  }
-
-  .sidebarTitle {
-    grid-area: 1 / 1 / 2 / 2;
-    flex-direction: column;
-    justify-content: center;
-    margin: -10px;
-  }
-
-  span {
-    align-self: center;
-  }
-
-  h2 {
-    margin: 0;
-    align-self: center;
-    font-size: 2vw;
-  }
-
-  h4 {
-    font-size: 1.2vw;
-  }
-
-  .slider1 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .slider2 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .slider3 {
-    grid-area: 4 / 1 / 5 / 2;
-  }
-  .slider4 {
-    grid-area: 5 / 1 / 6 / 2;
-  }
-  .button {
-    grid-area: 6 / 1 / 7 / 2;
-  }
-}
-
-@media screen and (orientation: landscape) {
-  .App {
-    display: grid;
-    grid-template-columns: minmax(200px, 0.3fr) auto;
-    grid-template-rows: 1fr;
-    justify-items: stretch;
-    align-items: center;
-  }
-
-  #myCanvas {
-    bottom: 0;
-    max-height: 100%;
-  }
-
-  .sidebar {
-    padding: 0;
-    align-items: center;
-    height: 100%;
-  }
-
-  .sidebarContent {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 20% repeat(4, 15%) 10%;
-    grid-row-gap: 2px;
-    height: 100%;
-  }
-
-  .sidebarTitle {
-    grid-area: 1 / 1 / 2 / 2;
-    flex-direction: column;
-    justify-content: center;
-    margin: -10px;
-  }
-
-  span {
-    align-self: center;
-  }
-
-  h2 {
-    margin: 0;
-    align-self: center;
-    font-size: 2vw;
-  }
-
-  h4 {
-    font-size: 1.2vw;
-  }
-
-  .slider1 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .slider2 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .slider3 {
-    grid-area: 4 / 1 / 5 / 2;
-  }
-  .slider4 {
-    grid-area: 5 / 1 / 6 / 2;
-  }
-  .button {
-    grid-area: 6 / 1 / 7 / 2;
-  }
+.main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
