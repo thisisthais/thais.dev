@@ -1,52 +1,34 @@
-import React, {
-  createContext,
-  createRef,
-  useContext,
-  useEffect,
-  useRef
-} from 'react';
+import React, { useMemo, useRef } from 'react';
 import './App.css';
 
-import { Canvas } from 'react-three-fiber';
+import { Canvas, useFrame } from 'react-three-fiber';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
+
+import { BackgroundShader } from './BackgroundShader';
 
 const deg = THREE.Math.degToRad;
 
 function Thing() {
-  const shaderData = {
-    vertexShader: `
-      varying vec3 Normal;
-      varying vec3 Position;
-      void main() {
-        Normal = normalize(normalMatrix * normal);
-        Position = vec3(modelViewMatrix * vec4(position, 1.0));
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      varying vec3 Normal;
-      varying vec3 Position;
+  const shaderData = useMemo(() => ({ ...BackgroundShader }), []);
 
-      void main() {
-        gl_FragColor=vec4(0.5, 0.5, 0.5, 1.0);
-      }
-
-    `
-  };
+  const material = useRef();
+  let t = 0;
+  useFrame(() => {
+    material.current.uniforms.u_time.value = Math.sin((t += 0.01));
+  });
   return (
     <mesh scale={[20000, 20000, 1]} rotation={[0, deg(-20), 0]}>
       <planeGeometry attach="geometry" args={[1, 1]} />
-      <a.shaderMaterial attach="material" {...shaderData} />
+      <a.shaderMaterial attach="material" ref={material} {...shaderData} />
     </mesh>
   );
 }
 
 function App() {
   return (
-    <div class="main">
+    <div className="main">
       <Canvas
-        invalidateFrameloop
         camera={{
           fov: 90,
           position: [0, 0, 1800],
@@ -58,6 +40,8 @@ function App() {
         <spotLight intensity={0.5} position={[-300, 300, 4000]} />
         <Thing />
       </Canvas>
+      <div className="header">Nav header</div>
+      <div className="content">Main Content</div>
     </div>
   );
 }
