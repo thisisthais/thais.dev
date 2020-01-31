@@ -41,7 +41,68 @@ function App() {
         <Thing />
       </Canvas>
       <div className="header">Nav header</div>
-      <div className="content">Main Content</div>
+      <div className="content">
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+        Main Content
+        <br />
+        <br />
+      </div>
     </div>
   );
 }

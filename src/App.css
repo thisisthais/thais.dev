@@ -57,11 +57,11 @@ canvas {
 .content {
   background-color: white;
   position: absolute;
-
   z-index: 100;
 
   width: 80vw;
-  height: 70vh;
-
+  height: 75vh;
   top: 140px;
+
+  overflow-y: auto;
 }
