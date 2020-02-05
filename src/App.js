@@ -11,6 +11,7 @@ const deg = THREE.Math.degToRad;
 
 function Thing() {
   const shaderData = useMemo(() => ({ ...BackgroundShader }), []);
+  console.log(shaderData);
 
   const material = useRef();
   let t = 0;
