@@ -1,0 +1,13 @@
+{
+  "name": "thais.dev",
+  "version": "1.0.0",
+  "main": "src/pages/index.js",
+  "repository": "git@github.com:thisisthais/thais.dev.git",
+  "author": "thisisthais <laney.thais@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby": "^2.20.31",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
