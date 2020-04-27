@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{eDXp:function(n,e,t){"use strict";t.r(e);var a=t("q1tI"),u=t.n(a);e.default=function(){return u.a.createElement("h1",null,"Ola Gatsby!")}}}]);
+//# sourceMappingURL=component---src-pages-index-pt-js-621cdb83ce70adbdcea3.js.map

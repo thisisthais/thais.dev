@@ -1,0 +1,16 @@
+[[redirects]]
+  from = "/en/*"
+  to = "/en/:splat"
+[[redirects]]
+  from = "/pt/*"
+  to = "/pt/:splat"
+
+[[redirects]]
+  from = "/*"
+  to = "/pt/:splat"
+  status = 302
+  conditions = {Language = ["pt"]}
+[[redirects]]
+  from = "/*"
+  to = "/en/:splat"
+  status = 302
