@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/pages/index.pt.js"],"names":[],"mappings":"2FAAA,gCAEe,4BAAM","file":"component---src-pages-index-pt-js-621cdb83ce70adbdcea3.js","sourcesContent":["import React from 'react';\n\nexport default () => <h1>Ola Gatsby!</h1>;\n"],"sourceRoot":""}

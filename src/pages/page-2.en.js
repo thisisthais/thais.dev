@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { FormattedMessage } from 'react-intl';
 import Layout from '../layouts/index.js';
 
 export default () => {
   return (
     <Layout>
-      <h1>
-        <FormattedMessage id="greeting" />
-      </h1>
-      <Link to="/pt/page-2/">Ir para página 2</Link>
+      <h1>Hi from the second page</h1>
+      <p>Welcome to page 2</p>
+      <Link to="/en/">Go back to the homepage</Link>
     </Layout>
   );
 };
