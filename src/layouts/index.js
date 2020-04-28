@@ -18,8 +18,8 @@ const messages = {
 const defaultLangKey = 'en';
 const langs = ['en', 'pt'];
 
-const Layout = ({ children }) => {
-  const url = window.location.pathname;
+const Layout = ({ children, location }) => {
+  const url = location.pathname;
   const langKey = getCurrentLangKey(langs, defaultLangKey, url);
   const homeLink = `/${langKey}`;
   const langsMenu = getLangs(langs, langKey, getUrlForLang(homeLink, url));

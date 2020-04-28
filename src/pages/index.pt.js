@@ -3,9 +3,9 @@ import { Link } from 'gatsby';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../layouts/index.js';
 
-export default () => {
+export default (props) => {
   return (
-    <Layout>
+    <Layout location={props.location}>
       <h1>
         <FormattedMessage id="greeting" />
       </h1>
