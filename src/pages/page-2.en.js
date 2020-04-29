@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import Layout from '../layouts/index.js';
 
-export default (props) => {
+export default function ENSecondPage(props) {
   return (
     <Layout location={props.location}>
       <h1>Hi from the second page</h1>
@@ -10,4 +11,8 @@ export default (props) => {
       <Link to="/en/">Go back to the homepage</Link>
     </Layout>
   );
+}
+
+ENSecondPage.propTypes = {
+  location: PropTypes.object,
 };

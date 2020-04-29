@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import Layout from '../layouts/index.js';
 
-export default (props) => {
+export default function PTSecondPage(props) {
   return (
     <Layout location={props.location}>
       <h1>Oi da segunda página!</h1>
@@ -10,4 +11,8 @@ export default (props) => {
       <Link to="/pt/">Voltar pro início</Link>
     </Layout>
   );
+}
+
+PTSecondPage.propTypes = {
+  location: PropTypes.object,
 };

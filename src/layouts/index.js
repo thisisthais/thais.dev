@@ -18,7 +18,7 @@ const messages = {
 const defaultLangKey = 'en';
 const langs = ['en', 'pt'];
 
-const Layout = ({ children, location }) => {
+export default function Layout({ children, location }) {
   const url = location.pathname;
   const langKey = getCurrentLangKey(langs, defaultLangKey, url);
   const homeLink = `/${langKey}`;
@@ -32,10 +32,9 @@ const Layout = ({ children, location }) => {
       </div>
     </IntlProvider>
   );
-};
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.object,
 };
-
-export default Layout;

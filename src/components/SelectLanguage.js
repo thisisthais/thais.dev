@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import { FormattedMessage } from 'react-intl';
 
-const SelectLanguage = (props) => {
+export default function SelectLanguage(props) {
   const links = props.langs.map((lang) => (
     <Link to={lang.link} key={lang.langKey}>
       <li selected={lang.selected}>{lang.langKey}</li>
@@ -19,10 +19,8 @@ const SelectLanguage = (props) => {
       <ul style={{ display: 'inline' }}>{links}</ul>
     </section>
   );
-};
+}
 
 SelectLanguage.propTypes = {
   langs: PropTypes.array,
 };
-
-export default SelectLanguage;
