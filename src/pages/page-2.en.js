@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import Layout from '../layouts/index.js';
+import Layout from '../components/layout.js';
 
 export default function ENSecondPage(props) {
   return (
