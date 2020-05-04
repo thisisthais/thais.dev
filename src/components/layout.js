@@ -7,6 +7,7 @@ import locale_pt from 'react-intl/locale-data/pt';
 import messages_en from '../data/en.js';
 import messages_pt from '../data/pt.js';
 
+import './layout.css';
 import SelectLanguage from '../components/SelectLanguage';
 
 addLocaleData([...locale_en, ...locale_pt]);
