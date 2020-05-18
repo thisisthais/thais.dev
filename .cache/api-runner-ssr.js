@@ -1,4 +1,7 @@
-var plugins = []
+var plugins = [{
+      plugin: require('/Users/thais/thais.dev/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
+      options: {"plugins":[],"icon":"src/images/favicon.png","cache_busting_mode":"query","include_favicon":true,"legacy":true,"theme_color_in_head":true,"cacheDigest":"3f7d7d13e6eefd952108c04d482f3140"},
+    }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [
 //   {

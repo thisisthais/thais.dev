@@ -22,3 +22,8 @@ html {
 a {
   color: #ec87ff;
 }
+
+h1 {
+  font-family: 'Fredoka One', Fallback, serif;
+  font-size: 3em;
+}
