@@ -10727,6 +10727,11 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeface-inconsolata@^0.0.72:
+  version "0.0.72"
+  resolved "https://registry.yarnpkg.com/typeface-inconsolata/-/typeface-inconsolata-0.0.72.tgz#6b5c92132c7d3e83f7a17025087d8d717ada63d5"
+  integrity sha512-ITFhcI2ANWmSEPVgQgPJHh6RyiCf1pnkRXj1VxjsxfSwRrXFGgGITRJV+HxW7kTRDx+3/6RReT2/SWsMPqJaTA==
+
 unc-path-regex@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
