@@ -1,4 +1,4 @@
 module.exports = {
-  selectLanguage: 'Select your language',
-  greeting: 'Hello friend!',
+  greeting: 'hey there!',
+  intro: "i'm thaís",
 };

@@ -27,3 +27,36 @@ h1 {
   font-family: 'Fredoka One', Fallback, serif;
   font-size: 3em;
 }
+
+h2 {
+  font-size: 1.5em;
+}
+
+.cursor {
+  display: inline-block;
+  position: relative;
+}
+
+.cursor::after {
+  content: '';
+  margin: auto;
+  position: absolute;
+  right: -5px;
+  top: 1px;
+  width: 2px;
+  height: 80%;
+  background-color: lavenderblush;
+  animation: cursor-animation 1.5s step-end infinite;
+}
+
+@keyframes cursor-animation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

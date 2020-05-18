@@ -12,6 +12,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-intl": "^2.8.0",
+    "react-typewriter-hook": "^1.0.1",
     "typeface-fredoka-one": "^0.0.72",
     "typeface-inconsolata": "^0.0.72"
   },
