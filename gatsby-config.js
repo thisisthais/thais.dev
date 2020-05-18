@@ -12,5 +12,11 @@ module.exports = {
         prefixDefault: true, // adds a route for your default language, en
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        icon: `src/images/favicon.ico`,
+      },
+    },
   ],
 };
