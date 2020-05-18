@@ -18,9 +18,11 @@ export default function Header(props) {
   ));
 
   return (
-    <header>
-      <ul>{links}</ul>
-    </header>
+    <div className="container">
+      <header>
+        <ul>{links}</ul>
+      </header>
+    </div>
   );
 }
 
