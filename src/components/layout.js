@@ -8,7 +8,7 @@ import messages_en from '../data/en.js';
 import messages_pt from '../data/pt.js';
 
 import './layout.css';
-import SelectLanguage from '../components/SelectLanguage';
+import Header from '../components/Header';
 
 addLocaleData([...locale_en, ...locale_pt]);
 
@@ -28,7 +28,7 @@ export default function Layout({ children, location }) {
   return (
     <IntlProvider locale={langKey} messages={messages[langKey]}>
       <div>
-        <SelectLanguage langs={langsMenu} />
+        <Header langs={langsMenu} currentLang={langKey} />
         <div>{children}</div>
       </div>
     </IntlProvider>

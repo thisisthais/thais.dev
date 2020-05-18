@@ -1,0 +1,27 @@
+a {
+  color: #4a4ae1;
+  border-bottom: 1px solid currentColor; /* Or whatever color you want */
+  text-decoration: none;
+}
+
+li {
+  display: inline;
+  text-decoration: none;
+}
+
+li:active {
+  font-weight: bolder;
+}
+
+li + li:before {
+  content: '  |  ';
+}
+
+ul {
+  padding-right: 10px;
+}
+
+header {
+  position: fixed;
+  right: 0;
+}
