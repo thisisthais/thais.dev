@@ -4,6 +4,8 @@ import useTypewriter from 'react-typewriter-hook';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
+import namePronounce from '../sound/namePronounce.mp3';
+import useSound from 'use-sound';
 
 const MagicWords = [
   'a web developer',
@@ -33,6 +35,8 @@ export default function ENIndexPage(props) {
     };
   }, [magicWord]);
 
+  const [playActive] = useSound(namePronounce, { volume: 0.25 });
+
   return (
     <Layout location={props.location}>
       <div>
@@ -41,7 +45,10 @@ export default function ENIndexPage(props) {
         </h1>
         <h2>
           <FormattedMessage id="intro" />
-          <i> (tah•EES) 🔊</i>
+          <i>
+            {' '}
+            (tah•EES) <span onClick={playActive}>🔊</span>
+          </i>
         </h2>
         <h2>
           i'm <p className="cursor">{currentWord}</p>

@@ -17,7 +17,8 @@
     "react-intl": "^2.8.0",
     "react-typewriter-hook": "^1.0.1",
     "typeface-fredoka-one": "^0.0.72",
-    "typeface-inconsolata": "^0.0.72"
+    "typeface-inconsolata": "^0.0.72",
+    "use-sound": "^1.0.2"
   },
   "scripts": {
     "start": "gatsby develop",
