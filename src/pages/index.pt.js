@@ -27,7 +27,7 @@ export default function PTIndexPage(props) {
     intervalRef.current = setInterval(() => {
       index = ++index % howManyWords;
       setMagicWord(MagicWords[index]);
-    }, 3000);
+    }, Math.min(4000, Math.max(3000, MagicWords[index].length * 400)));
     return function clear() {
       clearInterval(intervalRef.current);
     };

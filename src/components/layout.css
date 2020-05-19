@@ -46,7 +46,7 @@ h2 {
   width: 2px;
   height: 80%;
   background-color: lavenderblush;
-  animation: cursor-animation 1.5s step-end infinite;
+  animation: cursor-animation 1s step-end infinite;
 }
 
 @keyframes cursor-animation {
