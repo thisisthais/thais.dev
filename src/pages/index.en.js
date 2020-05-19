@@ -35,7 +35,12 @@ export default function ENIndexPage(props) {
     };
   }, [magicWord]);
 
-  const [playActive] = useSound(namePronounce, { volume: 0.25 });
+  const [playbackRate, setPlaybackRate] = React.useState(0.9);
+  const [play] = useSound(namePronounce, { playbackRate, volume: 0.5 });
+  const handleClick = () => {
+    setPlaybackRate(playbackRate + 0.1);
+    play();
+  };
 
   return (
     <Layout location={props.location}>
@@ -47,7 +52,7 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="intro" />
           <i>
             {' '}
-            (tah•EES) <span onClick={playActive}>🔊</span>
+            (tah•EES) <span onClick={handleClick}>🔊</span>
           </i>
         </h2>
         <h2>
