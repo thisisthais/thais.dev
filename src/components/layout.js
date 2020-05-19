@@ -6,6 +6,7 @@ import locale_en from 'react-intl/locale-data/en';
 import locale_pt from 'react-intl/locale-data/pt';
 import messages_en from '../data/en.js';
 import messages_pt from '../data/pt.js';
+import { Helmet } from 'react-helmet';
 
 import './layout.css';
 import Header from '../components/Header';
@@ -26,12 +27,19 @@ export default function Layout({ children, location }) {
   const langsMenu = getLangs(langs, langKey, getUrlForLang(homeLink, url));
 
   return (
-    <IntlProvider locale={langKey} messages={messages[langKey]}>
-      <div>
-        <Header langs={langsMenu} currentLang={langKey} />
-        <div>{children}</div>
-      </div>
-    </IntlProvider>
+    <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>thisisthaís</title>
+        <link rel="canonical" href="https://thais.dev" />
+      </Helmet>
+      <IntlProvider locale={langKey} messages={messages[langKey]}>
+        <div>
+          <Header langs={langsMenu} currentLang={langKey} />
+          <div>{children}</div>
+        </div>
+      </IntlProvider>
+    </>
   );
 }
 
