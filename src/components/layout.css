@@ -60,3 +60,13 @@ h2 {
     opacity: 0;
   }
 }
+
+.speaker {
+  display: inline-flex;
+  align-items: center;
+  transform-origin: center center;
+}
+
+.speaker:active {
+  transform: scale(1.5);
+}

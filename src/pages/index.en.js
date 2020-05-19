@@ -52,7 +52,15 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="intro" />
           <i>
             {' '}
-            (tah•EES) <span onClick={handleClick}>🔊</span>
+            (tah•EES){' '}
+            <span
+              className="speaker"
+              role="img"
+              aria-label="speaker"
+              onClick={handleClick}
+            >
+              🔊
+            </span>
           </i>
         </h2>
         <h2>
