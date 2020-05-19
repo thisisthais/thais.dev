@@ -9,10 +9,14 @@ export default function Header(props) {
     <li selected={lang.selected} key={lang.langKey}>
       {lang.selected ? (
         <b>
-          <Link to={lang.link}>{lang.langKey == 'en' ? '🇺🇸 en' : 'pt 🇧🇷'}</Link>
+          <Link to={lang.link}>
+            {lang.langKey == 'en' ? 'ENGLISH' : 'PORTUGUÊS'}
+          </Link>
         </b>
       ) : (
-        <Link to={lang.link}>{lang.langKey == 'en' ? '🇺🇸 en' : 'pt 🇧🇷'}</Link>
+        <Link to={lang.link}>
+          {lang.langKey == 'en' ? 'ENGLISH' : 'PORTUGUÊS'}
+        </Link>
       )}
     </li>
   ));
