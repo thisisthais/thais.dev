@@ -55,5 +55,5 @@ export default function AboutMe({ magicWords }) {
 }
 
 AboutMe.propTypes = {
-  magicWords: PropTypes.array,
+  magicWords: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
