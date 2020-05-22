@@ -48,7 +48,8 @@ export default function AboutMe({ magicWords }) {
         </i>
       </h2>
       <h2>
-        <FormattedMessage id="iAm" /> <p className="cursor">{currentWord}</p>
+        <FormattedMessage id="iAm" />{' '}
+        <span className="cursor">{currentWord}</span>
       </h2>
     </>
   );

@@ -36,7 +36,7 @@ export default function Layout({ children, location }) {
       <IntlProvider locale={langKey} messages={messages[langKey]}>
         <div>
           <Header langs={langsMenu} currentLang={langKey} />
-          <div>{children}</div>
+          <div className="contentContainer">{children}</div>
         </div>
       </IntlProvider>
     </>

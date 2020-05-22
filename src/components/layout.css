@@ -33,6 +33,7 @@ h2 {
 }
 
 .cursor {
+  content: ' ';
   display: inline-block;
   position: relative;
 }
@@ -69,4 +70,14 @@ h2 {
 
 .speaker:active {
   transform: scale(1.5);
+}
+
+.contentContainer {
+  display: flex;
+}
+
+.writingCard {
+  background-color: red;
+  min-width: 100px;
+  min-height: 100px;
 }

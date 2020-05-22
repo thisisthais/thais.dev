@@ -24,6 +24,7 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
+        {/* <div className="writingCard">coming soon!</div> */}
       </div>
     </Layout>
   );
