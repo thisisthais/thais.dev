@@ -1,9 +1,8 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
-import useTypewriter from 'react-typewriter-hook';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
+import AboutMe from '../components/AboutMe.js';
 
 const MagicWords = [
   'desenvolvedora de web',
@@ -16,35 +15,15 @@ const MagicWords = [
   'não-binária',
   'artista aspirante',
 ];
-let index = 0;
 
 export default function PTIndexPage(props) {
-  const [magicWord, setMagicWord] = useState('desenvolvedora de web');
-  const intervalRef = useRef({});
-  const currentWord = useTypewriter(magicWord);
-  const howManyWords = MagicWords.length;
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      index = ++index % howManyWords;
-      setMagicWord(MagicWords[index]);
-    }, Math.min(4000, Math.max(3000, MagicWords[index].length * 400)));
-    return function clear() {
-      clearInterval(intervalRef.current);
-    };
-  }, [magicWord]);
-
   return (
     <Layout location={props.location}>
       <div>
         <h1>
           <FormattedMessage id="greeting" />
         </h1>
-        <h2>
-          <FormattedMessage id="intro" />
-        </h2>
-        <h2>
-          sou <p className="cursor">{currentWord}</p>
-        </h2>
+        <AboutMe magicWords={MagicWords} />
       </div>
     </Layout>
   );
