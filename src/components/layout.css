@@ -68,25 +68,30 @@ div {
   align-self: center;
 }
 
-.writingCard button {
+.writingCard a button {
   background-color: transparent;
   border: 2px solid #4a4ae1;
   height: 40px;
   position: relative;
-  left: -3em;
-  bottom: -60%;
+  left: -2em;
+  bottom: -250%;
   width: 200px;
 }
 
+.writingCard a {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* TODO: iPad looks funky */
 @media only screen and (max-width: 380px) {
   .writingCard {
     width: 200px;
     height: 150px;
   }
 
-  .writingCard button {
-    left: -2em;
-    bottom: -50%;
+  .writingCard a button {
+    bottom: -150%;
     width: 150px;
   }
 }

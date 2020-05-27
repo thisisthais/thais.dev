@@ -12,4 +12,5 @@ export default function BlogPostLayout({ children, location }) {
 
 BlogPostLayout.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.object,
 };
