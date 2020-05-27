@@ -66,6 +66,7 @@ div {
 
   color: black;
   height: 200px;
+  position: relative;
   width: 300px;
 }
 
@@ -78,9 +79,9 @@ div {
   background-color: transparent;
   border: 2px solid #4a4ae1;
   height: 40px;
-  position: relative;
-  left: -2em;
-  bottom: -250%;
+  position: absolute;
+  left: -10%;
+  bottom: 10%;
   width: 200px;
 }
 
@@ -97,8 +98,7 @@ div {
   }
 
   .writingCard a button {
-    bottom: -150%;
-    width: 150px;
+    left: -20%;
   }
 }
 
