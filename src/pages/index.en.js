@@ -14,6 +14,7 @@ const MagicWords = [
   'a musclehead',
   'non-binary',
   'an aspiring artist',
+  'a scuba diver',
 ];
 
 export default function ENIndexPage(props) {
@@ -24,7 +25,9 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        {/* <div className="writingCard">coming soon!</div> */}
+        <div className="cardContainer">
+          <div className="writingCard">coming soon!</div>
+        </div>
       </div>
     </Layout>
   );

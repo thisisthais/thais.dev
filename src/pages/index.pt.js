@@ -14,6 +14,7 @@ const MagicWords = [
   'marombeira',
   'não-binária',
   'artista aspirante',
+  'mergulhadora de scuba',
 ];
 
 export default function PTIndexPage(props) {
