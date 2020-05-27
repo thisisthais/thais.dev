@@ -7,6 +7,9 @@ var plugins = [{
     },{
       plugin: require('/Users/thais/thais.dev/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
       options: {"plugins":[]},
+    },{
+      plugin: require('/Users/thais/thais.dev/node_modules/gatsby-plugin-mdx/gatsby-ssr'),
+      options: {"plugins":[],"extensions":[".mdx",".md"],"defaultLayouts":{"blog":"/Users/thais/thais.dev/src/components/blog-post-layout.js"}},
     }]
 // During bootstrap, we write requires at top of this file which looks like:
 // var plugins = [

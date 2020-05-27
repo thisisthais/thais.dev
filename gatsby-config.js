@@ -24,6 +24,22 @@ module.exports = {
         trackingId: 'UA-167129565-1',
       },
     },
-    `gatsby-plugin-react-helmet`,
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.mdx`, `.md`],
+        defaultLayouts: {
+          blog: require.resolve('./src/components/blog-post-layout.js'),
+        },
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages/blog`,
+        name: `blog`,
+      },
+    },
   ],
 };

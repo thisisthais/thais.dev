@@ -5,6 +5,9 @@ module.exports = [{
       plugin: require('../node_modules/gatsby-plugin-google-analytics/gatsby-browser.js'),
       options: {"plugins":[],"trackingId":"UA-167129565-1"},
     },{
+      plugin: require('../node_modules/gatsby-plugin-mdx/gatsby-browser.js'),
+      options: {"plugins":[],"extensions":[".mdx",".md"],"defaultLayouts":{"blog":"/Users/thais/thais.dev/src/components/blog-post-layout.js"}},
+    },{
       plugin: require('../gatsby-browser.js'),
       options: {"plugins":[]},
     }]

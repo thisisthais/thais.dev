@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-export default function Card(props) {
+export default function Card() {
   return (
     <div className="cardContainer">
       <div className="writingCard">
@@ -15,6 +15,4 @@ export default function Card(props) {
   );
 }
 
-Card.propTypes = {
-  children: PropTypes.node,
-};
+Card.propTypes = {};
