@@ -26,7 +26,9 @@ export default function ENIndexPage(props) {
         </h1>
         <AboutMe magicWords={MagicWords} />
         <div className="cardContainer">
-          <div className="writingCard">coming soon!</div>
+          <div className="writingCard">
+            <button>READ MORE</button>
+          </div>
         </div>
       </div>
     </Layout>
