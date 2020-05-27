@@ -47,6 +47,11 @@ div {
 }
 
 .writingCard {
+  background-color: lavenderblush;
+
+  /* color same as gradient dark color */
+  box-shadow: 5px 15px 20px 5px rgba(50, 58, 121, 0.5);
+
   height: 200px;
   width: 300px;
 }
@@ -93,10 +98,4 @@ div {
 
 .contentContainer {
   display: flex;
-}
-
-.writingCard {
-  background-color: red;
-  min-width: 100px;
-  min-height: 100px;
 }
