@@ -58,8 +58,14 @@ div {
   /* color same as gradient dark color */
   box-shadow: 5px 15px 20px 5px rgba(50, 58, 121, 0.5);
 
+  color: black;
   height: 200px;
   width: 300px;
+}
+
+.writingCard span {
+  padding-top: 10px;
+  align-self: center;
 }
 
 .writingCard button {
@@ -68,7 +74,7 @@ div {
   height: 40px;
   position: relative;
   left: -3em;
-  bottom: -70%;
+  bottom: -60%;
   width: 200px;
 }
 
@@ -80,7 +86,7 @@ div {
 
   .writingCard button {
     left: -2em;
-    bottom: -65%;
+    bottom: -50%;
     width: 150px;
   }
 }

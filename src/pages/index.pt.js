@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
+import Card from '../components/Card.js';
 
 const MagicWords = [
   'desenvolvedora de web',
@@ -25,6 +26,7 @@ export default function PTIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
+        <Card />
       </div>
     </Layout>
   );

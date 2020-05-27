@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
+import Card from '../components/Card.js';
 
 const MagicWords = [
   'a web developer',
@@ -25,11 +26,7 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        <div className="cardContainer">
-          <div className="writingCard">
-            <button>READ MORE</button>
-          </div>
-        </div>
+        <Card />
       </div>
     </Layout>
   );
