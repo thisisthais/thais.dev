@@ -7,8 +7,6 @@ exports.components = {
   "component---src-pages-blog-first-en-mdx": () => import("./../src/pages/blog/first.en.mdx" /* webpackChunkName: "component---src-pages-blog-first-en-mdx" */),
   "component---src-pages-blog-first-pt-mdx": () => import("./../src/pages/blog/first.pt.mdx" /* webpackChunkName: "component---src-pages-blog-first-pt-mdx" */),
   "component---src-pages-index-en-js": () => import("./../src/pages/index.en.js" /* webpackChunkName: "component---src-pages-index-en-js" */),
-  "component---src-pages-index-pt-js": () => import("./../src/pages/index.pt.js" /* webpackChunkName: "component---src-pages-index-pt-js" */),
-  "component---src-pages-page-2-en-js": () => import("./../src/pages/page-2.en.js" /* webpackChunkName: "component---src-pages-page-2-en-js" */),
-  "component---src-pages-page-2-pt-js": () => import("./../src/pages/page-2.pt.js" /* webpackChunkName: "component---src-pages-page-2-pt-js" */)
+  "component---src-pages-index-pt-js": () => import("./../src/pages/index.pt.js" /* webpackChunkName: "component---src-pages-index-pt-js" */)
 }
 
