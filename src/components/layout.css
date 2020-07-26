@@ -49,6 +49,29 @@ div {
   flex-direction: column;
 }
 
+article {
+  display: grid;
+  grid-template-columns:
+    minmax(1.2rem, 1fr)
+    minmax(auto, 57ch)
+    minmax(1.2rem, 1fr);
+}
+
+/* put article text paragraphs into the second (middle) columm */
+article h1,
+h2,
+p {
+  grid-column: 2;
+}
+
+/* position images to take up all three columns */
+img {
+  grid-column: 1 /4;
+  width: 100%;
+  max-width: 100ch;
+  justify-self: center;
+}
+
 .contentContainer {
   display: flex;
 }
