@@ -1,9 +1,10 @@
 import React from 'react';
+import BismuthCanvas from '../components/Bismuth/BismuthCanvas';
 
 export default function BismuthPage() {
   return (
     <div>
-      <h1>pretty rocks incoming</h1>
+      <BismuthCanvas />
     </div>
   );
 }
