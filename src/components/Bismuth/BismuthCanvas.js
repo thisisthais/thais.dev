@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-// import Bismuth from './Bismuth';
+import Bismuth from './Bismuth';
 // import BismuthSegment from './BismuthSegment';
 
 import './bismuthCanvas.css';
@@ -22,7 +22,7 @@ const Controls = () => {
 
 const BismuthCanvas = () => {
   return (
-    <div className="App">
+    <div>
       <Canvas
         id="myCanvas"
         style={{ touchAction: 'none' }}
@@ -33,8 +33,8 @@ const BismuthCanvas = () => {
         {/* <Controls /> */}
         {/* <ambientLight /> */}
         {/* <spotLight position={[0, 10, 4]} /> */}
-        {/* <axesHelper args={[5]} />
-        <Bismuth /> */}
+        <axesHelper args={[5]} />
+        <Bismuth />
         {/* <BismuthSegment /> */}
         {/* testing */}
         <mesh>
