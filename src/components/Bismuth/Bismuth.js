@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { a } from 'react-spring/three';
 import * as THREE from 'three';
 import { BismuthSegment as Segment } from './BismuthSegment';
 
+import { BismuthShader } from './BismuthShader';
+
 // to keep
 const HEIGHT = 0.1;
 const LENGTH_DELTA = 0.2;
-const MIN_BASE_HEIGHT = 2;
-const MAX_BASE_HEIGHT = 7;
 const DEFAULT_LENGTHS = [1, 1, 1, 1];
 const ROTATIONS = [0, Math.PI / 2, (3 / 2) * Math.PI, Math.PI];
 const QUAD_MULTIPLIERS = [
@@ -20,7 +20,6 @@ const QUAD_MULTIPLIERS = [
 const randIntInRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
 const randFloatInRange = (min, max) => Math.random() * (max - min) + min;
-const randomlyNegative = (num) => (Math.random() > 0.5 ? num : -num);
 const randRotation = () => ROTATIONS[randIntInRange(0, 3)];
 
 const genRandLengths = (lastLengths, height) => {
@@ -39,6 +38,8 @@ const genRandLengths = (lastLengths, height) => {
 
 const Base = ({ size = 1, position = [0, 0, 0] }) => {
   const boxGeo = new THREE.BoxGeometry(size, HEIGHT, size);
+  const shaderData = useMemo(() => ({ ...BismuthShader }), []);
+
   boxGeo.faces.forEach((face, idx) => {
     face.vertexColors = [
       new THREE.Color().setHSL(idx / 12, 0.5, 0.5),
@@ -48,10 +49,7 @@ const Base = ({ size = 1, position = [0, 0, 0] }) => {
   });
   return (
     <a.mesh geometry={boxGeo} position={position}>
-      <a.meshBasicMaterial
-        attach="material"
-        vertexColors={THREE.VertexColors}
-      />
+      <a.shaderMaterial attach="material" {...shaderData} />
     </a.mesh>
   );
 };
@@ -71,6 +69,7 @@ const generateTower = (
     position = [0, 0, 0, 0],
     rotation = [0, 0, 0],
   },
+  gapDistance,
   towerList = []
 ) => {
   if (height <= 1) {
@@ -82,6 +81,7 @@ const generateTower = (
       position={position}
       lengths={lengths}
       rotation={rotation}
+      gapDistance={gapDistance}
       key={`segment${towerList.length + Math.random()}`}
     />
   );
@@ -94,18 +94,19 @@ const generateTower = (
       lengths: lengths.map((l) => l + LENGTH_DELTA),
       height: height - 1,
     },
+    gapDistance,
     towerList
   );
 };
 
 const generateLayers = (
   {
+    baseTowerHeightRange,
+    towerHeightRange,
+    gapDistance,
     numLayers = 1,
     currentHeight = 0,
     lastLayerLengths = [],
-    baseTowerHeightRange = [10, 20],
-    towerHeightRange = [7, 30],
-    gapDistance = 1.25,
   },
   allSegments = []
 ) => {
@@ -116,10 +117,13 @@ const generateLayers = (
   let randomBaseTowerHeight;
   if (allSegments.length === 0) {
     randomBaseTowerHeight = randIntInRange(...baseTowerHeightRange);
-    const baseTower = generateTower({
-      height: randomBaseTowerHeight,
-      position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2],
-    });
+    const baseTower = generateTower(
+      {
+        height: randomBaseTowerHeight,
+        position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2],
+      },
+      gapDistance
+    );
     allSegments.push(...baseTower);
     currentHeight += randomBaseTowerHeight;
   }
@@ -172,12 +176,15 @@ const generateLayers = (
       lastLayerLengths = randLengths;
     }
 
-    const nextTower = generateTower({
-      lengths: randLengths,
-      position: [x, Math.min(y, 3), z],
-      rotation: [0, randRotation(), 0],
-      height: randTowerHeight,
-    });
+    const nextTower = generateTower(
+      {
+        lengths: randLengths,
+        position: [x, Math.min(y, 3), z],
+        rotation: [0, randRotation(), 0],
+        height: randTowerHeight,
+      },
+      gapDistance
+    );
     towersInLayer.push(...nextTower);
   }
 
@@ -189,13 +196,24 @@ const generateLayers = (
       currentHeight: nextLayerHeight,
       lastLayerLengths,
       towerHeightRange,
+      gapDistance,
     },
     [...allSegments, ...towersInLayer]
   );
 };
 
-export default () => {
-  const baseTower = generateLayers({ numLayers: 5 });
+export default ({
+  baseTowerHeightRange,
+  numLayers,
+  towerHeightRange,
+  gapDistance,
+}) => {
+  const baseTower = generateLayers({
+    baseTowerHeightRange,
+    numLayers,
+    towerHeightRange,
+    gapDistance,
+  });
 
   return (
     <>

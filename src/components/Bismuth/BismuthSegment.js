@@ -244,7 +244,7 @@ const BismuthSegment = ({
   const shaderRef = useRef();
 
   useEffect(
-    (state) => {
+    (_) => {
       shaderRef.current.uniforms.GapDistance.value = gapDistance;
     },
     [gapDistance]

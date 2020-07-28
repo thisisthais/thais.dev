@@ -48,6 +48,8 @@ const BismuthCanvas = () => {
   const [towerHeightRange, setTowerHeightRange] = useState([7, 30]);
   const [gapDistance, setGapDistance] = useState(1.25);
 
+  console.log(gapDistance);
+
   return (
     <div className="bismuthContainer">
       <div className="sidebar">
@@ -129,7 +131,13 @@ const BismuthCanvas = () => {
       >
         <Controls />
         <axesHelper args={[5]} />
-        <Bismuth />
+        <Bismuth
+          baseTowerHeightRange={baseTowerHeightRange}
+          forceUpdate={regenBismuth} // bool prop just to trigger re-render using new random values
+          numLayers={numLayers}
+          towerHeightRange={towerHeightRange}
+          gapDistance={gapDistance}
+        />
       </Canvas>
     </div>
   );
