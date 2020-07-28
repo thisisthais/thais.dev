@@ -1,9 +1,8 @@
 import React, { useRef } from 'react';
 
-import { Canvas, extend, useThree, useRender } from 'react-three-fiber';
+import { Canvas, extend, useThree, useFrame } from 'react-three-fiber';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Bismuth from './Bismuth';
-// import BismuthSegment from './BismuthSegment';
 
 import './bismuthCanvas.css';
 
@@ -13,7 +12,7 @@ const Controls = () => {
   const orbitRef = useRef();
   const { camera, gl } = useThree();
 
-  useRender(() => {
+  useFrame(() => {
     orbitRef.current.update();
   });
 
@@ -30,13 +29,11 @@ const BismuthCanvas = () => {
           position: [5, 9, 5],
         }}
       >
-        {/* <Controls /> */}
+        <Controls />
         {/* <ambientLight /> */}
         {/* <spotLight position={[0, 10, 4]} /> */}
         <axesHelper args={[5]} />
         <Bismuth />
-        {/* <BismuthSegment /> */}
-        {/* testing */}
         <mesh>
           <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
           <meshStandardMaterial attach="material" color={'hotpink'} />
