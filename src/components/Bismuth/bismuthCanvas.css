@@ -1,9 +1,45 @@
 html,
 body,
 .root,
+.bismuth,
 canvas {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+}
+
+#myCanvas {
+  margin-top: 1em;
+}
+
+.bismuth {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 30%;
+}
+
+.slidersContainer {
+  flex-grow: 2;
+  padding: 0.2em;
+}
+
+h4 {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size: 0.8em;
+  color: #ba6ca7;
+  margin-bottom: 0;
+}
+
+h5 {
+  color: #8658b8;
+  margin: 0.2em 0em 0.6em 0em;
 }
