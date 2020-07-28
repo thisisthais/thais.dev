@@ -1,8 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import { a } from 'react-spring/three';
-import { useFrame } from 'react-three-fiber';
 import * as THREE from 'three';
-import PropTypes from 'prop-types';
 
 import { BismuthShader } from './BismuthShader';
 
@@ -239,25 +237,18 @@ const BismuthSegment = ({
   lengths = [1, 1, 1, 1],
   position = [0, 0, 0],
   rotation = [0, 0, 0],
+  gapDistance = 1.25,
 }) => {
   const [vertices, faces] = useMemo(() => calcVerticesAndFaces(lengths), []);
   const shaderData = useMemo(() => ({ ...BismuthShader }), []);
   const shaderRef = useRef();
 
-  let canvasElement;
-  useEffect(() => {
-    canvasElement = document.getElementsByTagName('canvas')[0];
-  }, []);
-
-  useFrame((state) => {
-    shaderRef.current.uniforms.iTime.value =
-      shaderRef.current.uniforms.iTime.value + 0.0001;
-    shaderRef.current.uniforms.iResolution.value = new THREE.Vector3(
-      canvasElement.width,
-      canvasElement.height,
-      1
-    );
-  });
+  useEffect(
+    (state) => {
+      shaderRef.current.uniforms.GapDistance.value = gapDistance;
+    },
+    [gapDistance]
+  );
 
   return (
     <a.mesh position={position} rotation={rotation}>
@@ -267,16 +258,9 @@ const BismuthSegment = ({
         faces={faces}
         onUpdate={(self) => self.computeFaceNormals()}
       />
-      {/* <boxBufferGeometry attach="geometry" args={[1, 1, 1]} /> */}
       <a.shaderMaterial attach="material" ref={shaderRef} {...shaderData} />
     </a.mesh>
   );
-};
-
-BismuthSegment.propTypes = {
-  lengths: PropTypes.arrayOf(PropTypes.number),
-  position: PropTypes.arrayOf(PropTypes.number),
-  rotation: PropTypes.arrayOf(PropTypes.number),
 };
 
 export { BismuthSegment };

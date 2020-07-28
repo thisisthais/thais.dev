@@ -99,7 +99,14 @@ const generateTower = (
 };
 
 const generateLayers = (
-  { numLayers = 1, currentHeight = 0, lastLayerLengths = [] },
+  {
+    numLayers = 1,
+    currentHeight = 0,
+    lastLayerLengths = [],
+    baseTowerHeightRange = [10, 20],
+    towerHeightRange = [7, 30],
+    gapDistance = 1.25,
+  },
   allSegments = []
 ) => {
   if (numLayers < 1) {
@@ -108,7 +115,7 @@ const generateLayers = (
 
   let randomBaseTowerHeight;
   if (allSegments.length === 0) {
-    randomBaseTowerHeight = randIntInRange(10, 20);
+    randomBaseTowerHeight = randIntInRange(...baseTowerHeightRange);
     const baseTower = generateTower({
       height: randomBaseTowerHeight,
       position: [-0.5, HEIGHT, 0.5 - HEIGHT / 2],
@@ -118,7 +125,6 @@ const generateLayers = (
   }
 
   const numTowers = randIntInRange(1, 4);
-  const startingLayerHeight = ((randomBaseTowerHeight * 9) / 10) * HEIGHT;
   const initialBaseLength = 1 + randomBaseTowerHeight * LENGTH_DELTA;
 
   // keept track of where each tower is placed and don't reuse quadrants
@@ -156,7 +162,10 @@ const generateLayers = (
     }
     const randLengths = genRandLengths(lastLayerLengths, currentHeight);
 
-    const randTowerHeight = randIntInRange(7, 30 - currentHeight);
+    const randTowerHeight = randIntInRange(
+      towerHeightRange[0],
+      towerHeightRange[1] - currentHeight
+    );
     if (randTowerHeight <= shortestTowerHeight) {
       shortestTowerHeight = randTowerHeight;
       // also update lengths
@@ -179,6 +188,7 @@ const generateLayers = (
       numLayers: numLayers - 1,
       currentHeight: nextLayerHeight,
       lastLayerLengths,
+      towerHeightRange,
     },
     [...allSegments, ...towersInLayer]
   );
