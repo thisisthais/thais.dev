@@ -3,9 +3,10 @@ body,
 .root,
 .bismuthContainer {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #myCanvas {
@@ -22,20 +23,20 @@ body,
   width: 100vw;
   height: max(35vh, 100px);
   position: absolute;
-  top: 0px;
-  left: auto;
 }
 
 .sidebarContent {
   display: flex;
   align-items: center;
-  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .sidebarTitle {
   font-size: 4vw;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   align-items: center;
+  text-align: center;
 }
 
 .sidebarTitle span {
@@ -50,12 +51,13 @@ body,
   flex-wrap: wrap;
   align-content: center;
   justify-content: space-around;
-  height: max(100px, 50%);
+  height: max(120px, 50%);
+  width: 100vw;
 }
 
 .slidersContainer div {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 8%;
+  padding-right: 8%;
 }
 
 .slidersContainer div h4 {
@@ -64,18 +66,14 @@ body,
   font-size: 3vw;
 }
 
-.button {
-  /* background-color: mediumpurple; */
-}
-
 @media screen and (min-width: 800px), (orientation: landscape) {
   #myCanvas {
-    margin-left: max(25vw, 120px);
+    margin-left: max(30vw, 120px);
     margin-top: auto;
   }
 
   .sidebar {
-    width: max(25vw, 120px);
+    width: max(30vw, 120px);
     height: 100%;
     position: absolute;
     left: 0px;
@@ -86,6 +84,7 @@ body,
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    flex-wrap: nowrap;
   }
 
   .sidebarContent div {
@@ -98,6 +97,16 @@ body,
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin-top: 3vh;
+  }
+
+  .slidersContainer {
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    height: max(300px, 65vh);
+    padding-top: 5vh;
+    padding-bottom: 5vh;
   }
 
   .slidersContainer div h4 {
