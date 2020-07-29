@@ -20,19 +20,22 @@ canvas {
 .sidebar {
   background-color: white;
   width: 100vw;
-  height: max(35%, 120px);
+  height: max(35%, 100px);
   position: absolute;
   top: 0px;
   left: auto;
 }
 
 .sidebarContent {
+  display: flex;
+  align-items: center;
   height: 100%;
 }
 
 .sidebarTitle {
   font-size: 4vw;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  align-items: center;
 }
 
 .sidebarTitle span {
@@ -42,30 +45,32 @@ canvas {
   -webkit-text-fill-color: transparent;
 }
 
-h4 {
-  color: #ba6ca7;
-  margin: 0;
+.slidersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  height: max(100px, 50%);
 }
 
-.slider1 {
-  /* background-color: deepskyblue; */
+.slidersContainer div {
+  padding-left: 20px;
+  padding-right: 20px;
 }
-.slider2 {
-  /* background-color: hotpink; */
+
+.slidersContainer div h4 {
+  color: #ba6ca7;
+  margin: 0;
+  font-size: 3vw;
 }
-.slider3 {
-  /* background-color: lightskyblue; */
-}
-.slider4 {
-  /* background-color: magenta; */
-}
+
 .button {
   /* background-color: mediumpurple; */
 }
 
 @media screen and (min-width: 800px), (orientation: landscape) {
   canvas {
-    margin-left: max(10%, 80px);
+    margin-left: max(25%, 120px);
     margin-top: auto;
   }
 
@@ -78,7 +83,6 @@ h4 {
   }
 
   .sidebarContent {
-    display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
@@ -88,17 +92,19 @@ h4 {
     width: 100%;
   }
 
-  /* every div that's preceded by a div in sidebarContante, so the sliders */
-  .sidebarContent div ~ div {
-    padding-left: max(10%, 10px);
-    padding-right: max(10%, 10px);
-    font-size: 3vh;
-  }
-
   .sidebarTitle {
     font-size: 4vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .slidersContainer {
+    padding-left: max(10%, 10px);
+    padding-right: max(10%, 10px);
+  }
+
+  .slidersContainer div h4 {
+    font-size: 3vh;
   }
 }

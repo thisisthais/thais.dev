@@ -61,53 +61,55 @@ const BismuthCanvas = () => {
               ✨✨✨
             </span>
           </div>
-          <div className="slider1">
-            <h4>Base Tower Height Range</h4>
-            <MySlider
-              getAriaLabel={() => 'Base Tower Height Range'}
-              defaultValue={baseTowerHeightRange}
-              marks={true}
-              min={1}
-              max={30}
-              onChange={(_, value) => setBaseTowerHeightRange(value)}
-              valueLabelDisplay="auto"
-            />
-          </div>
-          <div className="slider2">
-            <h4>Number of Layers</h4>
-            <MySlider
-              aria-label="Number of Layers"
-              defaultValue={numLayers}
-              marks={true}
-              min={3}
-              max={10}
-              onChange={(_, value) => setNumLayers(value)}
-              valueLabelDisplay="auto"
-            />
-          </div>
-          <div className="slider3">
-            <h4>Tower Height Range</h4>
-            <MySlider
-              getAriaLabel={() => 'Tower Height Range'}
-              defaultValue={towerHeightRange}
-              marks={true}
-              min={5}
-              max={40}
-              onChange={(_, value) => setTowerHeightRange(value)}
-              valueLabelDisplay="auto"
-            />
-          </div>
-          <div className="slider4">
-            <h4>Iridescence Gap Distance</h4>
-            <MySlider
-              aria-label="Iridescence Gap Distance"
-              defaultValue={gapDistance}
-              min={0.01}
-              max={5.0}
-              step={0.01}
-              onChange={(_, value) => setGapDistance(value)}
-              valueLabelDisplay="auto"
-            />
+          <div className="slidersContainer">
+            <div className="slider">
+              <h4>Base Tower Height Range</h4>
+              <MySlider
+                getAriaLabel={() => 'Base Tower Height Range'}
+                defaultValue={baseTowerHeightRange}
+                marks={true}
+                min={1}
+                max={30}
+                onChange={(_, value) => setBaseTowerHeightRange(value)}
+                valueLabelDisplay="auto"
+              />
+            </div>
+            <div className="slider">
+              <h4>Number of Layers</h4>
+              <MySlider
+                aria-label="Number of Layers"
+                defaultValue={numLayers}
+                marks={true}
+                min={3}
+                max={10}
+                onChange={(_, value) => setNumLayers(value)}
+                valueLabelDisplay="auto"
+              />
+            </div>
+            <div className="slider">
+              <h4>Tower Height Range</h4>
+              <MySlider
+                getAriaLabel={() => 'Tower Height Range'}
+                defaultValue={towerHeightRange}
+                marks={true}
+                min={5}
+                max={40}
+                onChange={(_, value) => setTowerHeightRange(value)}
+                valueLabelDisplay="auto"
+              />
+            </div>
+            <div className="slider">
+              <h4>Iridescence Gap Distance</h4>
+              <MySlider
+                aria-label="Iridescence Gap Distance"
+                defaultValue={gapDistance}
+                min={0.01}
+                max={5.0}
+                step={0.01}
+                onChange={(_, value) => setGapDistance(value)}
+                valueLabelDisplay="auto"
+              />
+            </div>
           </div>
           <MyButton
             className="button"
