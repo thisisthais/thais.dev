@@ -97,14 +97,17 @@ canvas {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .slidersContainer {
-    padding-left: max(10%, 10px);
-    padding-right: max(10%, 10px);
+    text-align: center;
   }
 
   .slidersContainer div h4 {
     font-size: 3vh;
+  }
+}
+
+@media screen and (min-width: 1300px), (orientation: landscape) {
+  canvas {
+    margin-left: max(10%, 80px);
+    margin-top: auto;
   }
 }
