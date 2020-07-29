@@ -27,10 +27,11 @@ export default function PTIndexPage(props) {
         </h1>
         <AboutMe magicWords={MagicWords} />
         <Card linkURL="/bismuth" titleId="bismuth">
-          <span className="cardDescription">
+          {/* TODO: fix this so it fits no matter screensize. will have to fix card */}
+          {/* <span className="cardDescription">
             um dos projetos que fiz durante meu tempo no recurse center. uma
             exploração do cristal mais bonito, o bismuto, e arte generativa.
-          </span>
+          </span> */}
         </Card>
       </div>
     </Layout>

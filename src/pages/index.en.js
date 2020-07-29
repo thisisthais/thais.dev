@@ -26,13 +26,17 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        <Card linkURL="/bismuth" titleId="bismuth">
-          <span className="cardDescription">
-            one of the projects i worked on during my time at the recurse
-            center. an exploration of the prettiest crystal, bismuth, and
-            generative art.
-          </span>
-        </Card>
+        <div className="cardsContainer">
+          <Card linkURL="/bismuth" titleId="bismuth">
+            {/* TODO: fix this so it fits no matter screensize. will have to fix card */}
+            {/* <span className="cardDescription">
+              one of the projects i worked on during my time at the recurse
+              center. an exploration of the prettiest crystal, bismuth, and
+              generative art.
+            </span> */}
+          </Card>
+          <Card />
+        </div>
       </div>
     </Layout>
   );

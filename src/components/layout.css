@@ -80,3 +80,11 @@ img {
 .speaker:active {
   transform: scale(1.5);
 }
+
+.cardsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-evenly;
+}
