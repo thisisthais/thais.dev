@@ -1,44 +1,38 @@
 html,
 body,
 .root,
-.bismuthContainer,
-canvas {
-  height: 100%;
+.bismuthContainer {
+  height: 100vh;
   width: 100%;
   margin: 0;
   padding: 0;
 }
 
+canvas {
+  background-color: black;
+  margin-left: max(25%, 120px);
+}
+
 .bismuthContainer {
-  /* background-color: pink; */
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: minmax(100px, 0.3fr) auto;
+  background-color: pink;
+  position: relative;
 }
 
 .sidebar {
   background-color: white;
-  margin: 10px;
-  padding: 5px;
+  width: max(25%, 120px);
+  height: 100vh;
+  position: absolute;
+  left: 0px;
 }
 
 .sidebarContent {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 20% repeat(2, 35%) 15%;
-  grid-column-gap: 10px;
-  grid-row-gap: 2px;
+  background-color: orange;
+  height: 100%;
 }
 
 .sidebarTitle {
-  justify-self: center;
-  /* background-color: darkorange; */
-  grid-area: 1 / 1 / 2 / 3;
-  /* text */
-  display: flex;
-  flex-direction: row;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  margin: -8px;
 }
 
 h2 {
@@ -56,34 +50,27 @@ h4 {
 }
 
 .slider1 {
-  /* background-color: deepskyblue; */
-  grid-area: 2 / 1 / 3 / 2;
-  min-width: 40%;
+  background-color: deepskyblue;
 }
 .slider2 {
-  /* background-color: hotpink; */
-  grid-area: 2 / 2 / 3 / 3;
+  background-color: hotpink;
 }
 .slider3 {
-  /* background-color: lightskyblue; */
-  grid-area: 3 / 1 / 4 / 2;
+  background-color: lightskyblue;
 }
 .slider4 {
-  /* background-color: magenta; */
-  grid-area: 3 / 2 / 4 / 3;
+  background-color: magenta;
 }
 .button {
-  justify-self: center;
   background-color: mediumpurple;
-  grid-area: 4 / 1 / 5 / 3;
 }
 
 #myCanvas {
-  bottom: -20%;
-  max-height: 80%;
+  /* bottom: -20%;
+  max-height: 80%; */
 }
 
-@media screen and (min-width: 1025px) {
+/* @media screen and (min-width: 1025px) {
   .bismuthContainer {
     display: grid;
     grid-template-columns: minmax(200px, 0.3fr) auto;
@@ -212,4 +199,4 @@ h4 {
   .button {
     grid-area: 6 / 1 / 7 / 2;
   }
-}
+} */

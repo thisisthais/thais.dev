@@ -48,8 +48,6 @@ const BismuthCanvas = () => {
   const [towerHeightRange, setTowerHeightRange] = useState([7, 30]);
   const [gapDistance, setGapDistance] = useState(1.25);
 
-  console.log(gapDistance);
-
   return (
     <div className="bismuthContainer">
       <div className="sidebar">
