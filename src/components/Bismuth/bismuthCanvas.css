@@ -9,13 +9,11 @@ body,
 }
 
 canvas {
-  background-color: black;
   margin-left: auto;
   margin-top: max(35%, 120px);
 }
 
 .bismuthContainer {
-  background-color: pink;
   position: relative;
 }
 
@@ -29,210 +27,78 @@ canvas {
 }
 
 .sidebarContent {
-  background-color: orange;
   height: 100%;
 }
 
 .sidebarTitle {
+  font-size: 4vw;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
-h2 {
+.sidebarTitle span {
   color: #ba6ca7;
-  background: -webkit-linear-gradient(#ba6ca7, #7507eb);
+  background: -webkit-linear-gradient(#f74da2, #7507eb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 1em;
 }
 
 h4 {
   color: #ba6ca7;
-  font-size: 0.5em;
   margin: 0;
 }
 
 .slider1 {
-  background-color: deepskyblue;
+  /* background-color: deepskyblue; */
 }
 .slider2 {
-  background-color: hotpink;
+  /* background-color: hotpink; */
 }
 .slider3 {
-  background-color: lightskyblue;
+  /* background-color: lightskyblue; */
 }
 .slider4 {
-  background-color: magenta;
+  /* background-color: magenta; */
 }
 .button {
-  background-color: mediumpurple;
+  /* background-color: mediumpurple; */
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 800px), (orientation: landscape) {
   canvas {
-    background-color: black;
-    margin-left: max(25%, 120px);
+    margin-left: max(10%, 80px);
     margin-top: auto;
   }
 
   .sidebar {
-    background-color: white;
     width: max(25%, 120px);
-    height: 100vh;
+    height: 100%;
     position: absolute;
     left: 0px;
     top: auto;
   }
-}
-
-@media screen and (orientation: landscape) {
-  canvas {
-    background-color: black;
-    margin-left: max(25%, 120px);
-    margin-top: auto;
-  }
-
-  .sidebar {
-    background-color: white;
-    width: max(25%, 120px);
-    height: 100vh;
-    position: absolute;
-    left: 0px;
-    top: auto;
-  }
-}
-
-#myCanvas {
-  /* bottom: -20%;
-  max-height: 80%; */
-}
-
-/* @media screen and (min-width: 1025px) {
-  .bismuthContainer {
-    display: grid;
-    grid-template-columns: minmax(200px, 0.3fr) auto;
-    grid-template-rows: 1fr;
-    align-items: center;
-  }
-
-  #myCanvas {
-    bottom: 0;
-    max-height: 100%;
-  }
-
-  .sidebar {
-    padding: 0;
-    align-items: center;
-    height: 100%;
-  }
 
   .sidebarContent {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 20% repeat(4, 15%) 10%;
-    grid-row-gap: 2px;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .sidebarContent div {
+    width: 100%;
+  }
+
+  /* every div that's preceded by a div in sidebarContante, so the sliders */
+  .sidebarContent div ~ div {
+    padding-left: max(10%, 10px);
+    padding-right: max(10%, 10px);
+    font-size: 3vh;
   }
 
   .sidebarTitle {
-    grid-area: 1 / 1 / 2 / 2;
+    font-size: 4vh;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: -10px;
-  }
-
-  span {
-    align-self: center;
-  }
-
-  h2 {
-    margin: 0;
-    align-self: center;
-    font-size: 2vw;
-  }
-
-  h4 {
-    font-size: 1.2vw;
-  }
-
-  .slider1 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .slider2 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .slider3 {
-    grid-area: 4 / 1 / 5 / 2;
-  }
-  .slider4 {
-    grid-area: 5 / 1 / 6 / 2;
-  }
-  .button {
-    grid-area: 6 / 1 / 7 / 2;
+    align-items: center;
   }
 }
-
-@media screen and (orientation: landscape) {
-  .bismuthContainer {
-    display: grid;
-    grid-template-columns: minmax(200px, 0.3fr) auto;
-    grid-template-rows: 1fr;
-    justify-items: stretch;
-    align-items: center;
-  }
-
-  #myCanvas {
-    bottom: 0;
-    max-height: 100%;
-  }
-
-  .sidebar {
-    padding: 0;
-    align-items: center;
-    height: 100%;
-  }
-
-  .sidebarContent {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 20% repeat(4, 15%) 10%;
-    grid-row-gap: 2px;
-    height: 100%;
-  }
-
-  .sidebarTitle {
-    grid-area: 1 / 1 / 2 / 2;
-    flex-direction: column;
-    justify-content: center;
-    margin: -10px;
-  }
-
-  span {
-    align-self: center;
-  }
-
-  h2 {
-    margin: 0;
-    align-self: center;
-    font-size: 2vw;
-  }
-
-  h4 {
-    font-size: 1.2vw;
-  }
-
-  .slider1 {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .slider2 {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .slider3 {
-    grid-area: 4 / 1 / 5 / 2;
-  }
-  .slider4 {
-    grid-area: 5 / 1 / 6 / 2;
-  }
-  .button {
-    grid-area: 6 / 1 / 7 / 2;
-  }
-} */

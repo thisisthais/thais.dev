@@ -56,7 +56,7 @@ const BismuthCanvas = () => {
             <span role="img" aria-label="sparkle emoji">
               ✨✨✨
             </span>
-            <h2>Bismuth Generator</h2>
+            <span>Bismuth Generator</span>
             <span role="img" aria-label="sparkle emoji">
               ✨✨✨
             </span>
