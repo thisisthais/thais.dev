@@ -25,12 +25,6 @@ html {
   font-family: 'Inconsolata', sans-serif;
 }
 
-button {
-  font-family: 'Inconsolata', sans-serif;
-  font-size: 1em;
-  color: #4a4ae1;
-}
-
 a {
   color: #ec87ff;
 }
@@ -76,89 +70,6 @@ img {
   display: flex;
 }
 
-.cardContainer {
-  align-self: center;
-  margin: 2em 1em 1em 1em;
-}
-
-.writingCard {
-  background-color: lavenderblush;
-
-  /* color same as gradient dark color */
-  box-shadow: 5px 15px 20px 5px rgba(50, 58, 121, 0.5);
-
-  color: black;
-  height: 200px;
-  position: relative;
-  width: 300px;
-}
-
-.writingCard span {
-  padding-top: 10px;
-  align-self: center;
-}
-
-.writingCard a button {
-  background-color: transparent;
-  border: 2px solid #4a4ae1;
-  height: 40px;
-  position: absolute;
-  left: -10%;
-  bottom: 10%;
-  width: 200px;
-}
-
-.writingCard a {
-  text-decoration: none;
-  border-bottom: none;
-}
-
-/* TODO: iPad looks funky */
-@media only screen and (max-width: 380px) {
-  .writingCard {
-    width: 200px;
-    height: 150px;
-  }
-
-  .writingCard a button {
-    left: -20%;
-  }
-}
-
-.writingCard button:hover {
-  background-color: violet;
-}
-
-.cursor {
-  content: ' ';
-  display: inline-block;
-  position: relative;
-}
-
-.cursor::after {
-  content: '';
-  margin: auto;
-  position: absolute;
-  right: -5px;
-  top: 1px;
-  width: 2px;
-  height: 80%;
-  background-color: lavenderblush;
-  animation: cursor-animation 1s step-end infinite;
-}
-
-@keyframes cursor-animation {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 .speaker {
   display: inline-flex;
   align-items: center;
@@ -167,8 +78,4 @@ img {
 
 .speaker:active {
   transform: scale(1.5);
-}
-
-.contentContainer {
-  display: flex;
 }

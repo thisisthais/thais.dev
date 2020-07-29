@@ -4,4 +4,6 @@ module.exports = {
   iAm: "i'm",
   readMore: 'READ MORE',
   comingSoon: 'coming soon!',
+  seeProject: 'visit project',
+  bismuth: 'generative bismuth',
 };

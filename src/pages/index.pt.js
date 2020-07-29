@@ -26,7 +26,7 @@ export default function PTIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        <Card linkURL="/pt/blog/first" />
+        <Card linkURL="/bismuth" titleId="bismuth" />
       </div>
     </Layout>
   );

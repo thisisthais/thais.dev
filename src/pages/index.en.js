@@ -26,7 +26,7 @@ export default function ENIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        <Card linkURL="/en/blog/first" />
+        <Card linkURL="/bismuth" />
       </div>
     </Layout>
   );
