@@ -74,9 +74,21 @@ h4 {
     margin-top: auto;
   }
 
-  .bismuthContainer {
-    background-color: pink;
-    position: relative;
+  .sidebar {
+    background-color: white;
+    width: max(25%, 120px);
+    height: 100vh;
+    position: absolute;
+    left: 0px;
+    top: auto;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  canvas {
+    background-color: black;
+    margin-left: max(25%, 120px);
+    margin-top: auto;
   }
 
   .sidebar {
