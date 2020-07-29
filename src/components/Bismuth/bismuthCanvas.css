@@ -8,9 +8,9 @@ body,
   padding: 0;
 }
 
-canvas {
+#myCanvas {
   margin-left: auto;
-  margin-top: max(35%, 120px);
+  margin-top: max(35vh, 120px);
 }
 
 .bismuthContainer {
@@ -20,7 +20,7 @@ canvas {
 .sidebar {
   background-color: white;
   width: 100vw;
-  height: max(35%, 100px);
+  height: max(35vh, 100px);
   position: absolute;
   top: 0px;
   left: auto;
@@ -69,13 +69,13 @@ canvas {
 }
 
 @media screen and (min-width: 800px), (orientation: landscape) {
-  canvas {
-    margin-left: max(25%, 120px);
+  #myCanvas {
+    margin-left: max(25vw, 120px);
     margin-top: auto;
   }
 
   .sidebar {
-    width: max(25%, 120px);
+    width: max(25vw, 120px);
     height: 100%;
     position: absolute;
     left: 0px;
@@ -102,12 +102,5 @@ canvas {
 
   .slidersContainer div h4 {
     font-size: 3vh;
-  }
-}
-
-@media screen and (min-width: 1300px), (orientation: landscape) {
-  canvas {
-    margin-left: max(10%, 80px);
-    margin-top: auto;
   }
 }
