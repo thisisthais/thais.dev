@@ -68,6 +68,7 @@ img {
 
 .contentContainer {
   display: flex;
+  padding-left: 5vw;
 }
 
 .speaker {

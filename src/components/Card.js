@@ -6,17 +6,18 @@ import { FormattedMessage } from 'react-intl';
 
 import './card.css';
 
-export default function Card({ linkURL, titleId }) {
+export default function Card({ linkURL, titleId, thumbnail, children }) {
   return (
     <div className="cardContainer">
       <div className="writingCard">
         <FormattedMessage id={titleId || 'comingSoon'} />
-        <span>ugfiudsg ihsfiuhdsfnifuhniufg fiusnuigfa iffusga</span>
+        {children}
         <Link className="readMoreButton" to={linkURL}>
           <button>
             <FormattedMessage id="seeProject" />
           </button>
         </Link>
+        {thumbnail}
       </div>
     </div>
   );

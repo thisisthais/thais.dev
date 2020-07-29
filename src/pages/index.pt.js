@@ -13,7 +13,7 @@ const MagicWords = [
   'ótima cozinheira',
   'ex-matleta',
   'marombeira',
-  'não-binária',
+  'uma pessoa não-binária',
   'artista aspirante',
   'mergulhadora de scuba',
 ];
@@ -26,7 +26,12 @@ export default function PTIndexPage(props) {
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        <Card linkURL="/bismuth" titleId="bismuth" />
+        <Card linkURL="/bismuth" titleId="bismuth">
+          <span className="cardDescription">
+            um dos projetos que fiz durante meu tempo no recurse center. uma
+            exploração do cristal mais bonito, o bismuto, e arte generativa.
+          </span>
+        </Card>
       </div>
     </Layout>
   );
