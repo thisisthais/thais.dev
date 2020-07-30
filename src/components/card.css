@@ -6,7 +6,8 @@ button {
 
 .cardContainer {
   align-self: center;
-  margin: 2em 1em 1em 1em;
+  height: 30vh;
+  width: 50vw;
 }
 
 .writingCard {
@@ -16,11 +17,13 @@ button {
   box-shadow: 5px 15px 20px 5px rgba(50, 58, 121, 0.5);
 
   color: black;
-  height: 200px;
   position: relative;
-  width: 300px;
-
   text-align: center;
+
+  height: 100%;
+  width: 100%;
+
+  margin: 10%;
 }
 
 .writingCard span {
@@ -45,18 +48,6 @@ button {
 .writingCard a {
   text-decoration: none;
   border-bottom: none;
-}
-
-/* TODO: iPad looks funky */
-@media only screen and (max-width: 380px) {
-  .writingCard {
-    width: 200px;
-    height: 150px;
-  }
-
-  .writingCard a button {
-    left: -20%;
-  }
 }
 
 .writingCard button:hover {

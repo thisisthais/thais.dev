@@ -21,22 +21,22 @@ const MagicWords = [
 export default function ENIndexPage(props) {
   return (
     <Layout location={props.location}>
-      <div>
+      <div className="greetingContainer">
         <h1>
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
-        <div className="cardsContainer">
-          <Card linkURL="/bismuth" titleId="bismuth">
-            {/* TODO: fix this so it fits no matter screensize. will have to fix card */}
-            {/* <span className="cardDescription">
+      </div>
+      <div className="cardsContainer">
+        <Card linkURL="/bismuth" titleId="bismuth">
+          {/* TODO: fix this so it fits no matter screensize. will have to fix card */}
+          {/* <span className="cardDescription">
               one of the projects i worked on during my time at the recurse
               center. an exploration of the prettiest crystal, bismuth, and
               generative art.
             </span> */}
-          </Card>
-          <Card />
-        </div>
+        </Card>
+        <Card />
       </div>
     </Layout>
   );

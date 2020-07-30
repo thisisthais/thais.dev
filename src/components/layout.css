@@ -88,3 +88,15 @@ img {
   align-content: space-between;
   justify-content: space-evenly;
 }
+
+.greetingContainer h1 {
+  display: inline-block;
+  margin-top: max(5px, 5vh);
+  margin-bottom: max(5px, 1vh);
+}
+
+.greetingContainer h2 {
+  display: inline-block;
+  margin-top: max(5px, 3vh);
+  margin-bottom: max(5px, 1vh);
+}
