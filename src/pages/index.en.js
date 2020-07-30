@@ -4,6 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
 import Card from '../components/Card.js';
+import {
+  Desktop,
+  Tablet,
+  Mobile,
+  Default,
+} from '../components/ResponsiveComponents.js';
 
 const MagicWords = [
   'a web developer',
@@ -29,12 +35,26 @@ export default function ENIndexPage(props) {
       </div>
       <div className="cardsContainer">
         <Card linkURL="/bismuth" titleId="bismuth">
-          {/* TODO: fix this so it fits no matter screensize. will have to fix card */}
-          {/* <span className="cardDescription">
+          <Desktop>
+            <span className="cardDescription">
               one of the projects i worked on during my time at the recurse
               center. an exploration of the prettiest crystal, bismuth, and
               generative art.
-            </span> */}
+            </span>
+          </Desktop>
+          <Tablet>
+            <span className="cardDescription">
+              one of the projects i worked on during my time at the recurse
+              center. an exploration of the prettiest crystal, bismuth, and
+              generative art.
+            </span>
+          </Tablet>
+          <Mobile>
+            <span className="cardDescription">
+              an exploration of the prettiest crystal, bismuth, and generative
+              art.
+            </span>
+          </Mobile>
         </Card>
         <Card />
       </div>
