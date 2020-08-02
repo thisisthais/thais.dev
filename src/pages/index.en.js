@@ -10,6 +10,7 @@ import {
   Mobile,
   Default,
 } from '../components/ResponsiveComponents.js';
+import BismuthGif from '../images/pretty_bismuth_shader.gif';
 
 const MagicWords = [
   'a web developer',
@@ -34,27 +35,8 @@ export default function ENIndexPage(props) {
         <AboutMe magicWords={MagicWords} />
       </div>
       <div className="cardsContainer">
-        <Card linkURL="/bismuth" titleId="bismuth">
-          <Desktop>
-            <span className="cardDescription">
-              one of the projects i worked on during my time at the recurse
-              center. an exploration of the prettiest crystal, bismuth, and
-              generative art.
-            </span>
-          </Desktop>
-          <Tablet>
-            <span className="cardDescription">
-              one of the projects i worked on during my time at the recurse
-              center. an exploration of the prettiest crystal, bismuth, and
-              generative art.
-            </span>
-          </Tablet>
-          <Mobile>
-            <span className="cardDescription">
-              an exploration of the prettiest crystal, bismuth, and generative
-              art.
-            </span>
-          </Mobile>
+        <Card linkURL="/bismuth" titleId="bismuth" thumbnail={BismuthGif}>
+          <FormattedMessage id="bismuthDesc" />
         </Card>
         <Card />
       </div>

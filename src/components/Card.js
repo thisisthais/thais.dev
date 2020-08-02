@@ -11,13 +11,15 @@ export default function Card({ linkURL, titleId, thumbnail, children }) {
     <div className="cardContainer">
       <div className="writingCard">
         <FormattedMessage id={titleId || 'comingSoon'} />
-        {children}
-        <Link className="readMoreButton" to={linkURL}>
-          <button>
-            <FormattedMessage id="seeProject" />
-          </button>
-        </Link>
-        {thumbnail}
+        <div className="cardDescription">{children}</div>
+        <div className="cardFooter">
+          <Link className="readMoreButton" to={linkURL}>
+            <button>
+              <FormattedMessage id="seeProject" />
+            </button>
+          </Link>
+          <img className="cardThumbnail" src={thumbnail} />
+        </div>
       </div>
     </div>
   );

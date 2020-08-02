@@ -6,9 +6,9 @@ button {
 
 .cardContainer {
   align-self: center;
-  min-height: 30vh;
+  min-height: 35vh;
   width: 100%;
-  margin: 10%;
+  margin: 5% 10% 5% 10%;
   position: relative;
 }
 
@@ -30,12 +30,9 @@ button {
 }
 
 .writingCard span {
-  padding-top: 10px;
   align-self: center;
-}
-
-.cardDescription {
-  padding: 5%;
+  padding: 2vh;
+  font-size: 2vh;
 }
 
 .writingCard a button {
@@ -45,7 +42,7 @@ button {
   position: absolute;
   left: -4vw;
   bottom: 2vh;
-  width: 200px;
+  width: 60%;
 }
 
 .writingCard a {
@@ -55,4 +52,28 @@ button {
 
 .writingCard button:hover {
   background-color: violet;
+}
+
+.cardDescription {
+  display: block;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.cardDescription a {
+  color: #4a4ae1;
+}
+
+.cardFooter {
+  display: block;
+}
+
+.cardThumbnail {
+  width: auto;
+  height: min(40%, 100px);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1vh;
 }
