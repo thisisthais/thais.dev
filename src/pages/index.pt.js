@@ -4,6 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
 import Card from '../components/Card.js';
+import {
+  Desktop,
+  Tablet,
+  Mobile,
+  Default,
+} from '../components/ResponsiveComponents.js';
 
 const MagicWords = [
   'desenvolvedora de web',
@@ -21,18 +27,36 @@ const MagicWords = [
 export default function PTIndexPage(props) {
   return (
     <Layout location={props.location}>
-      <div>
+      <div className="greetingContainer">
         <h1>
           <FormattedMessage id="greeting" />
         </h1>
         <AboutMe magicWords={MagicWords} />
+      </div>
+      <div className="cardsContainer">
         <Card linkURL="/bismuth" titleId="bismuth">
-          {/* TODO: fix this so it fits no matter screensize. will have to fix card */}
-          {/* <span className="cardDescription">
-            um dos projetos que fiz durante meu tempo no recurse center. uma
-            exploração do cristal mais bonito, o bismuto, e arte generativa.
-          </span> */}
+          <Desktop>
+            <span className="cardDescription">
+              one of the projects i worked on during my time at the recurse
+              center. an exploration of the prettiest crystal, bismuth, and
+              generative art.
+            </span>
+          </Desktop>
+          <Tablet>
+            <span className="cardDescription">
+              one of the projects i worked on during my time at the recurse
+              center. an exploration of the prettiest crystal, bismuth, and
+              generative art.
+            </span>
+          </Tablet>
+          <Mobile>
+            <span className="cardDescription">
+              an exploration of the prettiest crystal, bismuth, and generative
+              art.
+            </span>
+          </Mobile>
         </Card>
+        <Card />
       </div>
     </Layout>
   );
