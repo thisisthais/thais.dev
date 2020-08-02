@@ -68,7 +68,6 @@ img {
 
 .contentContainer {
   display: flex;
-  padding-left: 5vw;
 }
 
 .speaker {
@@ -87,6 +86,10 @@ img {
   flex-wrap: wrap;
   align-content: space-between;
   justify-content: space-evenly;
+}
+
+.greetingContainer {
+  padding-left: 5vw;
 }
 
 .greetingContainer h1 {

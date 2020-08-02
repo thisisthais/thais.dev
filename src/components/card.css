@@ -6,8 +6,10 @@ button {
 
 .cardContainer {
   align-self: center;
-  height: 30vh;
-  width: 50vw;
+  min-height: 30vh;
+  width: 100%;
+  margin: 10%;
+  position: relative;
 }
 
 .writingCard {
@@ -17,13 +19,14 @@ button {
   box-shadow: 5px 15px 20px 5px rgba(50, 58, 121, 0.5);
 
   color: black;
-  position: relative;
+  position: absolute;
   text-align: center;
 
   height: 100%;
   width: 100%;
 
-  margin: 10%;
+  top: 0;
+  bottom: 0;
 }
 
 .writingCard span {
