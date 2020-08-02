@@ -4,12 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
 import Card from '../components/Card.js';
-import {
-  Desktop,
-  Tablet,
-  Mobile,
-  Default,
-} from '../components/ResponsiveComponents.js';
 import BismuthGif from '../images/pretty_bismuth_shader.gif';
 
 const MagicWords = [
@@ -36,7 +30,19 @@ export default function ENIndexPage(props) {
       </div>
       <div className="cardsContainer">
         <Card linkURL="/bismuth" titleId="bismuth" thumbnail={BismuthGif}>
-          <FormattedMessage id="bismuthDesc" />
+          <span>
+            generative art meets the prettiest crystal. now you can make bismuth
+            in your browser! no stovetop needed :) this is one of the projects i
+            worked on during my time at the{' '}
+            <a
+              href="https://www.recurse.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              recurse center
+            </a>
+            .
+          </span>
         </Card>
         <Card />
       </div>

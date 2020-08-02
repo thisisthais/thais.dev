@@ -4,12 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
 import Card from '../components/Card.js';
-import {
-  Desktop,
-  Tablet,
-  Mobile,
-  Default,
-} from '../components/ResponsiveComponents.js';
+import BismuthGif from '../images/pretty_bismuth_shader.gif';
 
 const MagicWords = [
   'desenvolvedora de web',
@@ -34,27 +29,20 @@ export default function PTIndexPage(props) {
         <AboutMe magicWords={MagicWords} />
       </div>
       <div className="cardsContainer">
-        <Card linkURL="/bismuth" titleId="bismuth">
-          <Desktop>
-            <span className="cardDescription">
-              one of the projects i worked on during my time at the recurse
-              center. an exploration of the prettiest crystal, bismuth, and
-              generative art.
-            </span>
-          </Desktop>
-          <Tablet>
-            <span className="cardDescription">
-              one of the projects i worked on during my time at the recurse
-              center. an exploration of the prettiest crystal, bismuth, and
-              generative art.
-            </span>
-          </Tablet>
-          <Mobile>
-            <span className="cardDescription">
-              an exploration of the prettiest crystal, bismuth, and generative
-              art.
-            </span>
-          </Mobile>
+        <Card linkURL="/bismuth" titleId="bismuth" thumbnail={BismuthGif}>
+          <span>
+            arte generativa se encontra com o cristal mais bonito. agora você
+            pode fazer bismuto no seu navegador! nenhum fogão necessário :) este
+            é um dos projetos em que trabalhei durante meu período no{' '}
+            <a
+              href="https://www.recurse.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              recurse center
+            </a>
+            .
+          </span>
         </Card>
         <Card />
       </div>
