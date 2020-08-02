@@ -10,19 +10,17 @@
 }
 
 html {
-  background-color: #d293bf;
-  background-image: linear-gradient(
-    135deg,
-    #d293bf 0%,
-    #816cb1 50%,
-    #323a79 100%
-  );
-  background-size: cover;
-  background-repeat: no-repeat;
   color: lavenderblush;
   height: 100%;
 
   font-family: 'Inconsolata', sans-serif;
+
+  background: linear-gradient(270deg, #d293bf, #816cb1, #323a79);
+  background-size: 600% 600%;
+
+  -webkit-animation: GradientAnimation 30s ease infinite;
+  -moz-animation: GradientAnimation 30s ease infinite;
+  animation: GradientAnimation 30s ease infinite;
 }
 
 a {
@@ -32,10 +30,12 @@ a {
 h1 {
   font-family: 'Fredoka One', Fallback, serif;
   font-size: 3em;
+  color: lavenderblush;
 }
 
 h2 {
   font-size: 1.5em;
+  color: lavenderblush;
 }
 
 div {
@@ -102,4 +102,38 @@ img {
   display: inline-block;
   margin-top: max(5px, 3vh);
   margin-bottom: max(5px, 1vh);
+}
+
+@-webkit-keyframes GradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes GradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes GradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
