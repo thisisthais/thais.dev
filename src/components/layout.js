@@ -34,10 +34,10 @@ export default function Layout({ children, location }) {
         <link rel="canonical" href="https://thais.dev" />
       </Helmet>
       <IntlProvider locale={langKey} messages={messages[langKey]}>
-        <div>
+        <>
           <Header langs={langsMenu} currentLang={langKey} />
           <div className="contentContainer">{children}</div>
-        </div>
+        </>
       </IntlProvider>
     </>
   );
