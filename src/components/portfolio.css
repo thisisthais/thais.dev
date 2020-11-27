@@ -1,0 +1,18 @@
+body {
+  padding: 1rem;
+}
+
+.projectCard {
+  background-color: lavenderblush;
+  opacity: 70%;
+  color: black;
+  padding: 1rem;
+  height: minmax(5rem, 10rem);
+}
+
+.projectsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
+  align-items: center;
+}

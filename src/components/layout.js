@@ -33,7 +33,10 @@ export default function Layout({ children, location }) {
         <title>thisisthaís</title>
         <link rel="canonical" href="https://thais.dev" />
       </Helmet>
-      <IntlProvider locale={langKey} messages={messages[langKey]}>
+      <IntlProvider
+        locale={langKey}
+        messages={flattenMessages(messages[langKey]) || messages[langKey]}
+      >
         <>
           <Header langs={langsMenu} currentLang={langKey} />
           <div className="contentContainer">{children}</div>
@@ -46,4 +49,23 @@ export default function Layout({ children, location }) {
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.object,
+};
+
+const flattenMessages = (nestedMessages, prefix = '') => {
+  console.log(nestedMessages);
+  if (!nestedMessages) {
+    return {};
+  }
+  return Object.keys(nestedMessages).reduce((messages, key) => {
+    const value = nestedMessages[key];
+    const prefixedKey = prefix ? `${prefix}.${key}` : key;
+
+    if (typeof value === 'string') {
+      Object.assign(messages, { [prefixedKey]: value });
+    } else {
+      Object.assign(messages, flattenMessages(value, prefixedKey));
+    }
+
+    return messages;
+  }, {});
 };
