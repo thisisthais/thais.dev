@@ -3,22 +3,30 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import doNothingThumb from '../images/doNothing.gif';
+import bismuthThumb from '../images/bismuth.gif';
+import shaderSketchesThumb from '../images/shaderSketches.gif';
 import portfolioData from '../data/portfolioData';
 
 import '../components/portfolio.css';
 
-const ProjectCard = ({}) => {
+const PROJECT_TO_THUMBNAIL = {
+  doNothing: doNothingThumb,
+  bismuth: bismuthThumb,
+  shaderSketches: shaderSketchesThumb,
+};
+
+const ProjectCard = ({ project }) => {
   return (
     <div className="projectCard">
-      <img src={doNothingThumb} />
+      <img src={PROJECT_TO_THUMBNAIL[project]} />
       <h3>
-        <FormattedMessage id="portfolioData.doNothing.title" />
+        <FormattedMessage id={`portfolioData.${project}.title`} />
       </h3>
       <p>
-        <FormattedMessage id="portfolioData.doNothing.shortDesc" />
+        <FormattedMessage id={`portfolioData.${project}.shortDesc`} />
       </p>
       <marquee scrollamount="3">
-        {portfolioData.doNothing.tags.map((t) => (
+        {(portfolioData[project].tags || []).map((t) => (
           <a href="">{t}</a>
         ))}
       </marquee>
@@ -30,8 +38,8 @@ const ENPortfolioPage = (props) => {
   return (
     <Layout location={props.location}>
       <div className="projectsContainer">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((t) => (
-          <ProjectCard key={t} text={t} />
+        {Object.keys(portfolioData).map((project, i) => (
+          <ProjectCard key={i} project={project} />
         ))}
       </div>
     </Layout>
