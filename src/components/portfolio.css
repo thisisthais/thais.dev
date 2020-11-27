@@ -10,6 +10,22 @@ body {
   height: minmax(5rem, 10rem);
 }
 
+.projectCard h3 {
+  margin-block-end: 0px;
+}
+
+.projectCard img {
+  max-height: 10%;
+}
+
+.projectCard a {
+  color: #4a4ae1;
+}
+
+.projectCard a + a {
+  padding-left: 10px;
+}
+
 .projectsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

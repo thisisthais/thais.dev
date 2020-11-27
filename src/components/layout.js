@@ -52,7 +52,6 @@ Layout.propTypes = {
 };
 
 const flattenMessages = (nestedMessages, prefix = '') => {
-  console.log(nestedMessages);
   if (!nestedMessages) {
     return {};
   }

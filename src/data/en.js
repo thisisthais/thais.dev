@@ -1,7 +1,5 @@
 import portfolioData from './portfolioData';
 
-console.log('!!!', portfolioData);
-
 export default {
   greeting: 'hey there!',
   intro: "i'm thaís",

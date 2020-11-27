@@ -3,20 +3,30 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import doNothingThumb from '../images/doNothing.gif';
+import portfolioData from '../data/portfolioData';
 
 import '../components/portfolio.css';
 
-const ProjectCard = ({ text }) => {
+const ProjectCard = ({}) => {
   return (
     <div className="projectCard">
       <img src={doNothingThumb} />
-      <FormattedMessage id="portfolioData.doNothing.title" />
-      <FormattedMessage id="portfolioData.doNothing.shortDesc" />
+      <h3>
+        <FormattedMessage id="portfolioData.doNothing.title" />
+      </h3>
+      <p>
+        <FormattedMessage id="portfolioData.doNothing.shortDesc" />
+      </p>
+      <marquee scrollamount="3">
+        {portfolioData.doNothing.tags.map((t) => (
+          <a href="">{t}</a>
+        ))}
+      </marquee>
     </div>
   );
 };
 
-export default function ENPortfolioPage(props) {
+const ENPortfolioPage = (props) => {
   return (
     <Layout location={props.location}>
       <div className="projectsContainer">
@@ -26,8 +36,10 @@ export default function ENPortfolioPage(props) {
       </div>
     </Layout>
   );
-}
+};
 
 ENPortfolioPage.propTypes = {
   location: PropTypes.object,
 };
+
+export default ENPortfolioPage;
