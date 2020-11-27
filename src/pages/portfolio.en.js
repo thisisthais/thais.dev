@@ -5,6 +5,7 @@ import Layout from '../components/layout.js';
 import doNothingThumb from '../images/doNothing.gif';
 import bismuthThumb from '../images/bismuth.gif';
 import shaderSketchesThumb from '../images/shaderSketches.gif';
+import dynamiclandThumb from '../images/dynamicland.gif';
 import portfolioData from '../data/portfolioData';
 
 import '../components/portfolio.css';
@@ -13,6 +14,7 @@ const PROJECT_TO_THUMBNAIL = {
   doNothing: doNothingThumb,
   bismuth: bismuthThumb,
   shaderSketches: shaderSketchesThumb,
+  dynamicland: dynamiclandThumb,
 };
 
 const ProjectCard = ({ project }) => {

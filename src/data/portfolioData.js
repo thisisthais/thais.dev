@@ -32,7 +32,13 @@ export default {
       '#TheBookOfShaders',
     ],
   },
-  dynamicland: {},
+  dynamicland: {
+    title: 'Dynamicland',
+    shortDesc:
+      'Volunteered inside the funnest computer in the world. Contributed to introductory tutorials and ran workshop for high schoolers.',
+    thumbnail: 'src/images/dynamicland.gif',
+    tags: ['#Dynamicland', '#learning', '#teaching', '#RealTalk'],
+  },
   mujic: {},
   girlsWhoCode: {},
   daedalus: {},
