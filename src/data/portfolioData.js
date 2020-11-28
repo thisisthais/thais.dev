@@ -39,7 +39,13 @@ export default {
     thumbnail: 'src/images/dynamicland.gif',
     tags: ['#Dynamicland', '#learning', '#teaching', '#RealTalk'],
   },
-  mujic: {},
+  mujic: {
+    title: 'Mujic',
+    shortDesc:
+      'A foray into functional programming. Clojure program that uses a Markov Chain to make music similar to a given MIDI file, except much worse.',
+    thumbnail: null,
+    tags: ['#generativeArt', '#functionalProgramming', '#RecurseCenter'],
+  },
   girlsWhoCode: {},
   daedalus: {},
   salor: {},

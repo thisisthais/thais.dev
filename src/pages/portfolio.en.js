@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
+import MujicThumb from '../components/MujicThumb.js';
+import useSound from 'use-sound';
+
 import doNothingThumb from '../images/doNothing.gif';
 import bismuthThumb from '../images/bismuth.gif';
 import shaderSketchesThumb from '../images/shaderSketches.gif';
@@ -15,12 +18,19 @@ const PROJECT_TO_THUMBNAIL = {
   bismuth: bismuthThumb,
   shaderSketches: shaderSketchesThumb,
   dynamicland: dynamiclandThumb,
+  mujic: null,
 };
 
 const ProjectCard = ({ project }) => {
+  const thumbNail =
+    project === 'mujic' ? (
+      <MujicThumb />
+    ) : (
+      <img src={PROJECT_TO_THUMBNAIL[project]} />
+    );
   return (
     <div className="projectCard">
-      <img src={PROJECT_TO_THUMBNAIL[project]} />
+      {thumbNail}
       <h3>
         <FormattedMessage id={`portfolioData.${project}.title`} />
       </h3>

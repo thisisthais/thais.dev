@@ -45,3 +45,28 @@ body {
   align-items: center;
   grid-auto-rows: 1fr;
 }
+
+.mujicThumb {
+  display: flex;
+  flex-direction: column;
+}
+
+.mujicThumb div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mujicThumb img {
+  object-fit: contain;
+  max-height: 130px;
+}
+
+.mujicThumb span {
+  padding-left: 10px;
+}
+
+.mujicThumb button {
+  margin-top: 10px;
+  padding: 3% 4% 3% 4%;
+}
