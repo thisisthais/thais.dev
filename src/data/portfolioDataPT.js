@@ -1,15 +1,15 @@
 export default {
   doNothing: {
-    title: 'Please, Do Nothing',
+    title: 'Por Favor, Faça Nada',
     shortDesc:
-      "Inspired by Jenny Odell's How To Do Nothing and my interest in emergent web tech, in this case in-browser eye-tracking ML, 3D graphics, and GLSL.",
+      'Inspirado pelo livro Como Fazer Nada, por Jenny Odeel, e meu interesse em emergent web tech. ML de rastreamento ocular no navegador, gráficos 3D, e GLSL.',
     thumbnail: 'src/images/doNothing.gif',
     tags: ['#ThreeJs', '#GLSL', '#RecurseCenter', '#browserML'],
   },
   bismuth: {
-    title: 'Generative Bismuth',
+    title: 'Bismuto Generativo',
     shortDesc:
-      'A generative system for making the most beautiful mineral, bismuth. Prototype for future series exploring crystal growth patterns.',
+      'Um sistema generativo para fazer o mais belo mineral, o bismuto. Protótipo para futuras séries explorando padrões de crescimento de cristais.',
     thumbnail: 'src/images/bismuth.gif',
     tags: [
       '#generativeArt',
@@ -20,9 +20,9 @@ export default {
     ],
   },
   shaderSketches: {
-    title: 'Shader Sketches',
+    title: 'Shader Esboçoss',
     shortDesc:
-      'Daily sketches exploring GLSL, done while working through The Book of Shaders',
+      'Esboços diários explorando GLSL, feitos enquanto estudava o Book of Shaders',
     thumbnail: 'src/images/shaderSketches.gif',
     tags: [
       '#artPractice',
@@ -35,14 +35,14 @@ export default {
   dynamicland: {
     title: 'Dynamicland',
     shortDesc:
-      'Volunteered inside the funnest computer in the world. Contributed to introductory tutorials and ran workshop for high schoolers.',
+      'Trabalhei como voluntária dentro do computador mais divertido do mundo. Contribui com tutoriais introdutórios e dei workshops para alunos do ensino médio.',
     thumbnail: 'src/images/dynamicland.gif',
     tags: ['#Dynamicland', '#learning', '#teaching', '#RealTalk'],
   },
   mujic: {
     title: 'Mujic',
     shortDesc:
-      'A foray into functional programming. Clojure program that uses a Markov Chain to make music similar to a given MIDI file, except much worse.',
+      'Uma incursão na programação funcional. Programado com Clojure, usa uma cadeia de Markov para gerer uma música semelhante a um dado arquivo MIDI, só que muito pior.',
     thumbnail: null,
     tags: ['#generativeArt', '#functionalProgramming', '#RecurseCenter'],
   },

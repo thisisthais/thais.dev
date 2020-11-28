@@ -9,6 +9,7 @@ exports.components = {
   "component---src-pages-blog-first-pt-mdx": () => import("./../src/pages/blog/first.pt.mdx" /* webpackChunkName: "component---src-pages-blog-first-pt-mdx" */),
   "component---src-pages-index-en-js": () => import("./../src/pages/index.en.js" /* webpackChunkName: "component---src-pages-index-en-js" */),
   "component---src-pages-index-pt-js": () => import("./../src/pages/index.pt.js" /* webpackChunkName: "component---src-pages-index-pt-js" */),
-  "component---src-pages-portfolio-en-js": () => import("./../src/pages/portfolio.en.js" /* webpackChunkName: "component---src-pages-portfolio-en-js" */)
+  "component---src-pages-portfolio-en-js": () => import("./../src/pages/portfolio.en.js" /* webpackChunkName: "component---src-pages-portfolio-en-js" */),
+  "component---src-pages-portfolio-pt-js": () => import("./../src/pages/portfolio.pt.js" /* webpackChunkName: "component---src-pages-portfolio-pt-js" */)
 }
 

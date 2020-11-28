@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import useSound from 'use-sound';
 import sunflowerPark from '../sound/sunflower-park.mp3';
 import markovSunflower from '../sound/markov-sunflower.mp4';
@@ -12,11 +13,12 @@ export default function MujicThumb() {
       <div>
         <img src={hamtaro} />
         <span>
-          My favorite example was generated based on a track from the game
-          Hamtaro: Ham-Hams Unite!
+          <FormattedMessage id="mujic.1" />
           <br />
           <br />
-          <i> Hover or hold to listen.</i>
+          <i>
+            <FormattedMessage id="mujic.2" />
+          </i>
         </span>
       </div>
       <div>
@@ -26,7 +28,7 @@ export default function MujicThumb() {
           onTouchStart={play}
           onTouchEnd={() => stop()}
         >
-          Original track
+          <FormattedMessage id="mujic.original" />
         </button>
         <button
           onMouseEnter={play2}
@@ -34,7 +36,7 @@ export default function MujicThumb() {
           onTouchStart={play2}
           onTouchEnd={() => stop2()}
         >
-          Generated track
+          <FormattedMessage id="mujic.generated" />
         </button>
       </div>
     </div>
