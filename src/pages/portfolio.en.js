@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import MujicThumb from '../components/MujicThumb.js';
+import GWCThumb from '../components/GWCThumb.js';
 import useSound from 'use-sound';
 
 import doNothingThumb from '../images/doNothing.gif';
 import bismuthThumb from '../images/bismuth.gif';
 import shaderSketchesThumb from '../images/shaderSketches.gif';
 import dynamiclandThumb from '../images/dynamicland.gif';
+import daedalusThumb from '../images/daedalus.png';
+import salorThumb from '../images/salor.png';
+import aquaponicsThumb from '../images/aquaponics.jpg';
 import portfolioData from '../data/portfolioData';
 
 import '../components/portfolio.css';
@@ -19,15 +23,32 @@ const PROJECT_TO_THUMBNAIL = {
   shaderSketches: shaderSketchesThumb,
   dynamicland: dynamiclandThumb,
   mujic: null,
+  girlsWhoCode: null,
+  daedalus: daedalusThumb,
+  salor: salorThumb,
+  aquaponics: aquaponicsThumb,
 };
 
 const ProjectCard = ({ project }) => {
-  const thumbNail =
-    project === 'mujic' ? (
-      <MujicThumb />
-    ) : (
-      <img src={PROJECT_TO_THUMBNAIL[project]} />
-    );
+  let thumbNail;
+  switch (project) {
+    case 'mujic':
+      thumbNail = <MujicThumb />;
+      break;
+    case 'girlsWhoCode':
+      thumbNail = <GWCThumb />;
+      break;
+    default:
+      thumbNail = (
+        <a
+          href={portfolioData[project].imageUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={PROJECT_TO_THUMBNAIL[project]} />
+        </a>
+      );
+  }
   return (
     <div className="projectCard">
       {thumbNail}
@@ -46,7 +67,7 @@ const ProjectCard = ({ project }) => {
   );
 };
 
-const ENPortfolioPage = (props) => {
+const PortfolioPage = (props) => {
   return (
     <Layout location={props.location}>
       <div className="projectsContainer">
@@ -58,8 +79,8 @@ const ENPortfolioPage = (props) => {
   );
 };
 
-ENPortfolioPage.propTypes = {
+PortfolioPage.propTypes = {
   location: PropTypes.object,
 };
 
-export default ENPortfolioPage;
+export default PortfolioPage;

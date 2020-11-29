@@ -46,8 +46,40 @@ export default {
     thumbnail: null,
     tags: ['#generativeArt', '#functionalProgramming', '#RecurseCenter'],
   },
-  // girlsWhoCode: {},
-  // daedalus: {},
-  // salor: {},
-  // aquaponics: {},
+  girlsWhoCode: {
+    title: 'Girls Who Code Professore Assistente',
+    shortDesc:
+      'Em 2014, ensinei um programa de imersão durante o verão na GWC em Miami. 16 meninas adolescentes, 7 semanas, mais de 30 projetos de programação e risadas demais para contar.',
+    thumbnail: null,
+    tags: [
+      '#learning',
+      '#teaching',
+      '#GirlsWhoCode',
+      '#Scratch',
+      '#Python',
+      '#WebDev',
+    ],
+  },
+  daedalus: {
+    title: 'Projeto Daedalus',
+    shortDesc:
+      'Eu sonho acordade em ir para o espaço desde que era criança. Resolvi enviar um balão de alta altitude com uma carga útil customizada, por enquanto. Por favor, assista ao vídeo se tiver alguns minutos, é bom!',
+    thumbnail: 'src/images/daedalus.png',
+    tags: ['#electornics', '#GIS', '#microcontrollers'],
+    imageUrl: 'https://www.youtube.com/watch?v=lKsRS06Gx2Y',
+  },
+  salor: {
+    title: 'SALOR',
+    shortDesc:
+      'Eu estendi o projeto do OpenROV para incluir um sensor de oxigênio que pudesse detectar o crescimento excessivo de matéria vegetal devido ao escoamento de fertilizantes em lagos.',
+    thumbNail: 'src/images/salor.png',
+    tags: ['#Arduino', '#environmental', '#electronics'],
+  },
+  aquaponics: {
+    title: 'Hooked on Aquaponics',
+    shortDesc:
+      'Co-fundei um clube de aquaponia no campus. Construímos um sistema simbiótico e altamente eficiente para o cultivo de ervas e peixes juntos. O refeitório da escola até usou nossas ervas!',
+    thumbNail: 'src/images/aquaponics.png',
+    tags: ['#environmental', '#agriculture'],
+  },
 };

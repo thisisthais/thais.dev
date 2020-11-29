@@ -46,8 +46,40 @@ export default {
     thumbnail: null,
     tags: ['#generativeArt', '#functionalProgramming', '#RecurseCenter'],
   },
-  // girlsWhoCode: {},
-  // daedalus: {},
-  // salor: {},
-  // aquaponics: {},
+  girlsWhoCode: {
+    title: 'Girls Who Code Teaching Assistant',
+    shortDesc:
+      'In 2014, I taught a summer immersion program through GWC in Miami. 16 teenaged girls, 7 weeks, over 30 coding projects, and too many laughs to count.',
+    thumbnail: null,
+    tags: [
+      '#learning',
+      '#teaching',
+      '#GirlsWhoCode',
+      '#Scratch',
+      '#Python',
+      '#WebDev',
+    ],
+  },
+  daedalus: {
+    title: 'Project Daedalus',
+    shortDesc:
+      "I've daydreamed about going into space since I was a kid. I settled for sending a high-altitude baloon with a custom-designed payload, for now. Please watch the video if you have a few minutes, it's good!",
+    thumbnail: 'src/images/daedalus.png',
+    tags: ['#electornics', '#GIS', '#microcontrollers'],
+    imageUrl: 'https://www.youtube.com/watch?v=lKsRS06Gx2Y',
+  },
+  salor: {
+    title: 'SALOR',
+    shortDesc:
+      'I extended the OpenROV design to include an oxygen sensor that could detect plant matter overgrowth due to fertilizer runoff in lakes.',
+    thumbNail: 'src/images/salor.png',
+    tags: ['#Arduino', '#environmental', '#electronics'],
+  },
+  aquaponics: {
+    title: 'Hooked on Aquaponics',
+    shortDesc:
+      'Co-founded an aquaponics club on campus. We built a symbiotic and highly efficient system for growing herbs and fish together. The school dining hall even used our herbs!',
+    thumbNail: 'src/images/aquaponics.png',
+    tags: ['#environmental', '#agriculture'],
+  },
 };
