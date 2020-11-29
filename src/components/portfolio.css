@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  opacity: 0.7;
 }
 
 .projectCard h3 {

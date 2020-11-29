@@ -25,7 +25,7 @@ export default function MujicThumb() {
         <button
           onMouseEnter={play}
           onMouseLeave={() => stop()}
-          onTouchStart={play}
+          onTouchStart={() => play()}
           onTouchEnd={() => stop()}
         >
           <FormattedMessage id="mujic.original" />
@@ -33,7 +33,7 @@ export default function MujicThumb() {
         <button
           onMouseEnter={play2}
           onMouseLeave={() => stop2()}
-          onTouchStart={play2}
+          onTouchStart={() => play2()}
           onTouchEnd={() => stop2()}
         >
           <FormattedMessage id="mujic.generated" />
