@@ -20,7 +20,8 @@ export default {
       '#RecurseCenter',
       '#react-three-fiber',
     ],
-    extra: '### HELLO',
+    imageUrl: 'https://www.thais.dev/bismuth',
+    // extra: '### HELLO',
   },
   shaderSketches: {
     title: 'Shader Sketches',

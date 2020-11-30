@@ -18,6 +18,7 @@ export default {
       '#RecurseCenter',
       '#react-three-fiber',
     ],
+    imageUrl: 'https://www.thais.dev/bismuth',
   },
   shaderSketches: {
     title: 'Shader Esboçoss',

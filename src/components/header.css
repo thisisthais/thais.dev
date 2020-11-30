@@ -23,14 +23,9 @@ ul {
 }
 
 header {
-  position: fixed;
   right: 0;
   top: 0;
   width: 100%;
   display: block;
   text-align: right;
-}
-
-.container {
-  padding-bottom: 5vh;
 }
