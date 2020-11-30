@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import AboutMe from '../components/AboutMe.js';
 import Card from '../components/Card.js';
-import BismuthGif from '../images/pretty_bismuth_shader.gif';
+import BismuthGif from '../images/bismuth.gif';
 
 const MagicWords = [
   'desenvolvedora de web',
