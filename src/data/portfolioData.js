@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default {
   doNothing: {
     title: 'Please, Do Nothing',
@@ -18,6 +20,7 @@ export default {
       '#RecurseCenter',
       '#react-three-fiber',
     ],
+    extra: '### HELLO',
   },
   shaderSketches: {
     title: 'Shader Sketches',

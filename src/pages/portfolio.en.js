@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { useSpring, animated } from 'react-spring';
+import ReactMarkdown from 'react-markdown';
+
 import Layout from '../components/layout.js';
 import MujicThumb from '../components/MujicThumb.js';
 import GWCThumb from '../components/GWCThumb.js';
@@ -13,7 +16,6 @@ import daedalusThumb from '../images/daedalus.png';
 import salorThumb from '../images/salor.png';
 import aquaponicsThumb from '../images/aquaponics.jpg';
 import portfolioData from '../data/portfolioData';
-import { useOnClickOutside } from '../utils/hooks.js';
 
 import '../components/portfolio.css';
 
@@ -29,9 +31,12 @@ const PROJECT_TO_THUMBNAIL = {
   aquaponics: aquaponicsThumb,
 };
 
-const ProjectCard = ({ project, setExpandedProject }) => {
-  const ref = useRef();
-  useOnClickOutside(ref, () => setExpandedProject(null));
+const ProjectCard = ({ isExpanded, project, setExpandedProject }) => {
+  const projectExtras = portfolioData[project].extra;
+  const animProps = useSpring({
+    height: isExpanded ? '300px' : '0px',
+    opacity: isExpanded ? '1.0' : '0.0',
+  });
 
   let thumbNail;
   switch (project) {
@@ -57,21 +62,26 @@ const ProjectCard = ({ project, setExpandedProject }) => {
   }
 
   return (
-    <div className="projectCard" ref={ref}>
+    <div className="projectCard">
       {thumbNail}
       <h3>
         <FormattedMessage id={`portfolioData.${project}.title`} />
       </h3>
       <p>
         <FormattedMessage id={`portfolioData.${project}.shortDesc`} />
-        <span
-          className="seeMore"
-          role="button"
-          onClick={() => setExpandedProject(project)}
-        >
-          See more!
-        </span>
+        {projectExtras && (
+          <span
+            className="seeMore"
+            role="button"
+            onClick={() => setExpandedProject(isExpanded ? null : project)}
+          >
+            {isExpanded ? 'Collapse' : 'See more!'}
+          </span>
+        )}
       </p>
+      <animated.div style={animProps}>
+        <ReactMarkdown>{projectExtras}</ReactMarkdown>
+      </animated.div>
       <marquee scrollamount="3">
         {(portfolioData[project].tags || []).map((t, i) => (
           <a href="" key={i}>
