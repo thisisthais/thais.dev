@@ -22,7 +22,7 @@ export default {
   shaderSketches: {
     title: 'Shader Sketches',
     shortDesc:
-      'Daily sketches exploring GLSL, done while working through The Book of Shaders',
+      'Daily sketches exploring GLSL, done while working through The Book of Shaders.',
     thumbnail: 'src/images/shaderSketches.gif',
     tags: [
       '#artPractice',

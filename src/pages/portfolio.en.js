@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
@@ -13,6 +13,7 @@ import daedalusThumb from '../images/daedalus.png';
 import salorThumb from '../images/salor.png';
 import aquaponicsThumb from '../images/aquaponics.jpg';
 import portfolioData from '../data/portfolioData';
+import { useOnClickOutside } from '../utils/hooks.js';
 
 import '../components/portfolio.css';
 
@@ -28,7 +29,10 @@ const PROJECT_TO_THUMBNAIL = {
   aquaponics: aquaponicsThumb,
 };
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, setExpandedProject }) => {
+  const ref = useRef();
+  useOnClickOutside(ref, () => setExpandedProject(null));
+
   let thumbNail;
   switch (project) {
     case 'mujic':
@@ -51,18 +55,28 @@ const ProjectCard = ({ project }) => {
         <img src={PROJECT_TO_THUMBNAIL[project]} />
       );
   }
+
   return (
-    <div className="projectCard">
+    <div className="projectCard" ref={ref}>
       {thumbNail}
       <h3>
         <FormattedMessage id={`portfolioData.${project}.title`} />
       </h3>
       <p>
         <FormattedMessage id={`portfolioData.${project}.shortDesc`} />
+        <span
+          className="seeMore"
+          role="button"
+          onClick={() => setExpandedProject(project)}
+        >
+          See more!
+        </span>
       </p>
       <marquee scrollamount="3">
-        {(portfolioData[project].tags || []).map((t) => (
-          <a href="">{t}</a>
+        {(portfolioData[project].tags || []).map((t, i) => (
+          <a href="" key={i}>
+            {t}
+          </a>
         ))}
       </marquee>
     </div>
@@ -70,11 +84,18 @@ const ProjectCard = ({ project }) => {
 };
 
 const PortfolioPage = (props) => {
+  const [expandedProject, setExpandedProject] = useState(null);
+
   return (
     <Layout location={props.location}>
       <div className="projectsContainer">
         {Object.keys(portfolioData).map((project, i) => (
-          <ProjectCard key={i} project={project} />
+          <ProjectCard
+            key={i}
+            project={project}
+            isExpanded={expandedProject === project}
+            setExpandedProject={setExpandedProject}
+          />
         ))}
       </div>
     </Layout>

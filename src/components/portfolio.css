@@ -79,3 +79,10 @@ a {
   margin-top: 10px;
   padding: 3% 4% 3% 4%;
 }
+
+.seeMore {
+  color: #4a4ae1;
+  font-weight: bold;
+  padding-left: 5px;
+  text-decoration: underline;
+}
