@@ -11,8 +11,18 @@ body {
   justify-content: space-between;
 }
 
+a {
+  text-decoration: none;
+}
+
 .projectCard h3 {
   margin-block-end: 0px;
+}
+
+.arrow {
+  padding-left: 10px;
+  font-size: 2em;
+  line-height: 0;
 }
 
 .projectCard img {

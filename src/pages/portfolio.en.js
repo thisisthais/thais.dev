@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import Layout from '../components/layout.js';
 import MujicThumb from '../components/MujicThumb.js';
 import GWCThumb from '../components/GWCThumb.js';
-import useSound from 'use-sound';
 
 import doNothingThumb from '../images/doNothing.gif';
 import bismuthThumb from '../images/bismuth.gif';
@@ -39,14 +38,17 @@ const ProjectCard = ({ project }) => {
       thumbNail = <GWCThumb />;
       break;
     default:
-      thumbNail = (
+      thumbNail = portfolioData[project].imageUrl ? (
         <a
           href={portfolioData[project].imageUrl}
           target="_blank"
           rel="noopener noreferrer"
+          className="imageUrl"
         >
           <img src={PROJECT_TO_THUMBNAIL[project]} />
         </a>
+      ) : (
+        <img src={PROJECT_TO_THUMBNAIL[project]} />
       );
   }
   return (
