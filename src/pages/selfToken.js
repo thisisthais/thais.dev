@@ -4,19 +4,15 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter';
 
-function Box(props) {
+const Shape = ({ position, children }) => {
   const exporter = new GLTFExporter();
-  // This reference will give us direct access to the THREE.Mesh object
   const ref = useRef();
-  // Set up state for the hovered and active state
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01));
-  // Return the view, these are regular Threejs elements expressed in JSX
+  useFrame(() => (ref.current.rotation.x += 0.01));
   return (
     <mesh
-      {...props}
+      position={position}
       ref={ref}
       scale={active ? 1.5 : 1}
       onClick={(event) => {
@@ -32,19 +28,23 @@ function Box(props) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
     >
-      <boxGeometry args={[1, 1, 1]} />
+      {children}
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   );
-}
+};
 
 export default function SelfToken() {
   return (
     <Canvas>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
+      <Shape position={[-1.2, 0, 0]}>
+        <boxGeometry args={[1, 1, 1]} />
+      </Shape>
+      <Shape position={[1.2, 0, 0]}>
+        <coneBufferGeometry args={[1, 1.2, 4]} />
+      </Shape>
     </Canvas>
   );
 }
