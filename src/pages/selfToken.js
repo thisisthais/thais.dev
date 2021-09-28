@@ -39,11 +39,17 @@ export default function SelfToken() {
     <Canvas>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <Shape position={[-1.2, 0, 0]}>
-        <boxGeometry args={[1, 1, 1]} />
+      <Shape position={[-4.2, 0, 0]}>
+        <torusBufferGeometry args={[0.5, 0.25, 16, 32]} />
       </Shape>
-      <Shape position={[1.2, 0, 0]}>
-        <coneBufferGeometry args={[1, 1.2, 4]} />
+      <Shape position={[-2.2, 0, 0]}>
+        <boxBufferGeometry args={[1, 1, 1]} />
+      </Shape>
+      <Shape position={[0, 0, 0]}>
+        <sphereBufferGeometry args={[0.8, 32, 16]} />
+      </Shape>
+      <Shape position={[2.2, 0, 0]}>
+        <octahedronBufferGeometry args={[1]} />
       </Shape>
     </Canvas>
   );
