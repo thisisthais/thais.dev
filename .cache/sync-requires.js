@@ -13,6 +13,7 @@ exports.components = {
   "component---src-pages-index-en-js": hot(preferDefault(require("/Users/thais/thais.dev/src/pages/index.en.js"))),
   "component---src-pages-index-pt-js": hot(preferDefault(require("/Users/thais/thais.dev/src/pages/index.pt.js"))),
   "component---src-pages-portfolio-en-js": hot(preferDefault(require("/Users/thais/thais.dev/src/pages/portfolio.en.js"))),
-  "component---src-pages-portfolio-pt-js": hot(preferDefault(require("/Users/thais/thais.dev/src/pages/portfolio.pt.js")))
+  "component---src-pages-portfolio-pt-js": hot(preferDefault(require("/Users/thais/thais.dev/src/pages/portfolio.pt.js"))),
+  "component---src-pages-self-token-js": hot(preferDefault(require("/Users/thais/thais.dev/src/pages/selfToken.js")))
 }
 
