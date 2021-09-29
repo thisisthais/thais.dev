@@ -44,6 +44,7 @@
     "lint": "eslint src/**/*.js"
   },
   "devDependencies": {
+    "@babel/helper-validator-option": "^7.14.5",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0"
   }
