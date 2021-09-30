@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.slidersContainer {
+  max-width: 600px;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  display: inline-block;
+  height: 100%;
+  padding: 30px;
+}
+
+canvas {
+  max-height: 90vh;
+  display: inline-block;
+}
