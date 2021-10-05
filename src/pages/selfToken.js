@@ -198,14 +198,19 @@ function saveString(text, filename) {
   save(new Blob([text], { type: 'model/gltf+json' }), filename);
 }
 
-var link = document.createElement('a');
-link.style.display = 'none';
-document.body.appendChild(link); // Firefox workaround, see #6594
+let link;
+if (typeof window !== 'undefined') {
+  link = document.createElement('a');
+  link.style.display = 'none';
+  document.body.appendChild(link); // Firefox workaround, see #6594
+}
 
 function save(blob, filename) {
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  link.click();
+  if (!!link) {
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+  }
 
   // URL.revokeObjectURL( url ); breaks Firefox...
 }
