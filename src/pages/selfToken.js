@@ -10,15 +10,12 @@ const Shape = ({ position, children }) => {
   const exporter = new GLTFExporter();
   const ref = useRef();
   const [hovered, setHover] = useState(false);
-  const [active, setActive] = useState(false);
   useFrame(() => (ref.current.rotation.x += 0.01));
   return (
     <mesh
       position={position}
       ref={ref}
-      scale={active ? 1.5 : 1}
       onClick={(event) => {
-        setActive(!active);
         exporter.parse(
           ref.current,
           function (gltf) {
@@ -46,6 +43,7 @@ export default function SelfToken() {
   return (
     <div className="container">
       <div className="slidersContainer">
+        <h4>You often have a backup plan for your backup plan.</h4>
         <Slider
           getAriaLabel={() => 'Radius'}
           defaultValue={radius}
@@ -55,7 +53,11 @@ export default function SelfToken() {
           step={0.2}
           onChange={(_, value) => setRadius(value)}
           valueLabelDisplay="auto"
+          valueLabelFormat={(value) => VALUES_1[value]}
         />
+        <h4>
+          You prefer to completely finish one project before starting another.
+        </h4>
         <Slider
           getAriaLabel={() => 'Tube'}
           defaultValue={tube}
@@ -65,7 +67,12 @@ export default function SelfToken() {
           step={0.1}
           onChange={(_, value) => setTube(value)}
           valueLabelDisplay="auto"
+          valueLabelFormat={(value) => VALUES_2[value]}
         />
+        <h4>
+          You feel comfortable just walking up to someone you find interesting
+          and striking up a conversation.
+        </h4>
         <Slider
           getAriaLabel={() => 'Tubular Segments'}
           defaultValue={tubularSegments}
@@ -75,7 +82,12 @@ export default function SelfToken() {
           step={25}
           onChange={(_, value) => setTubularSegments(value)}
           valueLabelDisplay="auto"
+          valueLabelFormat={(value) => VALUES_3[value]}
         />
+        <h4>
+          After a long and exhausting week, a lively social event is just what
+          you need.
+        </h4>
         <Slider
           getAriaLabel={() => 'Radial Segments'}
           defaultValue={radialSegments}
@@ -85,7 +97,12 @@ export default function SelfToken() {
           step={2}
           onChange={(_, value) => setRadialSegments(value)}
           valueLabelDisplay="auto"
+          valueLabelFormat={(value) => VALUES_4[value]}
         />
+        <h4>
+          Your personal work style is closer to spontaneous bursts of energy
+          than organized and consistent efforts.
+        </h4>
         <Slider
           getAriaLabel={() => 'Winds around axis of rotational symmetry'}
           defaultValue={p}
@@ -95,18 +112,21 @@ export default function SelfToken() {
           step={1}
           onChange={(_, value) => setP(value)}
           valueLabelDisplay="auto"
+          valueLabelFormat={(value) => VALUES_5[value]}
         />
+        <h4>You are more inclined to follow your head than your heart.</h4>
         <Slider
           getAriaLabel={() =>
-            'Winds around a cricle in the intereior of the torus'
+            'Winds around a cricle in the interior of the torus'
           }
           defaultValue={q}
           marks={true}
-          min={1}
-          max={12}
+          min={3}
+          max={7}
           step={1}
           onChange={(_, value) => setQ(value)}
           valueLabelDisplay="auto"
+          valueLabelFormat={(value) => VALUES_6[value]}
         />
       </div>
       <Canvas>
@@ -121,6 +141,54 @@ export default function SelfToken() {
     </div>
   );
 }
+
+const VALUES_1 = {
+  1.0: 1,
+  1.2: 2,
+  1.4: 3,
+  1.6: 4,
+  1.8: 5,
+};
+
+const VALUES_2 = {
+  0.1: 1,
+  0.2: 2,
+  0.3: 3,
+  0.4: 4,
+  0.5: 5,
+};
+
+const VALUES_3 = {
+  12: 1,
+  37: 2,
+  62: 3,
+  87: 4,
+  112: 5,
+};
+
+const VALUES_4 = {
+  3: 1,
+  5: 2,
+  7: 3,
+  9: 4,
+  11: 5,
+};
+
+const VALUES_5 = {
+  2: 1,
+  3: 2,
+  4: 3,
+  5: 4,
+  6: 5,
+};
+
+const VALUES_6 = {
+  3: 1,
+  4: 2,
+  5: 3,
+  6: 4,
+  7: 5,
+};
 
 function downloadJSON(json, filename) {
   saveString(JSON.stringify(json), filename);

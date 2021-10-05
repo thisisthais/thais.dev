@@ -13,7 +13,10 @@
   background-color: white;
   border-radius: 10px;
   width: 50%;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
   height: 100%;
   padding: 30px;
 }
@@ -21,4 +24,8 @@
 canvas {
   max-height: 90vh;
   display: inline-block;
+}
+
+h4 {
+  color: violet;
 }
