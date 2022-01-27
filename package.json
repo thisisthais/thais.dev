@@ -32,7 +32,7 @@
     "react-three-fiber": "^4.2.17",
     "react-typewriter-hook": "^1.0.1",
     "react-use-gesture": "^7.0.15",
-    "three": "^0.132.2",
+    "three": "^0.137.0",
     "typeface-fredoka-one": "^0.0.72",
     "typeface-inconsolata": "^0.0.72",
     "use-sound": "^1.0.2"
